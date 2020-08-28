@@ -15,10 +15,10 @@ A Flutter plugin to display ads from Appodeal. It current supports __Banner__, _
 - ~~Display banner ads.~~
 - ~~Display interstitial ads.~~
 - ~~Display reward ads.~~
+- ~~Support for iOS 14+.~~
+- Support for Consent Manager framework (GDPR/CCPA consent status).
 - Create callbacks to be notified of events when ads don't load, when they are closed, rewarded, etc.
-- Support for iOS 14+.
 - Support for floating banner ads.
-- Support for Consent Manager framework.
 - Ability to cache ads manually.
 - Other features under consideration...
 
@@ -28,7 +28,7 @@ A Flutter plugin to display ads from Appodeal. It current supports __Banner__, _
 
 ```yaml
 dependencies:
-  appodeal_flutter: "^0.0.1"
+  appodeal_flutter: "^0.0.2"
 ```
 
 2. Install the package by running the command below in the terminal, in your project's root directory:
@@ -36,6 +36,12 @@ dependencies:
 ```
 $ flutter pub get
 ```
+
+3. Follow the Appodeal installation instructions available for [iOS](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide) and [Android](https://wiki.appodeal.com/en/android/2-7-3-beta-android-sdk-integration-guide). However, ignore the steps to include the Appodeal SDK dependencies in your Gradle files (Android) and the Cocoapods dependencies (iOS) since both steps are already done by this Flutter package.
+
+### Extra step For iOS 14+ only
+
+4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide/ios-14+-support) on how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code will be executed when you call the function `Appodeal.requestTrackingAuthorization()`, before the initialization of Appodeal (see below).
 
 ## 📱 Usage
 
@@ -46,12 +52,19 @@ Import the package as early as possible somewhere in your project (ideally in th
 ```dart
 import 'package:appodeal_flutter/appodeal_flutter.dart';
 
-Appodeal.initialize(
+// iOS 14+: request permission to track users
+// on iOS <= 13 and on Android this function does nothing and just returns true
+await Appodeal.requestTrackingAuthorization();
+
+// Initialize Appodeal
+await Appodeal.initialize(
   androidAppKey: '<your-appodeal-android-key>',
   iosAppKey: '<your-appodeal-ios-key>',
   adTypes: [AppodealAdType.BANNER, AppodealAdType.INTERSTITIAL, AppodealAdType.REWARD],
   testMode: true
 );
+
+// At this point you can safely display ads
 ```
 
 * `androidAppKey` and `iosAppKey` (mandatory): you must set these fields with the appropriate key associated with your app in your Appodeal account. You must set at least one of these fields during the initialization (either Android or iOS). If no key is set then this function will throw an error.
@@ -79,6 +92,7 @@ To show an interstitial or a reward ad, call the function `Appodeal.show()` pass
 ```dart
 Appodeal.show(AppodealAdType.INTERSTITIAL)  // Show an interstitial ad
 Appodeal.show(AppodealAdType.REWARD)        // Show a reward ad
+Appodeal.show(AppodealAdType.NON_SKIPPABLE) // Show a non-skippable ad
 ```
 
 ## 📝 License

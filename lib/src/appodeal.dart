@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 
 class Appodeal {
   static const MethodChannel _channel = const MethodChannel('appodeal_flutter');
+
+  static Future<bool> requestTrackingAuthorization() async {
+    return Platform.isIOS ? _channel.invokeMethod('requestTrackingAuthorization') : true;
+  }
 
   static Future<void> initialize({
     String androidAppKey,

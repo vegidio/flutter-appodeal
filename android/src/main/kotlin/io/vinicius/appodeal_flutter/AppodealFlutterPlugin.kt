@@ -26,7 +26,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
-            "initialize" -> initialize(call)
+            "initialize" -> initialize(call, result)
             "isLoaded" -> isLoaded(call, result)
             "show" -> show(activity, call, result)
             else -> result.notImplemented()
@@ -51,7 +51,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
     override fun onDetachedFromActivity() {}
 
     // region - Methods
-    private fun initialize(call: MethodCall) {
+    private fun initialize(call: MethodCall, result: Result) {
         val args = call.arguments as Map<*, *>
         val appKey = args["androidAppKey"] as String
         val adTypes = args["adTypes"] as List<Int>
@@ -60,6 +60,8 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
         val ads = adTypes.fold(0) { acc, value -> acc or getAdType(value) }
         Appodeal.setTesting(testMode)
         Appodeal.initialize(activity, appKey, ads, true)
+
+        result.success(null)
     }
 
     private fun isLoaded(call: MethodCall, result: Result) {

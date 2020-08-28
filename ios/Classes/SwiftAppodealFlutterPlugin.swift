@@ -1,3 +1,4 @@
+import AppTrackingTransparency
 import Appodeal
 import Flutter
 import UIKit
@@ -14,7 +15,8 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
-        case "initialize": initialize(call)
+        case "requestTrackingAuthorization": requestTrackingAuthorization(result)
+        case "initialize": initialize(call, result)
         case "isLoaded": isLoaded(call, result)
         case "show": show(call, result)
         default: result(FlutterMethodNotImplemented)
@@ -22,7 +24,17 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
     }
     
     // region - Methods
-    private func initialize(_ call: FlutterMethodCall) {
+    private func requestTrackingAuthorization(_ result: @escaping FlutterResult) {
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                result(status == .authorized)
+            }
+        } else {
+            result(true)
+        }
+    }
+    
+    private func initialize(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let args = call.arguments as! Dictionary<String, Any>
         let appKey = args["iosAppKey"] as! String
         let adTypes = args["adTypes"] as! Array<Int>
@@ -31,6 +43,8 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         let ads = AppodealAdType(rawValue: adTypes.reduce(0) { $0 | getAdType(adId: $1).rawValue })
         Appodeal.setTestingEnabled(testMode)
         Appodeal.initialize(withApiKey: appKey, types: ads, hasConsent: true)
+        
+        result(nil)
     }
     
     private func isLoaded(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
