@@ -1,6 +1,6 @@
 name: appodeal_flutter
 description: A Flutter plugin to display ads from Appodeal
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/vegidio-flutter/appodeal
 
 environment:

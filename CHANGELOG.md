@@ -5,3 +5,7 @@
 ## 0.0.2
 
 * Added support for iOS 14+ user tracking permission.
+
+## 0.0.3
+
+* Corrected typos in the documentation.
