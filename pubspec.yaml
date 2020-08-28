@@ -1,8 +1,7 @@
 name: appodeal_flutter
-description: A new flutter plugin project.
+description: A Flutter plugin to display ads from Appodeal
 version: 0.0.1
-author:
-homepage:
+homepage: https://vinicius.io
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

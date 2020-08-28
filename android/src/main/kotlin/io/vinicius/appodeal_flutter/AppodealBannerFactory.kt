@@ -16,10 +16,11 @@ class AppodealBannerFactory(private val activity: Activity, private val messenge
     : PlatformViewFactory(StandardMessageCodec.INSTANCE)
 {
     override fun create(context: Context?, viewId: Int, args: Any?): PlatformView =
-            AppodealBannerView(activity, messenger, viewId, args as Map<*, *>)
+            AppodealBannerView(activity, messenger, viewId)
 
-    class AppodealBannerView(activity: Activity, messenger: BinaryMessenger, id: Int, params: Map<*, *>)
-        : PlatformView, MethodChannel.MethodCallHandler {
+    class AppodealBannerView(activity: Activity, messenger: BinaryMessenger, id: Int)
+        : PlatformView, MethodChannel.MethodCallHandler
+    {
         private val bannerView = Appodeal.getBannerView(activity)
         private val channel = MethodChannel(messenger, "plugins.io.vinicius.appodeal/banner_$id")
 
