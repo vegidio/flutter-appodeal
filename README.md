@@ -1,6 +1,6 @@
 # appodeal_flutter
 
-[![GitHub Actions](https://img.shields.io/github/workflow/status/vegidio-flutter/appodeal/test?label=tests)](https://github.com/vegidio-flutter/appodeal/actions)
+[![GitHub Actions](https://img.shields.io/github/workflow/status/vegidio-flutter/appodeal/build)](https://github.com/vegidio-flutter/appodeal/actions)
 [![Pub Version](https://img.shields.io/pub/v/appodeal_flutter)](https://pub.dev/packages/appodeal_flutter)
 [![ISC License](https://img.shields.io/npm/l/vimdb?color=important)](LICENSE)
 

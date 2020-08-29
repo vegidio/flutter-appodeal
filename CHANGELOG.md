@@ -9,3 +9,7 @@
 ## 0.0.3
 
 * Corrected typos in the documentation.
+
+## 0.0.4
+
+* Added auto-deploy of package with Github Actions.
