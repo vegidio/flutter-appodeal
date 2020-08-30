@@ -3,7 +3,12 @@ package io.vinicius.appodeal_flutter
 import android.app.Activity
 import androidx.annotation.NonNull
 import com.appodeal.ads.Appodeal
-
+import com.explorestack.consent.Consent
+import com.explorestack.consent.ConsentForm
+import com.explorestack.consent.ConsentFormListener
+import com.explorestack.consent.ConsentInfoUpdateListener
+import com.explorestack.consent.ConsentManager
+import com.explorestack.consent.exception.ConsentManagerException
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -29,6 +34,10 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
             "initialize" -> initialize(call, result)
             "isLoaded" -> isLoaded(call, result)
             "show" -> show(activity, call, result)
+
+            "fetchConsentInfo" -> fetchConsentInfo(call, result)
+            "requestConsentAuthorization" -> requestConsentAuthorization(result)
+
             else -> result.notImplemented()
         }
     }
@@ -50,7 +59,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {}
     override fun onDetachedFromActivity() {}
 
-    // region - Methods
+    // region - Appodeal
     private fun initialize(call: MethodCall, result: Result) {
         val args = call.arguments as Map<*, *>
         val appKey = args["androidAppKey"] as String
@@ -89,6 +98,56 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
             5 -> Appodeal.NON_SKIPPABLE_VIDEO
             else -> Appodeal.NONE
         }
+    }
+    // endregion
+
+    // region - Consent Manager
+    private fun fetchConsentInfo(call: MethodCall, result: Result) {
+        val args = call.arguments as Map<*, *>
+        val appKey = args["androidAppKey"] as String
+
+        val consentManager = ConsentManager.getInstance(activity)
+        consentManager.requestConsentInfoUpdate(appKey, object : ConsentInfoUpdateListener {
+            override fun onConsentInfoUpdated(consent: Consent?) {
+                if (consent == null) {
+                    result.success(null)
+                } else {
+                    result.success(mapOf(
+                            "acceptedVendors" to consent.acceptedVendors?.map { it.name },
+                            "status" to consent.status.ordinal,
+                            "zone" to consent.zone.ordinal
+                    ))
+                }
+            }
+
+            override fun onFailedToUpdateConsentInfo(exception: ConsentManagerException?) {
+                result.error("CONSENT_INFO_ERROR", "Failed to fetch the consent info",
+                        exception)
+            }
+        })
+    }
+
+    private fun requestConsentAuthorization(result: Result) {
+        var consentForm: ConsentForm? = null
+
+        consentForm = ConsentForm.Builder(activity)
+                .withListener(object : ConsentFormListener {
+                    override fun onConsentFormLoaded() {
+                        consentForm?.showAsDialog()
+                        result.success(null)
+                    }
+
+                    override fun onConsentFormError(exception: ConsentManagerException?) {
+                        result.error("CONSENT_WINDOW_ERROR",
+                                "Error showing the consent window", exception)
+                    }
+
+                    override fun onConsentFormOpened() {}
+                    override fun onConsentFormClosed(consent: Consent?) {}
+                })
+                .build()
+
+        consentForm.load()
     }
     // endregion
 }

@@ -45,7 +45,7 @@ PODS:
     - Appodeal (= 2.7.3-Beta)
     - YandexMobileMetrica (< 4.0.0, >= 3.2.0)
   - Appodeal (2.7.3-Beta)
-  - appodeal_flutter (0.0.1):
+  - appodeal_flutter (0.1.0):
     - APDAdColonyAdapter (= 2.7.3.1-Beta)
     - APDAmazonAdsAdapter (= 2.7.3.1-Beta)
     - APDAppLovinAdapter (= 2.7.3.1-Beta)
@@ -68,6 +68,7 @@ PODS:
     - APDVungleAdapter (= 2.7.3.1-Beta)
     - APDYandexAdapter (= 2.7.3.1-Beta)
     - Flutter
+    - StackConsentManager (= 1.0.1)
   - FBSDKCoreKit/Basics (7.1.1)
   - Flutter (1.0.0)
   - Google-Mobile-Ads-SDK (7.64.0):
@@ -103,6 +104,7 @@ PODS:
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.10)
+  - StackConsentManager (1.0.1)
   - YandexMobileMetrica (3.11.1):
     - YandexMobileMetrica/Static (= 3.11.1)
   - YandexMobileMetrica/Static (3.11.1):
@@ -147,6 +149,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - StackConsentManager
     - YandexMobileMetrica
 
 EXTERNAL SOURCES:
@@ -178,7 +181,7 @@ SPEC CHECKSUMS:
   APDVungleAdapter: 2aad7b2f57f66f9212358b57fde2cf265941c209
   APDYandexAdapter: 3cc0b56c099f8433c7a57a786a8c72e1f3553088
   Appodeal: 6ce87c36e28299f2ec4295165fc29c3dac6013e7
-  appodeal_flutter: 1669a95015f93d517ea569554fcc69c74cf71b59
+  appodeal_flutter: 5e9c4256e5dcf2260d4a2d6002291acd1526c13a
   FBSDKCoreKit: b46507dc8b8cefed31d644e74d7cc30e2a715ef8
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   Google-Mobile-Ads-SDK: aec52559ce73ddf1e6478d1904dd71a741f1bc61
@@ -187,6 +190,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
+  StackConsentManager: 2e7c7512d4c1b5dddf248e7e9f78931d8d0142e8
   YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
 
 PODFILE CHECKSUM: a75497545d4391e2d394c3668e20cfb1c2bbd4aa

@@ -35,7 +35,9 @@ jobs:
           EOF
 
       - name: Check publish warnings
-        run: pub publish --dry-run
+        run: |
+          dartfmt .
+          pub publish --dry-run
 
       - name: Upload package to pub.dev
         run: pub publish -f

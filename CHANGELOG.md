@@ -1,15 +1,19 @@
-## 0.0.1
+## 0.1.0
 
-* Development release: with initial support for __Banner__, __Interstitital__, __Reward__ and __Non-Skippable__ ads. 
+* Added support to Consent Manager (respecting GDPR & CCPA laws).
 
-## 0.0.2
+## 0.0.4
 
-* Added support for iOS 14+ user tracking permission.
+* Added auto-deploy of package with Github Actions.
 
 ## 0.0.3
 
 * Corrected typos in the documentation.
 
-## 0.0.4
+## 0.0.2
 
-* Added auto-deploy of package with Github Actions.
+* Added support for iOS 14+ user tracking permission.
+
+## 0.0.1
+
+* Development release: with initial support for __Banner__, __Interstitital__, __Reward__ and __Non-Skippable__ ads.

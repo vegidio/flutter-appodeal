@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'appodeal_flutter'
-  s.version          = '0.0.1'
+  s.version          = '0.1.0'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
 A new flutter plugin project.
@@ -18,7 +18,7 @@ A new flutter plugin project.
   s.platform = :ios, '9.0'
   s.static_framework = true
 
-  # Dependencies
+  # Appodeal Dependencies
   s.dependency 'APDAdColonyAdapter', '2.7.3.1-Beta' 
   s.dependency 'APDAmazonAdsAdapter', '2.7.3.1-Beta' 
   s.dependency 'APDAppLovinAdapter', '2.7.3.1-Beta' 
@@ -40,6 +40,9 @@ A new flutter plugin project.
   s.dependency 'APDUnityAdapter', '2.7.3.1-Beta' 
   s.dependency 'APDVungleAdapter', '2.7.3.1-Beta' 
   s.dependency 'APDYandexAdapter', '2.7.3.1-Beta'
+
+  # Consent Manager Dependency
+  s.dependency 'StackConsentManager', '1.0.1'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }

@@ -1,5 +1,6 @@
 import AppTrackingTransparency
 import Appodeal
+import StackConsentManager
 import Flutter
 import UIKit
 
@@ -16,14 +17,18 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case "requestTrackingAuthorization": requestTrackingAuthorization(result)
+            
         case "initialize": initialize(call, result)
         case "isLoaded": isLoaded(call, result)
         case "show": show(call, result)
+        
+        case "fetchConsentInfo": fetchConsentInfo(call, result)
+        case "requestConsentAuthorization": requestConsentAuthorization(result)
+            
         default: result(FlutterMethodNotImplemented)
         }
     }
     
-    // region - Methods
     private func requestTrackingAuthorization(_ result: @escaping FlutterResult) {
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization { status in
@@ -34,6 +39,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         }
     }
     
+    // region - Appodeal
     private func initialize(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let args = call.arguments as! Dictionary<String, Any>
         let appKey = args["iosAppKey"] as! String
@@ -60,6 +66,39 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
         result(Appodeal.showAd(adType, rootViewController: rootViewController))
+    }
+    // endregion
+    
+    // region - Consent Manager
+    private func fetchConsentInfo(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        let args = call.arguments as! Dictionary<String, Any>
+        let appKey = args["iosAppKey"] as! String
+        
+        STKConsentManager.shared().synchronize(withAppKey: appKey) { error in
+            if (error == nil) {
+                result([
+                    "acceptedVendors": [],
+                    "status": STKConsentManager.shared().consentStatus.rawValue,
+                    "zone": STKConsentManager.shared().regulation.rawValue
+                ])
+            } else {
+                result(FlutterError(code: "CONSENT_INFO_ERROR", message: "Failed to fetch the consent info",
+                                    details: error))
+            }
+        }
+    }
+    
+    private func requestConsentAuthorization(_ result: @escaping FlutterResult) {
+        STKConsentManager.shared().loadConsentDialog { error in
+            if (error == nil) {
+                let controller = UIApplication.shared.keyWindow?.rootViewController
+                STKConsentManager.shared().showConsentDialog(fromRootViewController: controller!, delegate: nil)
+                result(nil)
+            } else {
+                result(FlutterError(code: "CONSENT_WINDOW_ERROR", message: "Error showing the consent window",
+                                    details: error))
+            }
+        }
     }
     // endregion
     

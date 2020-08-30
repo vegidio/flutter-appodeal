@@ -46,4 +46,6 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.appodeal.ads:sdk:2.7.3.+'
+    implementation 'com.explorestack:consent:1.0.2'
+    implementation 'com.google.android.gms:play-services-ads-identifier:15.0.0'
 }
