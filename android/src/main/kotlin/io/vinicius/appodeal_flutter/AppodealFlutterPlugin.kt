@@ -63,12 +63,13 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
     private fun initialize(call: MethodCall, result: Result) {
         val args = call.arguments as Map<*, *>
         val appKey = args["androidAppKey"] as String
+        val hasConsent = args["hasConsent"] as Boolean
         val adTypes = args["adTypes"] as List<Int>
         val testMode = args["testMode"] as Boolean
 
         val ads = adTypes.fold(0) { acc, value -> acc or getAdType(value) }
         Appodeal.setTesting(testMode)
-        Appodeal.initialize(activity, appKey, ads, true)
+        Appodeal.initialize(activity, appKey, ads, hasConsent)
 
         result.success(null)
     }

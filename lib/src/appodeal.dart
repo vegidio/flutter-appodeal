@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'consent.dart';
 
 class Appodeal {
@@ -16,10 +17,8 @@ class Appodeal {
   /// function nothing. It simply returns `true` as if the authorization had already been granted.
   ///
   /// On devices with iOS 14+ it returns `true` or `false` depending whether the user granted access or not.
-  static Future<bool> requestiOSTrackingAuthorization() async {
-    return Platform.isIOS
-        ? _channel.invokeMethod('requestTrackingAuthorization')
-        : true;
+  static Future<void> requestiOSTrackingAuthorization() async {
+    if (Platform.isIOS) await _channel.invokeMethod('requestTrackingAuthorization');
   }
 
   // region - Appodeal
@@ -35,12 +34,13 @@ class Appodeal {
   /// During the initialization you must define the type of ads [adTypes] that you would like to display in your app and
   /// also if ads should be presented in test mode [testMode] or not. Always set test mode as `true` during development
   /// or tests.
-  static Future<void> initialize({List<int> adTypes = const [], bool testMode = false}) async {
+  static Future<void> initialize({@required bool hasConsent, List<int> adTypes = const [], bool testMode = false}) async {
     assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
 
     await _channel.invokeMethod('initialize', {
       'androidAppKey': _androidAppKey,
       'iosAppKey': _iosAppKey,
+      'hasConsent': hasConsent,
       'adTypes': adTypes,
       'testMode': testMode
     });
@@ -76,6 +76,8 @@ class Appodeal {
   /// Returns an object of type `Consent` where you can check the user status and in what zone, if any, that consent
   /// applies.
   static Future<Consent> fetchConsentInfo() async {
+    assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
+
     var consentMap = await _channel.invokeMethod('fetchConsentInfo', {
       'androidAppKey': _androidAppKey,
       'iosAppKey': _iosAppKey

@@ -1,7 +1,7 @@
 # appodeal_flutter
 
 [![GitHub Actions](https://img.shields.io/github/workflow/status/vegidio-flutter/appodeal/build)](https://github.com/vegidio-flutter/appodeal/actions)
-[![Pub Version](https://img.shields.io/pub/v/appodeal_flutter)](https://pub.dev/packages/appodeal_flutter)
+[![Pub Version](https://img.shields.io/pub/v/appodeal_flutter?color=blue)](https://pub.dev/packages/appodeal_flutter)
 [![ISC License](https://img.shields.io/npm/l/vimdb?color=important)](LICENSE)
 
 A Flutter plugin to display ads from Appodeal. It current supports __Banner__, __Interstitial__, __Reward__ and __Non-Skippable__ ads.
@@ -50,35 +50,73 @@ Import the package as early as possible somewhere in your project (ideally in th
 
 ### Initialization
 
+First you need to set the app keys:
+
 ```dart
-import 'package:appodeal_flutter/appodeal_flutter.dart';
-
-// iOS 14+: request permission to track users
-// on iOS <= 13 and on Android this function does nothing and just returns true
-await Appodeal.requestiOSTrackingAuthorization();
-
 // Set the Appodeal app keys
 Appodeal.setAppKeys(
   androidAppKey: '<your-appodeal-android-key>',
   iosAppKey: '<your-appodeal-ios-key>',
 );
+```
 
+Where `androidAppKey` and `iosAppKey` are the keys associated with your app in your Appodeal account. At least one of these keys must be defined before the the initialization (either Android or iOS), otherwise you will get an error.
+
+Afterwards you can initialize Appodeal with the function:
+
+```dart
 // Initialize Appodeal
 await Appodeal.initialize(
+  hasConsent: true,
   adTypes: [AdType.BANNER, AdType.INTERSTITIAL, AdType.REWARD],
   testMode: true
 );
 
-// At this point you can safely display ads
+// At this point you are ready to display ads
 ```
+* `hasConsent` (mandatory) you must pass `true` or `false`, depending if the user granted access to be tracked in order to received better ads. See section about collecting user consent for more information.
 
-* `androidAppKey` and `iosAppKey` (mandatory): you must set these fields with the appropriate key associated with your app in your Appodeal account. At least one of these keys must be defined during the initialization (either Android or iOS), otherwise this function will throw an error.
-
-* `adTypes` (optional) you must set a list (of type `AppodealAdType`) with all the ad types that you would like to display in your app. If this parameter is undefined or an empty list then no ads will be loaded.
+* `adTypes` (optional) you must set a list (of type `AdType`) with all the ad types that you would like to display in your app. If this parameter is undefined or an empty list then no ads will be loaded.
 
 * `testMode` (optional) you must set `false` (default) or `true` depending if you are running the ads during development/test or production.
 
-### Banner ads
+### Collecting user consent
+
+Before you initialize the plugin and start displaying ads to the user sometimes it's important to collect his consent, depending on the user location or the operating system that he is using.
+
+Since iOS 14+ you are required to request a specific permission before you can have access to Apple's IDFA (a sort of proprietary cookie used by Apple to track users among multiple advertisers... Apple, always Apple 😒). For iOS versions before 14 and for Android devices this function won't do anything, so it's safe to call it on any device OS or version.
+
+```dart
+// iOS 14+: request permission to track users
+// on iOS <= 13 and on Android this function does nothing and just returns true
+await Appodeal.requestiOSTrackingAuthorization();
+```
+
+Depending on the location of your users, they might be protected by the privacy laws GDPR or CCPA. These laws require, among other things, that app developers must collect user consent before the adverstisers can track them online. You have two options to collect the user content:
+
+1. You design the UI with all the legal information and multiple options to let the user decline, accept or partially accept the options to be tracked. After you collect this information yourself, you need to pass the value `true` or `false` to the parameter `hasConsent` during the Appodeal initialization.
+
+or:
+
+2. You can use the UI provided by the Consent Manager framework. With this option you can't customize the UI when you collect the user consent, however it does the heavy lifting for you of creating and displaying a window with all the legal wording, permission options and everything that is necessary to get the user's permission to be tracked. If you decide to go with option # 2 then must call two funtions:
+
+    2.1. Call the function `Appodeal.requestConsentAuthorization()` to display a window requesting the user consent to be tracked:
+    ```dart
+    await Appodeal.requestConsentAuthorization();
+    ```
+
+    2.2. After the user grants or decline consent, you can call the function `Appodeal.fetchConsentInfo()` to fetch the consent info:
+    ```dart
+    var consent = await Appodeal.fetchConsentInfo();
+    var hasConsent = consent.status == ConsentStatus.PERSONALIZED || consent.status == ConsentStatus.PARTLY_PERSONALIZED;
+    await Appodeal.initialize(hasConsent: hasConsent, ...)
+    ```
+
+## 💵 Showing ads
+
+After you collect all the permissions and plugin is already initialized than you just need to display the ads.
+
+### Banner
 
 To display a banner ad in your app, just include the `AppodealBanner()` widget somewhere in your widget tree. For example:
 

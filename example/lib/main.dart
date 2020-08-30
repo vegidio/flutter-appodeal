@@ -28,13 +28,15 @@ class _MyAppState extends State<MyApp> {
     Appodeal.requestiOSTrackingAuthorization().then((_) async {
       // Initialize Appodeal after the authorization was granted or not
       await Appodeal.initialize(
-          adTypes: [
-            AdType.BANNER,
-            AdType.INTERSTITIAL,
-            AdType.REWARD,
-            AdType.NON_SKIPPABLE
-          ],
-          testMode: true);
+        hasConsent: true,
+        adTypes: [
+          AdType.BANNER,
+          AdType.INTERSTITIAL,
+          AdType.REWARD,
+          AdType.NON_SKIPPABLE
+        ],
+        testMode: true
+      );
 
       setState(() => this.isAppodealInitialized = true);
     });
@@ -63,6 +65,7 @@ class _Body extends StatelessWidget {
             child: Text('Check GDPR/CCPA Consent Info'),
             onPressed: () async {
               var consent = await Appodeal.fetchConsentInfo();
+
               Toast.show('Status: ${consent.status}; Zone: ${consent.zone}', context,
                   duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
             },

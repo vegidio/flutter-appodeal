@@ -43,12 +43,13 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
     private func initialize(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let args = call.arguments as! Dictionary<String, Any>
         let appKey = args["iosAppKey"] as! String
+        let hasConsent = args["hasConsent"] as! Bool
         let adTypes = args["adTypes"] as! Array<Int>
         let testMode = args["testMode"] as! Bool
         
         let ads = AppodealAdType(rawValue: adTypes.reduce(0) { $0 | getAdType(adId: $1).rawValue })
         Appodeal.setTestingEnabled(testMode)
-        Appodeal.initialize(withApiKey: appKey, types: ads, hasConsent: true)
+        Appodeal.initialize(withApiKey: appKey, types: ads, hasConsent: hasConsent)
         
         result(nil)
     }
