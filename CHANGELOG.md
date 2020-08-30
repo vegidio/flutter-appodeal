@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Corrected the case in the function name `requestIOSTrackingAuthorization`.
+
 ## 0.1.1
 
 * Updated the docs to include information about user consent.

@@ -17,7 +17,7 @@ class Appodeal {
   /// function nothing. It simply returns `true` as if the authorization had already been granted.
   ///
   /// On devices with iOS 14+ it returns `true` or `false` depending whether the user granted access or not.
-  static Future<void> requestiOSTrackingAuthorization() async {
+  static Future<void> requestIOSTrackingAuthorization() async {
     if (Platform.isIOS) await _channel.invokeMethod('requestTrackingAuthorization');
   }
 

@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
     );
 
     // Request authorization to track the user
-    Appodeal.requestiOSTrackingAuthorization().then((_) async {
+    Appodeal.requestIOSTrackingAuthorization().then((_) async {
       // Initialize Appodeal after the authorization was granted or not
       await Appodeal.initialize(
         hasConsent: true,

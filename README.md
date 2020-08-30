@@ -29,7 +29,7 @@ A Flutter plugin to display ads from Appodeal. It current supports __Banner__, _
 
 ```yaml
 dependencies:
-  appodeal_flutter: "^0.1.0"
+  appodeal_flutter: "^0.1.2"
 ```
 
 2. Install the package by running the command below in the terminal, in your project's root directory:
@@ -40,9 +40,13 @@ $ flutter pub get
 
 3. Follow the Appodeal installation instructions available for [iOS](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide) and [Android](https://wiki.appodeal.com/en/android/2-7-3-beta-android-sdk-integration-guide). However, ignore the steps to include the Appodeal SDK dependencies in Gradle (Android) and Cocoapods (iOS) since these steps will be done by this package.
 
+### Extra step For Android only
+
+4. The Appodeal framework includes mutiple libraries from different ad providers, so it's very likely that the inclusion of this plugin in your project will make it exceed to 64K limit method count of Android. To solve this problem you need to enable multidex in your project; follow the instructions [here](https://developer.android.com/studio/build/multidex) to learn how to do that.
+
 ### Extra step For iOS 14+ only
 
-4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide/ios-14+-support) on how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code will be executed when you call the function `Appodeal.requestTrackingAuthorization()`, before the initialization of Appodeal (see below).
+4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide/ios-14+-support) on how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code will be executed when you call the function `Appodeal.requestIOSTrackingAuthorization()`, before the initialization of Appodeal (see below).
 
 ## 📱 Usage
 
@@ -89,7 +93,7 @@ Since iOS 14+ you are required to request a specific permission before you can h
 ```dart
 // iOS 14+: request permission to track users
 // on iOS <= 13 and on Android this function does nothing and just returns true
-await Appodeal.requestiOSTrackingAuthorization();
+await Appodeal.requestIOSTrackingAuthorization();
 ```
 
 Depending on the location of your users, they might be protected by the privacy laws GDPR or CCPA. These laws require, among other things, that app developers must collect user consent before the adverstisers can track them online. You have two options to collect the user content:
