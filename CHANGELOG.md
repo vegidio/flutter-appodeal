@@ -1,3 +1,7 @@
+## 0.1.3
+
+* Small updates in the documentation.
+
 ## 0.1.2
 
 * Corrected the case in the function name `requestIOSTrackingAuthorization`.

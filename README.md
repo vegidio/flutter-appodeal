@@ -17,7 +17,7 @@ A Flutter plugin to display ads from Appodeal. It current supports __Banner__, _
 - ~~Display reward ads.~~
 - ~~Display non-skippable ads.~~
 - ~~Support for iOS 14+.~~
-- ~~Support for Consent Manager framework (GDPR/CCPA consent status).~~
+- ~~Support for Consent Manager framework (GDPR/CCPA privacy laws).~~
 - Create callbacks to be notified of events when ads don't load, when they are closed, rewarded, etc.
 - Support for floating banner ads.
 - Ability to cache ads manually.
@@ -29,10 +29,10 @@ A Flutter plugin to display ads from Appodeal. It current supports __Banner__, _
 
 ```yaml
 dependencies:
-  appodeal_flutter: "^0.1.2"
+  appodeal_flutter: "^0.1.3"
 ```
 
-2. Install the package by running the command below in the terminal, in your project's root directory:
+2. Install the plugin by running the command below in the terminal, in your project's root directory:
 
 ```
 $ flutter pub get
@@ -46,11 +46,11 @@ $ flutter pub get
 
 ### Extra step For iOS 14+ only
 
-4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide/ios-14+-support) on how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code will be executed when you call the function `Appodeal.requestIOSTrackingAuthorization()`, before the initialization of Appodeal (see below).
+4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide/ios-14+-support) to learn how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code will be executed when you call the function `Appodeal.requestIOSTrackingAuthorization()`, before the initialization of Appodeal (see below).
 
 ## 📱 Usage
 
-Import the package as early as possible somewhere in your project (ideally in the file `main.dart`), then initialize the plugin by calling the method `Appodeal.initialize()`:
+Import the plugin as early as possible somewhere in your project (ideally in the file `main.dart`), then initialize the plugin by calling the functions `Appodeal.setAppKeys()` and `Appodeal.initialize()`:
 
 ### Initialization
 
@@ -64,7 +64,7 @@ Appodeal.setAppKeys(
 );
 ```
 
-Where `androidAppKey` and `iosAppKey` are the keys associated with your app in your Appodeal account. At least one of these keys must be defined before the the initialization (either Android or iOS), otherwise you will get an error.
+Where `androidAppKey` and `iosAppKey` are the keys associated with your app in your Appodeal account. At least one of these keys must be set before the the initialization (either Android or iOS), otherwise you will get an error.
 
 Afterwards you can initialize Appodeal with the function:
 
@@ -86,23 +86,23 @@ await Appodeal.initialize(
 
 ### Collecting user consent
 
-Before you initialize the plugin and start displaying ads to the user sometimes it's important to collect his consent, depending on the user location or the operating system that he is using.
+Before you initialize the plugin and start displaying ads, you might need to collect the user's consent to be tracked online, depending on his location or the operating system that he is using.
 
-Since iOS 14+ you are required to request a specific permission before you can have access to Apple's IDFA (a sort of proprietary cookie used by Apple to track users among multiple advertisers... Apple, always Apple 😒). For iOS versions before 14 and for Android devices this function won't do anything, so it's safe to call it on any device OS or version.
+Since iOS 14+ you are required to request a specific permission before you can have access to Apple's IDFA (a sort of proprietary cookie used by Apple to track users among multiple advertisers... ah Apple, always Apple 😒). For iOS versions before 14 and for Android devices this function won't do anything, so it's safe to call it on any device OS or version.
 
 ```dart
 // iOS 14+: request permission to track users
-// on iOS <= 13 and on Android this function does nothing and just returns true
+// on iOS <= 13 and on Android this function does nothing
 await Appodeal.requestIOSTrackingAuthorization();
 ```
 
-Depending on the location of your users, they might be protected by the privacy laws GDPR or CCPA. These laws require, among other things, that app developers must collect user consent before the adverstisers can track them online. You have two options to collect the user content:
+Depending on the location of your users, they might be protected by the privacy laws GDPR or CCPA. These laws require, among other things, that app developers must collect user consent before the adverstisers can track them online. You have two options to collect the user consent:
 
-1. You design the UI with all the legal information and multiple options to let the user decline, accept or partially accept the options to be tracked. After you collect this information yourself, you need to pass the value `true` or `false` to the parameter `hasConsent` during the Appodeal initialization.
+1. You can design the UI with all the legal information and multiple options to let the user decline, accept or partially accept the options to be tracked. After you collect this information yourself, you then need to pass the value `true` or `false` to the parameter `hasConsent` during the Appodeal initialization.
 
 or:
 
-2. You can use the UI provided by the Consent Manager framework. With this option you can't customize the UI when you collect the user consent, however it does the heavy lifting for you of creating and displaying a window with all the legal wording, permission options and everything that is necessary to get the user's permission to be tracked. If you decide to go with option # 2 then must call two funtions:
+2. You can use the UI provided by the Consent Manager framework. With this option you can't customize the UI used to collect the user consent, however it does the heavy lifting for you of creating and displaying a window with all the legal wording, permission options and everything that is necessary to get the user's permission to be tracked. If you decide to go with option # 2 then you must call two functions:
 
     2.1. Call the function `Appodeal.requestConsentAuthorization()` to display a window requesting the user consent to be tracked:
     ```dart
@@ -118,7 +118,7 @@ or:
 
 ## 💵 Showing ads
 
-After you collect all the permissions and plugin is already initialized than you just need to display the ads.
+After you collect all the permissions and the plugin properly initialized, you are ready to display the ads:
 
 ### Banner
 
