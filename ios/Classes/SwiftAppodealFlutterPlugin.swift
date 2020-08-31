@@ -6,22 +6,23 @@ import UIKit
 
 public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
 {
+    internal var channel: FlutterMethodChannel?
+    
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "appodeal_flutter", binaryMessenger: registrar.messenger())
         let instance = SwiftAppodealFlutterPlugin()
+        instance.channel = FlutterMethodChannel(name: "appodeal_flutter", binaryMessenger: registrar.messenger())
         
-        registrar.addMethodCallDelegate(instance, channel: channel)
+        registrar.addMethodCallDelegate(instance, channel: instance.channel!)
         registrar.register(AppodealBannerFactory(), withId: "plugins.io.vinicius.appodeal/banner")
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
-        case "requestTrackingAuthorization": requestTrackingAuthorization(result)
-            
         case "initialize": initialize(call, result)
         case "isLoaded": isLoaded(call, result)
         case "show": show(call, result)
         
+        case "requestIOSTrackingAuthorization": requestTrackingAuthorization(result)
         case "fetchConsentInfo": fetchConsentInfo(call, result)
         case "requestConsentAuthorization": requestConsentAuthorization(result)
             
@@ -39,13 +40,16 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         }
     }
     
-    // region - Appodeal
+    // MARK: - Appodeal
     private func initialize(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let args = call.arguments as! Dictionary<String, Any>
         let appKey = args["iosAppKey"] as! String
         let hasConsent = args["hasConsent"] as! Bool
         let adTypes = args["adTypes"] as! Array<Int>
         let testMode = args["testMode"] as! Bool
+        
+        // Registering callbacks
+        setCallbacks()
         
         let ads = AppodealAdType(rawValue: adTypes.reduce(0) { $0 | getAdType(adId: $1).rawValue })
         Appodeal.setTestingEnabled(testMode)
@@ -68,9 +72,15 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
         result(Appodeal.showAd(adType, rootViewController: rootViewController))
     }
-    // endregion
     
-    // region - Consent Manager
+    private func setCallbacks() {
+        Appodeal.setBannerDelegate(self)
+        Appodeal.setInterstitialDelegate(self)
+        Appodeal.setRewardedVideoDelegate(self)
+        Appodeal.setNonSkippableVideoDelegate(self)
+    }
+    
+    // MARK: - Consent Manager
     private func fetchConsentInfo(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let args = call.arguments as! Dictionary<String, Any>
         let appKey = args["iosAppKey"] as! String
@@ -101,9 +111,8 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
             }
         }
     }
-    // endregion
     
-    // region - Helper
+    // MARK: - Helper Methods
     private func getShowStyle(adType: AppodealAdType) -> AppodealShowStyle {
         switch adType {
         case .interstitial: return .interstitial
@@ -123,5 +132,4 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         default: return AppodealAdType(rawValue: 0)
         }
     }
-    // endregion
 }

@@ -24,6 +24,12 @@ class _MyAppState extends State<MyApp> {
       iosAppKey: '3a2ef99639e29dfe3333e4b3b496964dae6097cc510cbb2f'
     );
 
+    // Defining the callbacks
+    Appodeal.setBannerCallback((event) => print('Banner ad triggered the event $event'));
+    Appodeal.setInterstitialCallback((event) => print('Interstitial ad triggered the event $event'));
+    Appodeal.setRewardCallback((event) => print('Reward ad triggered the event $event'));
+    Appodeal.setNonSkippableCallback((event) => print('Non-skippable ad triggered the event $event'));
+
     // Request authorization to track the user
     Appodeal.requestIOSTrackingAuthorization().then((_) async {
       // Initialize Appodeal after the authorization was granted or not

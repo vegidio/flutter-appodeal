@@ -1,3 +1,8 @@
+## 0.2.0
+
+* Added support to callback functions to track ad events.
+* The plugin entered the beta stage.
+
 ## 0.1.3
 
 * Small updates in the documentation.

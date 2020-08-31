@@ -6,10 +6,6 @@
 
 A Flutter plugin to display ads from Appodeal. It current supports __Banner__, __Interstitial__, __Reward__ and __Non-Skippable__ ads.
 
-## 🚧 Under development
-
-🔴 **ATTENTION: This plugin is under development and is considered to be in ALPHA STAGE. It means that many features are not implemented yet and/or are subject of change in future releases. While some things are already working, please use caution when using this plugin in production apps.**
-
 ### Roadmap
 
 - ~~Display banner ads.~~
@@ -18,7 +14,7 @@ A Flutter plugin to display ads from Appodeal. It current supports __Banner__, _
 - ~~Display non-skippable ads.~~
 - ~~Support for iOS 14+.~~
 - ~~Support for Consent Manager framework (GDPR/CCPA privacy laws).~~
-- Create callbacks to be notified of events when ads don't load, when they are closed, rewarded, etc.
+- ~~Create callbacks to be notified of events when ads don't load, when they are closed, rewarded, etc.~~
 - Support for floating banner ads.
 - Ability to cache ads manually.
 - Other features under consideration...
@@ -29,7 +25,7 @@ A Flutter plugin to display ads from Appodeal. It current supports __Banner__, _
 
 ```yaml
 dependencies:
-  appodeal_flutter: "^0.1.3"
+  appodeal_flutter: # use the latest version
 ```
 
 2. Install the plugin by running the command below in the terminal, in your project's root directory:
@@ -141,6 +137,49 @@ Appodeal.show(AdType.INTERSTITIAL);  // Show an interstitial ad
 Appodeal.show(AdType.REWARD);        // Show a reward ad
 Appodeal.show(AdType.NON_SKIPPABLE); // Show a non-skippable ad
 ```
+
+## ♻️ Callbacks
+
+You can define callbacks to your ads and track when an event occur. You can do that by calling the callback functions below:
+
+- `Appodeal.setBannerCallback((event) {})`
+- `Appodeal.setInterstitialCallback((event) {})`
+- `Appodeal.setRewardCallback((event) {})`
+- `Appodeal.setNonSkippableCallback((event) {})`
+
+Every callback carries the parameter `event` of type `String` and you can use it to determine what event has been triggered. For example, if I wanted to know when the user watched a reward ad until the end, I could use the following callback code:
+
+```dart
+Appodeal.setRewardCallback((event) {
+  if (event == 'onRewardedVideoFinished') {
+    print('The user watched the reward ad until the end');
+  }
+})
+```
+
+and if later I don't want to track reward events anymore, I just need to pass the value `null` to the same callback function:
+
+```dart
+Appodeal.setRewardCallback(null);
+```
+
+The full list of events that you can track is below:
+
+### Banner
+
+`onBannerLoaded`, `onBannerFailedToLoad`, `onBannerShown`, `onBannerClicked`, `onBannerExpired`.
+
+### Interstitial
+
+`onInterstitialLoaded`, `onInterstitialFailedToLoad`, `onInterstitialShown`, `onInterstitialShowFailed`, `onInterstitialClicked`, `onInterstitialClosed`, `onInterstitialExpired`.
+
+### Reward
+
+`onRewardedVideoLoaded`, `onRewardedVideoFailedToLoad`, `onRewardedVideoShown`, `onRewardedVideoShowFailed`, `onRewardedVideoFinished`, `onRewardedVideoClosed`, `onRewardedVideoExpired`, `onRewardedVideoClicked`.
+
+### Non-Skippable
+
+`onNonSkippableVideoLoaded`, `onNonSkippableVideoFailedToLoad`, `onNonSkippableVideoShown`, `onNonSkippableVideoShowFailed`, `onNonSkippableVideoFinished`, `onNonSkippableVideoClosed`, `onNonSkippableVideoExpired`.
 
 ## 📝 License
 

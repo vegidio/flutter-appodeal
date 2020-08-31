@@ -6,6 +6,7 @@
 //
 
 import Appodeal
+import Flutter
 import Foundation
 
 class AppodealBannerFactory: NSObject, FlutterPlatformViewFactory

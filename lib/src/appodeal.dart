@@ -8,6 +8,12 @@ import 'consent.dart';
 class Appodeal {
   static String _androidAppKey;
   static String _iosAppKey;
+
+  static Function(String) _bannerCallback;
+  static Function(String) _interstitialCallback;
+  static Function(String) _rewardCallback;
+  static Function(String) _nonSkippableCallback;
+
   static const MethodChannel _channel = const MethodChannel('appodeal_flutter');
 
   /// Request the user authorization to track him across multiple apps and websites in order to deliver more relevant
@@ -18,7 +24,7 @@ class Appodeal {
   ///
   /// On devices with iOS 14+ it returns `true` or `false` depending whether the user granted access or not.
   static Future<void> requestIOSTrackingAuthorization() async {
-    if (Platform.isIOS) await _channel.invokeMethod('requestTrackingAuthorization');
+    if (Platform.isIOS) await _channel.invokeMethod('requestIOSTrackingAuthorization');
   }
 
   // region - Appodeal
@@ -37,7 +43,10 @@ class Appodeal {
   static Future<void> initialize({@required bool hasConsent, List<int> adTypes = const [], bool testMode = false}) async {
     assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
 
-    await _channel.invokeMethod('initialize', {
+    // Register the callbacks
+    _setCallbacks();
+
+    return _channel.invokeMethod('initialize', {
       'androidAppKey': _androidAppKey,
       'iosAppKey': _iosAppKey,
       'hasConsent': hasConsent,
@@ -66,6 +75,52 @@ class Appodeal {
     return _channel.invokeMethod('show', {
       'adType': adType
     });
+  }
+  // endregion
+
+  // region - Callbacks
+  static void _setCallbacks() {
+    _channel.setMethodCallHandler((call) {
+      if (call.method.startsWith('onBanner')) {
+        _bannerCallback?.call(call.method);
+      } else if (call.method.startsWith('onInterstitial')) {
+        _interstitialCallback?.call(call.method);
+      } else if (call.method.startsWith('onRewarded')) {
+        _rewardCallback?.call(call.method);
+      } else if (call.method.startsWith('onRewarded')) {
+        _nonSkippableCallback?.call(call.method);
+      }
+
+      return null;
+    });
+  }
+
+  /// Define a callback to track banner ad events.
+  ///
+  /// It receives a function [callback] with parameter `event` of type `String.
+  static void setBannerCallback(Function(String event) callback) {
+    _bannerCallback = callback;
+  }
+
+  /// Define a callback to track interstitial ad events.
+  ///
+  /// It receives a function [callback] with parameter `event` of type `String.
+  static void setInterstitialCallback(Function(String event) callback) {
+    _interstitialCallback = callback;
+  }
+
+  /// Define a callback to track reward ad events.
+  ///
+  /// It receives a function [callback] with parameter `event` of type `String.
+  static void setRewardCallback(Function(String event) callback) {
+    _rewardCallback = callback;
+  }
+
+  /// Define a callback to track non-skippable ad events.
+  ///
+  /// It receives a function [callback] with parameter `event` of type `String.
+  static void setNonSkippableCallback(Function(String event) callback) {
+    _nonSkippableCallback = callback;
   }
   // endregion
 
