@@ -23,13 +23,15 @@ class Appodeal {
   /// function nothing. It simply returns `true` as if the authorization had already been granted.
   ///
   /// On devices with iOS 14+ it returns `true` or `false` depending whether the user granted access or not.
-  static Future<void> requestIOSTrackingAuthorization() async {
-    if (Platform.isIOS) await _channel.invokeMethod('requestIOSTrackingAuthorization');
+  static Future<bool> requestIOSTrackingAuthorization() async {
+    return Platform.isIOS ?
+      await _channel.invokeMethod('requestIOSTrackingAuthorization') :
+      true;
   }
 
   // region - Appodeal
-  /// Define the app keys for Android and iOS, according to the values available in your Appodeal account. At least of
-  /// of the keys must be set, otherwise an error will be throw during the initialization.
+  /// Define the Appodeal app keys for Android and iOS. At least one of the keys must be set, otherwise an error will be
+  /// throw during the initialization.
   static void setAppKeys({String androidAppKey, String iosAppKey}) {
     _androidAppKey = androidAppKey;
     _iosAppKey = iosAppKey;
@@ -66,7 +68,7 @@ class Appodeal {
     });
   }
 
-  /// Presents an ad of certain type [adType].
+  /// Shows an ad of certain type [adType].
   ///
   /// Use the constants in the class `AdType` to specify what ad should be shown.
   ///
@@ -126,9 +128,9 @@ class Appodeal {
 
   // region - Consent Manager
   /// Fetches the user consent status, respecting the GDPR and CCPA laws, about tracking individuals across multiple
-  /// sites and apps.
+  /// sites and apps. This command must be called before the initialization of the Appodeal plugin.
   ///
-  /// Returns an object of type `Consent` where you can check the user status and in what zone, if any, that consent
+  /// Returns an object of type `Consent` where you can check the user status, in what zone, if any, that consent
   /// applies.
   static Future<Consent> fetchConsentInfo() async {
     assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
@@ -141,7 +143,24 @@ class Appodeal {
     return Consent(consentMap);
   }
 
-  /// Displays a dialog window where the user can grant or deny access to be granted across multiple sites and devices,
+  /// Checks if the app needs to request the user consent to track him online.
+  ///
+  /// Depending on the current user location he might not be protected by privacy laws, so in this cases it's not
+  /// necessary to request consent to track him online.
+  ///
+  /// Returns `true` if the app must request consent. This function will return `false` when the user is not protected
+  /// by any privacy laws, but also when the user previously granted or declined permission to be tracked.
+  static Future<bool> shouldShowConsent() async {
+    assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
+
+    await fetchConsentInfo();
+    return await _channel.invokeMethod('shouldShowConsent', {
+      'androidAppKey': _androidAppKey,
+      'iosAppKey': _iosAppKey
+    });
+  }
+
+  /// Displays a dialog window where the user can grant or deny access to be tracked across multiple sites and devices,
   /// according to GDPR or CCPA laws.
   static Future<void> requestConsentAuthorization() async {
     await fetchConsentInfo();

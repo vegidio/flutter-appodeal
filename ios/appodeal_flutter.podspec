@@ -4,14 +4,14 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'appodeal_flutter'
-  s.version          = '0.1.0'
-  s.summary          = 'A new flutter plugin project.'
+  s.version          = '0.2.1'
+  s.summary          = 'A Flutter plugin to display ads from Appodeal.'
   s.description      = <<-DESC
-A new flutter plugin project.
+A Flutter plugin to display ads from Appodeal; it supports the new reqs for iOS 14+ and GDPR/CCPA consent.
                        DESC
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Vinicius Egidio' => 'me@vinicius.io' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'

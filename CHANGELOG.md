@@ -1,3 +1,7 @@
+## 0.2.1
+
+* Added function to check if the app must request user consent.
+
 ## 0.2.0
 
 * Added support to callback functions to track ad events.
@@ -33,4 +37,4 @@
 
 ## 0.0.1
 
-* Development release: with initial support for __Banner__, __Interstitital__, __Reward__ and __Non-Skippable__ ads.
+* Initial release with support for __Banner__, __Interstitital__, __Reward__ and __Non-Skippable__ ads.

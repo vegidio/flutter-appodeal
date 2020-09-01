@@ -6,18 +6,9 @@
 
 A Flutter plugin to display ads from Appodeal. It current supports __Banner__, __Interstitial__, __Reward__ and __Non-Skippable__ ads.
 
-### Roadmap
+## 📽 Demo
 
-- ~~Display banner ads.~~
-- ~~Display interstitial ads.~~
-- ~~Display reward ads.~~
-- ~~Display non-skippable ads.~~
-- ~~Support for iOS 14+.~~
-- ~~Support for Consent Manager framework (GDPR/CCPA privacy laws).~~
-- ~~Create callbacks to be notified of events when ads don't load, when they are closed, rewarded, etc.~~
-- Support for floating banner ads.
-- Ability to cache ads manually.
-- Other features under consideration...
+![Demo](plugin_demo.gif)
 
 ## ⚙️ Installation
 
@@ -36,11 +27,11 @@ $ flutter pub get
 
 3. Follow the Appodeal installation instructions available for [iOS](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide) and [Android](https://wiki.appodeal.com/en/android/2-7-3-beta-android-sdk-integration-guide). However, ignore the steps to include the Appodeal SDK dependencies in Gradle (Android) and Cocoapods (iOS) since these steps will be done by this package.
 
-### Extra step For Android only
+### Extra step for Android only
 
 4. The Appodeal framework includes mutiple libraries from different ad providers, so it's very likely that the inclusion of this plugin in your project will make it exceed to 64K limit method count of Android. To solve this problem you need to enable multidex in your project; follow the instructions [here](https://developer.android.com/studio/build/multidex) to learn how to do that.
 
-### Extra step For iOS 14+ only
+### Extra step for iOS 14+ only
 
 4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide/ios-14+-support) to learn how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code will be executed when you call the function `Appodeal.requestIOSTrackingAuthorization()`, before the initialization of Appodeal (see below).
 
@@ -80,19 +71,32 @@ await Appodeal.initialize(
 
 * `testMode` (optional) you must set `false` (default) or `true` depending if you are running the ads during development/test or production.
 
-### Collecting user consent
+## 👮🏾‍♂️ Consent to track the user
 
 Before you initialize the plugin and start displaying ads, you might need to collect the user's consent to be tracked online, depending on his location or the operating system that he is using.
+
+### For iOS 14+ only
 
 Since iOS 14+ you are required to request a specific permission before you can have access to Apple's IDFA (a sort of proprietary cookie used by Apple to track users among multiple advertisers... ah Apple, always Apple 😒). For iOS versions before 14 and for Android devices this function won't do anything, so it's safe to call it on any device OS or version.
 
 ```dart
 // iOS 14+: request permission to track users
-// on iOS <= 13 and on Android this function does nothing
+// on iOS <= 13 and Android this function does nothing; it just returns true
 await Appodeal.requestIOSTrackingAuthorization();
 ```
 
-Depending on the location of your users, they might be protected by the privacy laws GDPR or CCPA. These laws require, among other things, that app developers must collect user consent before the adverstisers can track them online. You have two options to collect the user consent:
+### For users protected by GDPR/CCPA privacy laws
+
+Depending on the location of your users, they might be protected by the privacy laws GDPR or CCPA. These laws require, among other things, that app developers must collect user consent before the adverstisers can track them online. You can check if the user is protected by any privacy laws, by calling the function `Appodeal.shouldShowConsent()`:
+
+```dart
+bool shouldShow = await Appodeal.shouldShowConsent();
+if (shouldShow) { /* Request user consent */ }
+```
+
+Keep in mind that the function above will also return `false` if the user previously accepted or declined the request to be tracked online. So it's important to always call this function in advance to avoid annoying the user with constant request messages.
+
+After you determine if you need to request user consent, you have two options to collect this consent:
 
 1. You can design the UI with all the legal information and multiple options to let the user decline, accept or partially accept the options to be tracked. After you collect this information yourself, you then need to pass the value `true` or `false` to the parameter `hasConsent` during the Appodeal initialization.
 
@@ -140,7 +144,7 @@ Appodeal.show(AdType.NON_SKIPPABLE); // Show a non-skippable ad
 
 ## ♻️ Callbacks
 
-You can define callbacks to your ads and track when an event occur. You can do that by calling the callback functions below:
+You can define callbacks to your ads and track when an event occurs; it can do by calling the callback functions below:
 
 - `Appodeal.setBannerCallback((event) {})`
 - `Appodeal.setInterstitialCallback((event) {})`

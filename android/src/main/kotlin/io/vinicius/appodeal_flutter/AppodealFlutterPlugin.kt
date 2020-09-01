@@ -8,6 +8,7 @@ import com.appodeal.ads.InterstitialCallbacks
 import com.appodeal.ads.NonSkippableVideoCallbacks
 import com.appodeal.ads.RewardedVideoCallbacks
 import com.explorestack.consent.Consent
+import com.explorestack.consent.Consent.ShouldShow
 import com.explorestack.consent.ConsentForm
 import com.explorestack.consent.ConsentFormListener
 import com.explorestack.consent.ConsentInfoUpdateListener
@@ -20,6 +21,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+
 
 class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
 {
@@ -40,6 +42,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
             "show" -> show(activity, call, result)
 
             "fetchConsentInfo" -> fetchConsentInfo(call, result)
+            "shouldShowConsent" -> shouldShowConsent(result)
             "requestConsentAuthorization" -> requestConsentAuthorization(result)
 
             else -> result.notImplemented()
@@ -112,7 +115,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
             }
 
             override fun onBannerShowFailed() {
-                // Not implemented for the same o consistency with iOS
+                // Not implemented for the sake of consistency with iOS
             }
 
             override fun onBannerClicked() {
@@ -244,6 +247,13 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
                         exception)
             }
         })
+    }
+
+    private fun shouldShowConsent(result: Result) {
+        val consentManager = ConsentManager.getInstance(activity)
+        val shouldShow = consentManager.shouldShowConsentDialog()
+
+        result.success(shouldShow == ShouldShow.TRUE)
     }
 
     private fun requestConsentAuthorization(result: Result) {

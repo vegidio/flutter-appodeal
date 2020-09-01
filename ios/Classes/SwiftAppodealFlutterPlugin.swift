@@ -1,7 +1,7 @@
 import AppTrackingTransparency
 import Appodeal
-import StackConsentManager
 import Flutter
+import StackConsentManager
 import UIKit
 
 public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
@@ -22,15 +22,17 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         case "isLoaded": isLoaded(call, result)
         case "show": show(call, result)
         
-        case "requestIOSTrackingAuthorization": requestTrackingAuthorization(result)
+        case "requestIOSTrackingAuthorization": requestIOSTrackingAuthorization(result)
+        
         case "fetchConsentInfo": fetchConsentInfo(call, result)
+        case "shouldShowConsent": shouldShowConsent(call, result)
         case "requestConsentAuthorization": requestConsentAuthorization(result)
             
         default: result(FlutterMethodNotImplemented)
         }
     }
     
-    private func requestTrackingAuthorization(_ result: @escaping FlutterResult) {
+    private func requestIOSTrackingAuthorization(_ result: @escaping FlutterResult) {
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization { status in
                 result(status == .authorized)
@@ -94,6 +96,20 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
                 ])
             } else {
                 result(FlutterError(code: "CONSENT_INFO_ERROR", message: "Failed to fetch the consent info",
+                                    details: error))
+            }
+        }
+    }
+
+    private func shouldShowConsent(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        let args = call.arguments as! Dictionary<String, Any>
+        let appKey = args["iosAppKey"] as! String
+        
+        STKConsentManager.shared().synchronize(withAppKey: appKey) { error in
+            if (error == nil) {
+                result(STKConsentManager.shared().shouldShowConsentDialog == .true)
+            } else {
+                result(FlutterError(code: "CONSENT_CHECK_ERROR", message: "Failed to check if consent is needed",
                                     details: error))
             }
         }
