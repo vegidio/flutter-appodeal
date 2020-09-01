@@ -8,7 +8,7 @@ A Flutter plugin to display ads from Appodeal. It current supports __Banner__, _
 
 ## 📽 Demo
 
-![Demo](plugin_demo.gif)
+[![Demo](https://i.imgur.com/rrLm2ro.gif)](https://i.imgur.com/Rh2YwuW.mp4)
 
 ## ⚙️ Installation
 
@@ -87,14 +87,14 @@ await Appodeal.requestIOSTrackingAuthorization();
 
 ### For users protected by GDPR/CCPA privacy laws
 
-Depending on the location of your users, they might be protected by the privacy laws GDPR or CCPA. These laws require, among other things, that app developers must collect user consent before the adverstisers can track them online. You can check if the user is protected by any privacy laws, by calling the function `Appodeal.shouldShowConsent()`:
+Depending on the location of your users, they might be protected by the privacy laws GDPR or CCPA. These laws require, among other things, that app developers must collect user consent before the advertisers can track them online. You can check if the user is protected by any privacy laws, by calling the function `Appodeal.shouldShowConsent()`:
 
 ```dart
 bool shouldShow = await Appodeal.shouldShowConsent();
 if (shouldShow) { /* Request user consent */ }
 ```
 
-Keep in mind that the function above will also return `false` if the user previously accepted or declined the request to be tracked online. So it's important to always call this function in advance to avoid annoying the user with constant request messages.
+Keep in mind that the function above will also return `false` if the user previously accepted or declined the request to be tracked online. So it's important to always call this function in advance to avoid annoying the user with request inquiries that he already answered.
 
 After you determine if you need to request user consent, you have two options to collect this consent:
 

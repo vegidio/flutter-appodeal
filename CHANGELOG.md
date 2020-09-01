@@ -1,3 +1,7 @@
+## 0.2.2
+
+* Hosted the plugin video elsewhere to remove the blob from the package.
+
 ## 0.2.1
 
 * Added function to check if the app must request user consent.
