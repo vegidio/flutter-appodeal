@@ -4,7 +4,7 @@
 [![Pub Version](https://img.shields.io/pub/v/appodeal_flutter?color=blue)](https://pub.dev/packages/appodeal_flutter)
 [![ISC License](https://img.shields.io/npm/l/vimdb?color=important)](LICENSE)
 
-A Flutter plugin to display ads from Appodeal. It current supports __Banner__, __Interstitial__, __Reward__ and __Non-Skippable__ ads.
+A Flutter plugin to display ads from Appodeal. It currently supports __Banner__, __Interstitial__, __Reward__ and __Non-Skippable__ ads.
 
 ## 📽 Demo
 
@@ -33,7 +33,7 @@ $ flutter pub get
 
 ### Extra step for iOS 14+ only
 
-4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide/ios-14+-support) to learn how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code will be executed when you call the function `Appodeal.requestIOSTrackingAuthorization()`, before the initialization of Appodeal (see below).
+4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/2-7-3-beta-ios-sdk-integration-guide/ios-14+-support) to learn how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code is already included in this plugin and it will be executed when you call the function `Appodeal.requestIOSTrackingAuthorization()`, before the initialization of Appodeal (see below).
 
 ## 📱 Usage
 
@@ -51,7 +51,7 @@ Appodeal.setAppKeys(
 );
 ```
 
-Where `androidAppKey` and `iosAppKey` are the keys associated with your app in your Appodeal account. At least one of these keys must be set before the the initialization (either Android or iOS), otherwise you will get an error.
+Where `androidAppKey` and `iosAppKey` are the keys associated with your app in your Appodeal account. At least one of these keys must be set before the initialization (either Android or iOS), otherwise you will get an error.
 
 Afterwards you can initialize Appodeal with the function:
 
@@ -77,13 +77,15 @@ Before you initialize the plugin and start displaying ads, you might need to col
 
 ### For iOS 14+ only
 
-Since iOS 14+ you are required to request a specific permission before you can have access to Apple's IDFA (a sort of proprietary cookie used by Apple to track users among multiple advertisers... ah Apple, always Apple 😒). For iOS versions before 14 and for Android devices this function won't do anything, so it's safe to call it on any device OS or version.
+Since iOS 14+ you are required to request a specific permission before you can have access to Apple's IDFA (a sort of proprietary cookie used by Apple to track users among multiple advertisers... ah Apple, always Apple 🙄). To request this permission call the function `Appodeal.requestIOSTrackingAuthorization()`:
 
 ```dart
 // iOS 14+: request permission to track users
 // on iOS <= 13 and Android this function does nothing; it just returns true
 await Appodeal.requestIOSTrackingAuthorization();
 ```
+
+For iOS versions before 14 and for Android devices this function won't do anything, so it's safe to call it on any device OS or version.
 
 ### For users protected by GDPR/CCPA privacy laws
 
@@ -94,7 +96,7 @@ bool shouldShow = await Appodeal.shouldShowConsent();
 if (shouldShow) { /* Request user consent */ }
 ```
 
-Keep in mind that the function above will also return `false` if the user previously accepted or declined the request to be tracked online. So it's important to always call this function in advance to avoid annoying the user with request inquiries that he already answered.
+Keep in mind that the function above will also return `false` if the user previously accepted or declined the request to be tracked online. So it's important to always call this function in advance to avoid annoying the user with permission requests that he already answered.
 
 After you determine if you need to request user consent, you have two options to collect this consent:
 
@@ -144,7 +146,7 @@ Appodeal.show(AdType.NON_SKIPPABLE); // Show a non-skippable ad
 
 ## ♻️ Callbacks
 
-You can define callbacks to your ads and track when an event occurs; it can do by calling the callback functions below:
+You can define callbacks to your ads and track when an event occurs; it can be done by calling the callback functions below:
 
 - `Appodeal.setBannerCallback((event) {})`
 - `Appodeal.setInterstitialCallback((event) {})`

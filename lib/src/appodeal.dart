@@ -16,11 +16,11 @@ class Appodeal {
 
   static const MethodChannel _channel = const MethodChannel('appodeal_flutter');
 
-  /// Request the user authorization to track him across multiple apps and websites in order to deliver more relevant
-  /// ads. This command must be called before the initialization of the Appodeal plugin.
+  /// Request the user authorization to track him online in order to deliver more relevant ads. This command must be
+  /// called before the initialization of the Appodeal plugin.
   ///
   /// This authorization request is only relevant for iOS 14+. In older versions of iOS and on Android devices this
-  /// function nothing. It simply returns `true` as if the authorization had already been granted.
+  /// function does nothing. It simply returns `true` as if the authorization had already been granted.
   ///
   /// On devices with iOS 14+ it returns `true` or `false` depending whether the user granted access or not.
   static Future<bool> requestIOSTrackingAuthorization() async {
@@ -31,7 +31,7 @@ class Appodeal {
 
   // region - Appodeal
   /// Define the Appodeal app keys for Android and iOS. At least one of the keys must be set, otherwise an error will be
-  /// throw during the initialization.
+  /// thrown during the initialization.
   static void setAppKeys({String androidAppKey, String iosAppKey}) {
     _androidAppKey = androidAppKey;
     _iosAppKey = iosAppKey;
@@ -127,11 +127,11 @@ class Appodeal {
   // endregion
 
   // region - Consent Manager
-  /// Fetches the user consent status, respecting the GDPR and CCPA laws, about tracking individuals across multiple
-  /// sites and apps. This command must be called before the initialization of the Appodeal plugin.
+  /// Fetches the user consent status, respecting the GDPR and CCPA laws, to track him online. This command must be
+  /// called before the initialization of the Appodeal plugin.
   ///
-  /// Returns an object of type `Consent` where you can check the user status, in what zone, if any, that consent
-  /// applies.
+  /// Returns an object of type `Consent` where you can check the user's consent status and in what zone/regulation, if
+  /// any, that consent applies.
   static Future<Consent> fetchConsentInfo() async {
     assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
 
@@ -160,8 +160,8 @@ class Appodeal {
     });
   }
 
-  /// Displays a dialog window where the user can grant or deny access to be tracked across multiple sites and devices,
-  /// according to GDPR or CCPA laws.
+  /// Displays a dialog window where the user can grant or deny access to be tracked online, according to GDPR or CCPA
+  /// laws.
   static Future<void> requestConsentAuthorization() async {
     await fetchConsentInfo();
     return _channel.invokeMethod('requestConsentAuthorization');

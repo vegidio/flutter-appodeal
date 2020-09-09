@@ -1,3 +1,7 @@
+## 0.2.3
+
+* Small improvements and fixed some typos in the documentation.
+
 ## 0.2.2
 
 * Hosted the plugin video elsewhere to remove the blob from the package.
