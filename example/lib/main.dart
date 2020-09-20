@@ -32,6 +32,9 @@ class _MyAppState extends State<MyApp> {
 
     // Request authorization to track the user
     Appodeal.requestIOSTrackingAuthorization().then((_) async {
+      // Set interstitial ads to be cached manually
+      await Appodeal.setAutoCache(AdType.INTERSTITIAL, false);
+
       // Initialize Appodeal after the authorization was granted or not
       await Appodeal.initialize(
         hasConsent: true,
@@ -96,11 +99,18 @@ class _Body extends StatelessWidget {
             ),
 
             RaisedButton(
-              child: Text('Check: Is Interstitial Ad loaded?'),
+              child: Text('Is Interstitial Ad ready for show?'),
               onPressed: () async {
-                var isLoaded = await Appodeal.isLoaded(AdType.INTERSTITIAL);
-                Toast.show(isLoaded ? 'Interstitial ad is loaded' : 'Interstitial ad is NOT loaded', context,
+                var isReady = await Appodeal.isReadyForShow(AdType.INTERSTITIAL);
+                Toast.show(isReady ? 'Interstitial ad is ready' : 'Interstitial ad is NOT ready', context,
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+              },
+            ),
+
+            RaisedButton(
+              child: Text('Cache Interstitial Ad'),
+              onPressed: () async {
+                await Appodeal.cache(AdType.INTERSTITIAL);
               },
             ),
 
@@ -112,10 +122,10 @@ class _Body extends StatelessWidget {
             ),
 
             RaisedButton(
-              child: Text('Check: Is Reward Ad loaded?'),
+              child: Text('Is Reward Ad ready for show?'),
               onPressed: () async {
-                var isLoaded = await Appodeal.isLoaded(AdType.REWARD);
-                Toast.show(isLoaded ? 'Reward ad is loaded' : 'Reward ad is NOT loaded', context,
+                var isReady = await Appodeal.isReadyForShow(AdType.REWARD);
+                Toast.show(isReady ? 'Reward ad is ready' : 'Reward ad is NOT ready', context,
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
@@ -129,10 +139,10 @@ class _Body extends StatelessWidget {
             ),
 
             RaisedButton(
-              child: Text('Check: Is Non-Skippable Ad loaded?'),
+              child: Text('Is Non-Skippable Ad ready?'),
               onPressed: () async {
-                var isLoaded = await Appodeal.isLoaded(AdType.NON_SKIPPABLE);
-                Toast.show(isLoaded ? 'Non-Skippable ad is loaded' : 'No-Skippable ad is NOT loaded', context,
+                var isReady = await Appodeal.isReadyForShow(AdType.NON_SKIPPABLE);
+                Toast.show(isReady ? 'Non-Skippable ad is ready' : 'No-Skippable ad is NOT ready', context,
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),

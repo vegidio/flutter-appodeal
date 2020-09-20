@@ -19,7 +19,9 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case "initialize": initialize(call, result)
-        case "isLoaded": isLoaded(call, result)
+        case "setAutoCache": setAutoCache(call, result)
+        case "cache": cache(call, result)
+        case "isReadyForShow": isReadyForShow(call, result)
         case "show": show(call, result)
         
         case "requestIOSTrackingAuthorization": requestIOSTrackingAuthorization(result)
@@ -31,7 +33,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         default: result(FlutterMethodNotImplemented)
         }
     }
-    
+
     private func requestIOSTrackingAuthorization(_ result: @escaping FlutterResult) {
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization { status in
@@ -41,7 +43,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
             result(true)
         }
     }
-    
+
     // MARK: - Appodeal
     private func initialize(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let args = call.arguments as! Dictionary<String, Any>
@@ -59,14 +61,33 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         
         result(nil)
     }
-    
-    private func isLoaded(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+
+    private func setAutoCache(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        let args = call.arguments as! Dictionary<String, Any>
+        let adType = getAdType(adId: args["adType"] as! Int)
+        let autoCache = args["autoCache"] as! Bool
+
+        Appodeal.setAutocache(autoCache, types: adType)
+        
+        result(nil)
+    }
+
+    private func cache(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        let args = call.arguments as! Dictionary<String, Any>
+        let adType = getAdType(adId: args["adType"] as! Int)
+
+        Appodeal.cacheAd(adType)
+        
+        result(nil)
+    }
+
+    private func isReadyForShow(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let args = call.arguments as! Dictionary<String, Any>
         let adType = getShowStyle(adType: getAdType(adId: args["adType"] as! Int))
         
         result(Appodeal.isReadyForShow(with: adType))
     }
-    
+
     private func show(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let args = call.arguments as! Dictionary<String, Any>
         let adType = getShowStyle(adType: getAdType(adId: args["adType"] as! Int))
@@ -74,14 +95,14 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
         result(Appodeal.showAd(adType, rootViewController: rootViewController))
     }
-    
+
     private func setCallbacks() {
         Appodeal.setBannerDelegate(self)
         Appodeal.setInterstitialDelegate(self)
         Appodeal.setRewardedVideoDelegate(self)
         Appodeal.setNonSkippableVideoDelegate(self)
     }
-    
+
     // MARK: - Consent Manager
     private func fetchConsentInfo(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let args = call.arguments as! Dictionary<String, Any>

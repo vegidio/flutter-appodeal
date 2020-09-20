@@ -37,7 +37,9 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
             "initialize" -> initialize(call, result)
-            "isLoaded" -> isLoaded(call, result)
+            "setAutoCache" -> setAutoCache(call, result)
+            "cache" -> cache(call, result)
+            "isReadyForShow" -> isReadyForShow(call, result)
             "show" -> show(activity, call, result)
 
             "fetchConsentInfo" -> fetchConsentInfo(call, result)
@@ -83,7 +85,24 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
         result.success(null)
     }
 
-    private fun isLoaded(call: MethodCall, result: Result) {
+    private fun setAutoCache(call: MethodCall, result: Result) {
+        val args = call.arguments as Map<*, *>
+        val adType = getAdType(args["adType"] as Int)
+        val autoCache = args["autoCache"] as Boolean
+
+        Appodeal.setAutoCache(adType, autoCache)
+        result.success(null)
+    }
+
+    private fun cache(call: MethodCall, result: Result) {
+        val args = call.arguments as Map<*, *>
+        val adType = getAdType(args["adType"] as Int)
+
+        Appodeal.cache(activity, adType)
+        result.success(null)
+    }
+
+    private fun isReadyForShow(call: MethodCall, result: Result) {
         val args = call.arguments as Map<*, *>
         val adType = getAdType(args["adType"] as Int)
 

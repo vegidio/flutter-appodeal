@@ -10,16 +10,16 @@ class AppodealBanner extends StatelessWidget {
       width: 320,
       height: 50,
       child: Platform.isIOS
-          ? UiKitView(
-              viewType: 'plugins.io.vinicius.appodeal/banner',
-              creationParams: {},
-              creationParamsCodec: const StandardMessageCodec(),
-            )
-          : AndroidView(
-              viewType: 'plugins.io.vinicius.appodeal/banner',
-              creationParams: {},
-              creationParamsCodec: const StandardMessageCodec(),
-            ),
+        ? UiKitView(
+            viewType: 'plugins.io.vinicius.appodeal/banner',
+            creationParams: {},
+            creationParamsCodec: const StandardMessageCodec(),
+          )
+        : AndroidView(
+            viewType: 'plugins.io.vinicius.appodeal/banner',
+            creationParams: {},
+            creationParamsCodec: const StandardMessageCodec(),
+          ),
     );
   }
 }

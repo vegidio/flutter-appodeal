@@ -1,3 +1,8 @@
+## 0.3.0
+
+* Added support to the functions to cache ads manually.
+* Renamed the function `isLoaded()` to `isReadyForShow()`.
+
 ## 0.2.3
 
 * Small improvements and fixed some typos in the documentation.

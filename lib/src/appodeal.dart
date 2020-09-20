@@ -57,13 +57,36 @@ class Appodeal {
     });
   }
 
-  /// Check if an ad of certain type [adType] is loaded and ready to be presented.
+  /// Enable or disable the auto caching of an ad of certain type [adType].
+  ///
+  /// When you initialize Appodeal all ads types are set to be downloaded automatically. If you want to prevent this
+  /// behaviour you can call this function before the initialization passing `false` to the parameter [autoCache].
+  ///
+  /// Use the constants in the class `AdType` to specify what ad should be loaded.
+  static Future<void> setAutoCache(int adType, bool autoCache) async {
+    return _channel.invokeMethod('setAutoCache', {
+      'adType': adType,
+      'autoCache': autoCache
+    });
+  }
+
+  /// Cache an ad of certain type [adType].
+  ///
+  /// If you disabled the auto caching (function `setAutoCache()`) then you must call this function before you can
+  /// display the ad type where auto cache has been disabled.
+  static Future<void> cache(int adType) async {
+    return _channel.invokeMethod('cache', {
+      'adType': adType
+    });
+  }
+
+  /// Check if an ad of certain type [adType] is ready to be presented.
   ///
   /// Use the constants in the class `AdType` to specify what ad should be loaded.
   ///
   /// Returns `true` if the ad is loaded.
-  static Future<bool> isLoaded(int adType) async {
-    return _channel.invokeMethod('isLoaded', {
+  static Future<bool> isReadyForShow(int adType) async {
+    return _channel.invokeMethod('isReadyForShow', {
       'adType': adType
     });
   }
