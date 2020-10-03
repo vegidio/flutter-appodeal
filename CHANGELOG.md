@@ -1,3 +1,7 @@
+## 0.3.2
+
+* Updated documentation with instructions to upgrade Gradle.
+
 ## 0.3.1
 
 * Upgraded Appodeal library to version 2.8.0-Beta.
