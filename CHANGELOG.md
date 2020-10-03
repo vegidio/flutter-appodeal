@@ -1,3 +1,7 @@
+## 0.3.1
+
+* Upgraded Appodeal library to version 2.8.0-Beta.
+
 ## 0.3.0
 
 * Added support to the functions to cache ads manually.
