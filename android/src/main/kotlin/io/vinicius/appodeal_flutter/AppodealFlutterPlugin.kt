@@ -2,17 +2,9 @@ package io.vinicius.appodeal_flutter
 
 import android.app.Activity
 import androidx.annotation.NonNull
-import com.appodeal.ads.Appodeal
-import com.appodeal.ads.BannerCallbacks
-import com.appodeal.ads.InterstitialCallbacks
-import com.appodeal.ads.NonSkippableVideoCallbacks
-import com.appodeal.ads.RewardedVideoCallbacks
-import com.explorestack.consent.Consent
+import com.appodeal.ads.*
+import com.explorestack.consent.*
 import com.explorestack.consent.Consent.ShouldShow
-import com.explorestack.consent.ConsentForm
-import com.explorestack.consent.ConsentFormListener
-import com.explorestack.consent.ConsentInfoUpdateListener
-import com.explorestack.consent.ConsentManager
 import com.explorestack.consent.exception.ConsentManagerException
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -22,8 +14,7 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
-class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
-{
+class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private lateinit var activity: Activity
     private lateinit var channel: MethodChannel
     private lateinit var pluginBinding: FlutterPlugin.FlutterPluginBinding
@@ -45,6 +36,8 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
             "fetchConsentInfo" -> fetchConsentInfo(call, result)
             "shouldShowConsent" -> shouldShowConsent(result)
             "requestConsentAuthorization" -> requestConsentAuthorization(result)
+            "disableLocationPermissionCheck" -> disableLocationPermissionCheck(result)
+            "disableWriteExternalStoragePermissionCheck" -> disableWriteExternalStoragePermissionCheck(result)
 
             else -> result.notImplemented()
         }
@@ -308,6 +301,19 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
             5 -> Appodeal.NON_SKIPPABLE_VIDEO
             else -> Appodeal.NONE
         }
+    }
+    // endregion
+
+
+    // region - Permissions
+    private fun disableWriteExternalStoragePermissionCheck(result: Result) {
+        Appodeal.disableWriteExternalStoragePermissionCheck()
+        result.success(null)
+    }
+
+    private fun disableLocationPermissionCheck(result: Result) {
+        Appodeal.disableLocationPermissionCheck()
+        result.success(null)
     }
     // endregion
 }

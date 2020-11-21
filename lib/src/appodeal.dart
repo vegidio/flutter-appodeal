@@ -189,5 +189,16 @@ class Appodeal {
     await fetchConsentInfo();
     return _channel.invokeMethod('requestConsentAuthorization');
   }
+
+  // endregion
+
+  // region - Permissions
+  static Future<void> disableWriteExternalStoragePermissionCheck() async {
+    return _channel.invokeMethod('disableWriteExternalStoragePermissionCheck');
+  }
+
+  static Future<void> disableLocationPermissionCheck() async {
+    return _channel.invokeMethod('disableLocationPermissionCheck');
+  }
   // endregion
 }
