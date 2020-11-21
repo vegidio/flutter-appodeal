@@ -255,7 +255,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
             override fun onFailedToUpdateConsentInfo(exception: ConsentManagerException?) {
                 result.error("CONSENT_INFO_ERROR", "Failed to fetch the consent info",
-                        exception)
+                        exception?.reason)
             }
         })
     }
@@ -279,7 +279,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
                     override fun onConsentFormError(exception: ConsentManagerException?) {
                         result.error("CONSENT_WINDOW_ERROR",
-                                "Error showing the consent window", exception)
+                                "Error showing the consent window", exception?.reason)
                     }
 
                     override fun onConsentFormOpened() {}
