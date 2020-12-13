@@ -194,11 +194,14 @@ class Appodeal {
   // endregion
 
   // region - Permissions
-  static Future<void> disableWriteExternalStoragePermissionCheck() async {
+
+  /// Method only for Android (cf https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide/configure-sdk)
+  static Future<void> disableAndroidWriteExternalStoragePermissionCheck() async {
     return _channel.invokeMethod('disableWriteExternalStoragePermissionCheck');
   }
 
-  static Future<void> disableLocationPermissionCheck() async {
+  /// Method only for Android (cf https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide/configure-sdk)
+  static Future<void> disableAndroidLocationPermissionCheck() async {
     return _channel.invokeMethod('disableLocationPermissionCheck');
   }
 // endregion
