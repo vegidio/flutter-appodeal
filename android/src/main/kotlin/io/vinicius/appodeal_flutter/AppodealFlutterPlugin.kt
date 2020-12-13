@@ -2,9 +2,17 @@ package io.vinicius.appodeal_flutter
 
 import android.app.Activity
 import androidx.annotation.NonNull
-import com.appodeal.ads.*
-import com.explorestack.consent.*
+import com.appodeal.ads.Appodeal
+import com.appodeal.ads.BannerCallbacks
+import com.appodeal.ads.InterstitialCallbacks
+import com.appodeal.ads.NonSkippableVideoCallbacks
+import com.appodeal.ads.RewardedVideoCallbacks
+import com.explorestack.consent.Consent
 import com.explorestack.consent.Consent.ShouldShow
+import com.explorestack.consent.ConsentForm
+import com.explorestack.consent.ConsentFormListener
+import com.explorestack.consent.ConsentInfoUpdateListener
+import com.explorestack.consent.ConsentManager
 import com.explorestack.consent.exception.ConsentManagerException
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
