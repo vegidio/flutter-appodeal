@@ -29,6 +29,9 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
         case "fetchConsentInfo": fetchConsentInfo(call, result)
         case "shouldShowConsent": shouldShowConsent(call, result)
         case "requestConsentAuthorization": requestConsentAuthorization(result)
+        case "disableAndroidWriteExternalStoragePermissionCheck": disableAndroidWriteExternalStoragePermissionCheck(result)
+        case "disableAndroidLocationPermissionCheck": disableAndroidLocationPermissionCheck(result)
+        case "setIOSLocationTracking": setIOSLocationTracking(call, result)
             
         default: result(FlutterMethodNotImplemented)
         }
@@ -147,6 +150,24 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin
                                     details: error))
             }
         }
+    }
+    
+    private func disableAndroidWriteExternalStoragePermissionCheck(_ result: @escaping FlutterResult) {
+        // Not implemented, Android call
+        result(nil)
+    }
+    
+    private func disableAndroidLocationPermissionCheck(_ result: @escaping FlutterResult) {
+        // Not implemented, Android call
+        result(nil)
+    }
+    
+    private func setIOSLocationTracking(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        let args = call.arguments as! Dictionary<String, Any>
+        let enabled = args["enabled"] as! Bool
+        
+        Appodeal.setLocationTracking(enabled)
+        result(nil)
     }
     
     // MARK: - Helper Methods

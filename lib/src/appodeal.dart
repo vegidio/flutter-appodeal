@@ -195,14 +195,21 @@ class Appodeal {
 
   // region - Permissions
 
-  /// Method only for Android (cf https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide/configure-sdk)
+  /// Method only for Android (cf https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide/configure-sdk#AndroidSDK.ConfigureSDK-7.Disablewriteexternalstoragepermissioncheck)
   static Future<void> disableAndroidWriteExternalStoragePermissionCheck() async {
-    return _channel.invokeMethod('disableWriteExternalStoragePermissionCheck');
+    return _channel.invokeMethod('disableAndroidWriteExternalStoragePermissionCheck');
   }
 
-  /// Method only for Android (cf https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide/configure-sdk)
+  /// Method only for Android (cf https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide/configure-sdk#AndroidSDK.ConfigureSDK-6.Disablelocationpermissioncheck)
   static Future<void> disableAndroidLocationPermissionCheck() async {
-    return _channel.invokeMethod('disableLocationPermissionCheck');
+    return _channel.invokeMethod('disableAndroidLocationPermissionCheck');
+  }
+
+  /// Method only for iOS (cf https://wiki.appodeal.com/en/ios/2-8-1-ios-sdk-integration/configure-sdk#iOSSDK.ConfigureSDK-5.Setlocationtracking)
+  static Future<void> setIOSLocationTracking(bool enabled) async {
+    return _channel.invokeMethod('setIOSLocationTracking', {
+      'enabled': enabled,
+    });
   }
 // endregion
 }
