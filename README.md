@@ -25,7 +25,7 @@ dependencies:
 $ flutter pub get
 ```
 
-3. Follow the Appodeal installation instructions available for [iOS](https://wiki.appodeal.com/en/ios/2-8-0-beta-ios-sdk-integration) and [Android](https://wiki.appodeal.com/en/android/2-8-0-beta-android-sdk-integration-guide). However, ignore the steps to include the Appodeal SDK dependencies in Gradle (Android) and Cocoapods (iOS) since these steps will be done by this package.
+3. Follow the Appodeal installation instructions available for [iOS](https://wiki.appodeal.com/en/ios/2-8-1-ios-sdk-integration) and [Android](https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide). However, ignore the steps to include the Appodeal SDK dependencies in Gradle (Android) and Cocoapods (iOS) since these steps will be done by this package.
 
 ### Extra steps for Android only
 
@@ -35,7 +35,7 @@ $ flutter pub get
 
 ### Extra step for iOS 14+ only
 
-4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/2-8-0-beta-ios-sdk-integration/ios-14+-support) to learn how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code is already included in this plugin and it will be executed when you call the function `Appodeal.requestIOSTrackingAuthorization()`, before the initialization of Appodeal (see below).
+4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/2-8-1-ios-sdk-integration/ios-14+-support) to learn how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code is already included in this plugin and it will be executed when you call the function `Appodeal.requestIOSTrackingAuthorization()`, before the initialization of Appodeal (see below).
 
 ## 📱 Usage
 
