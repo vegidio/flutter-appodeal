@@ -134,9 +134,8 @@ class _Body extends StatelessWidget {
             RaisedButton(
               child: Text('Show Non-Skippable Ad'),
               onPressed: () async {
-                await Appodeal.disableAndroidLocationPermissionCheck();
-//                var status = await Appodeal.show(AdType.NON_SKIPPABLE);
-                print("Blah");
+                var status = await Appodeal.show(AdType.NON_SKIPPABLE);
+                print(status);
               },
             ),
             AppodealBanner()
