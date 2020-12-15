@@ -2,17 +2,9 @@ package io.vinicius.appodeal_flutter
 
 import android.app.Activity
 import androidx.annotation.NonNull
-import com.appodeal.ads.Appodeal
-import com.appodeal.ads.BannerCallbacks
-import com.appodeal.ads.InterstitialCallbacks
-import com.appodeal.ads.NonSkippableVideoCallbacks
-import com.appodeal.ads.RewardedVideoCallbacks
-import com.explorestack.consent.Consent
+import com.appodeal.ads.*
+import com.explorestack.consent.*
 import com.explorestack.consent.Consent.ShouldShow
-import com.explorestack.consent.ConsentForm
-import com.explorestack.consent.ConsentFormListener
-import com.explorestack.consent.ConsentInfoUpdateListener
-import com.explorestack.consent.ConsentManager
 import com.explorestack.consent.exception.ConsentManagerException
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -22,8 +14,7 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
-class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
-{
+class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private lateinit var activity: Activity
     private lateinit var channel: MethodChannel
     private lateinit var pluginBinding: FlutterPlugin.FlutterPluginBinding
@@ -45,6 +36,9 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
             "fetchConsentInfo" -> fetchConsentInfo(call, result)
             "shouldShowConsent" -> shouldShowConsent(result)
             "requestConsentAuthorization" -> requestConsentAuthorization(result)
+            "disableAndroidLocationPermissionCheck" -> disableAndroidLocationPermissionCheck(result)
+            "disableAndroidWriteExternalStoragePermissionCheck" -> disableAndroidWriteExternalStoragePermissionCheck(result)
+            "setIOSLocationTracking" -> setIOSLocationTracking(result)
 
             else -> result.notImplemented()
         }
@@ -262,7 +256,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
 
             override fun onFailedToUpdateConsentInfo(exception: ConsentManagerException?) {
                 result.error("CONSENT_INFO_ERROR", "Failed to fetch the consent info",
-                        exception)
+                        exception?.reason)
             }
         })
     }
@@ -286,7 +280,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
 
                     override fun onConsentFormError(exception: ConsentManagerException?) {
                         result.error("CONSENT_WINDOW_ERROR",
-                                "Error showing the consent window", exception)
+                                "Error showing the consent window", exception?.reason)
                     }
 
                     override fun onConsentFormOpened() {}
@@ -308,6 +302,24 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware
             5 -> Appodeal.NON_SKIPPABLE_VIDEO
             else -> Appodeal.NONE
         }
+    }
+    // endregion
+
+
+    // region - Permissions
+    private fun disableAndroidWriteExternalStoragePermissionCheck(result: Result) {
+        Appodeal.disableWriteExternalStoragePermissionCheck()
+        result.success(null)
+    }
+
+    private fun disableAndroidLocationPermissionCheck(result: Result) {
+        Appodeal.disableLocationPermissionCheck()
+        result.success(null)
+    }
+
+    private fun setIOSLocationTracking(result: Result) {
+        // Not implemented, iOS call
+        result.success(null)
     }
     // endregion
 }

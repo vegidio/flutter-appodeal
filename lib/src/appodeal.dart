@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+
 import 'consent.dart';
 
 class Appodeal {
@@ -24,9 +25,7 @@ class Appodeal {
   ///
   /// On devices with iOS 14+ it returns `true` or `false` depending whether the user granted access or not.
   static Future<bool> requestIOSTrackingAuthorization() async {
-    return Platform.isIOS ?
-      await _channel.invokeMethod('requestIOSTrackingAuthorization') :
-      true;
+    return Platform.isIOS ? await _channel.invokeMethod('requestIOSTrackingAuthorization') : true;
   }
 
   // region - Appodeal
@@ -66,7 +65,7 @@ class Appodeal {
   static Future<void> setAutoCache(int adType, bool autoCache) async {
     return _channel.invokeMethod('setAutoCache', {
       'adType': adType,
-      'autoCache': autoCache
+      'autoCache': autoCache,
     });
   }
 
@@ -76,7 +75,7 @@ class Appodeal {
   /// display the ad type where auto cache has been disabled.
   static Future<void> cache(int adType) async {
     return _channel.invokeMethod('cache', {
-      'adType': adType
+      'adType': adType,
     });
   }
 
@@ -87,7 +86,7 @@ class Appodeal {
   /// Returns `true` if the ad is loaded.
   static Future<bool> isReadyForShow(int adType) async {
     return _channel.invokeMethod('isReadyForShow', {
-      'adType': adType
+      'adType': adType,
     });
   }
 
@@ -98,9 +97,10 @@ class Appodeal {
   /// Returns `true` if the ad is shown.
   static Future<bool> show(int adType) async {
     return _channel.invokeMethod('show', {
-      'adType': adType
+      'adType': adType,
     });
   }
+
   // endregion
 
   // region - Callbacks
@@ -147,6 +147,7 @@ class Appodeal {
   static void setNonSkippableCallback(Function(String event) callback) {
     _nonSkippableCallback = callback;
   }
+
   // endregion
 
   // region - Consent Manager
@@ -160,7 +161,7 @@ class Appodeal {
 
     var consentMap = await _channel.invokeMethod('fetchConsentInfo', {
       'androidAppKey': _androidAppKey,
-      'iosAppKey': _iosAppKey
+      'iosAppKey': _iosAppKey,
     });
 
     return Consent(consentMap);
@@ -179,7 +180,7 @@ class Appodeal {
     await fetchConsentInfo();
     return await _channel.invokeMethod('shouldShowConsent', {
       'androidAppKey': _androidAppKey,
-      'iosAppKey': _iosAppKey
+      'iosAppKey': _iosAppKey,
     });
   }
 
@@ -189,5 +190,26 @@ class Appodeal {
     await fetchConsentInfo();
     return _channel.invokeMethod('requestConsentAuthorization');
   }
+
   // endregion
+
+  // region - Permissions
+
+  /// Method only for Android (cf https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide/configure-sdk#AndroidSDK.ConfigureSDK-7.Disablewriteexternalstoragepermissioncheck)
+  static Future<void> disableAndroidWriteExternalStoragePermissionCheck() async {
+    return _channel.invokeMethod('disableAndroidWriteExternalStoragePermissionCheck');
+  }
+
+  /// Method only for Android (cf https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide/configure-sdk#AndroidSDK.ConfigureSDK-6.Disablelocationpermissioncheck)
+  static Future<void> disableAndroidLocationPermissionCheck() async {
+    return _channel.invokeMethod('disableAndroidLocationPermissionCheck');
+  }
+
+  /// Method only for iOS (cf https://wiki.appodeal.com/en/ios/2-8-1-ios-sdk-integration/configure-sdk#iOSSDK.ConfigureSDK-5.Setlocationtracking)
+  static Future<void> setIOSLocationTracking(bool enabled) async {
+    return _channel.invokeMethod('setIOSLocationTracking', {
+      'enabled': enabled,
+    });
+  }
+// endregion
 }
