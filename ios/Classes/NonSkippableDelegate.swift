@@ -8,12 +8,11 @@
 import Appodeal
 import Foundation
 
-extension SwiftAppodealFlutterPlugin: AppodealNonSkippableVideoDelegate
-{
-    public func nonSkippableVideoDidLoadAdIsPrecache(_ precache: Bool) {
+extension SwiftAppodealFlutterPlugin: AppodealNonSkippableVideoDelegate {
+    public func nonSkippableVideoDidLoadAdIsPrecache(_: Bool) {
         channel?.invokeMethod("onNonSkippableVideoLoaded", arguments: nil)
     }
-    
+
     public func nonSkippableVideoDidFailToLoadAd() {
         channel?.invokeMethod("onNonSkippableVideoFailedToLoad", arguments: nil)
     }
@@ -21,20 +20,20 @@ extension SwiftAppodealFlutterPlugin: AppodealNonSkippableVideoDelegate
     public func nonSkippableVideoDidPresent() {
         channel?.invokeMethod("onNonSkippableVideoShown", arguments: nil)
     }
-    
-    public func nonSkippableVideoDidFailToPresentWithError(_ error: Error) {
+
+    public func nonSkippableVideoDidFailToPresentWithError(_: Error) {
         channel?.invokeMethod("onNonSkippableVideoShowFailed", arguments: nil)
     }
-    
+
     public func nonSkippableVideoDidFinish() {
         channel?.invokeMethod("onNonSkippableVideoFinished", arguments: nil)
     }
-    
-    public func nonSkippableVideoWillDismissAndWasFullyWatched(_ wasFullyWatched: Bool) {
+
+    public func nonSkippableVideoWillDismissAndWasFullyWatched(_: Bool) {
         channel?.invokeMethod("onNonSkippableVideoClosed", arguments: nil)
     }
-    
-    public func nonSkippableVideoDidExpired(){
+
+    public func nonSkippableVideoDidExpired() {
         channel?.invokeMethod("onNonSkippableVideoExpired", arguments: nil)
     }
 }

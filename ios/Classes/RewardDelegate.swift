@@ -8,12 +8,11 @@
 import Appodeal
 import Foundation
 
-extension SwiftAppodealFlutterPlugin: AppodealRewardedVideoDelegate
-{
-    public func rewardedVideoDidLoadAdIsPrecache(_ precache: Bool) {
+extension SwiftAppodealFlutterPlugin: AppodealRewardedVideoDelegate {
+    public func rewardedVideoDidLoadAdIsPrecache(_: Bool) {
         channel?.invokeMethod("onRewardedVideoLoaded", arguments: nil)
     }
-    
+
     public func rewardedVideoDidFailToLoadAd() {
         channel?.invokeMethod("onRewardedVideoFailedToLoad", arguments: nil)
     }
@@ -21,20 +20,20 @@ extension SwiftAppodealFlutterPlugin: AppodealRewardedVideoDelegate
     public func rewardedVideoDidPresent() {
         channel?.invokeMethod("onRewardedVideoShown", arguments: nil)
     }
-    
-    public func rewardedVideoDidFailToPresentWithError(_ error: Error) {
+
+    public func rewardedVideoDidFailToPresentWithError(_: Error) {
         channel?.invokeMethod("onRewardedVideoShowFailed", arguments: nil)
     }
-    
-    public func rewardedVideoDidFinish(_ rewardAmount: Float, name rewardName: String?) {
+
+    public func rewardedVideoDidFinish(_: Float, name _: String?) {
         channel?.invokeMethod("onRewardedVideoFinished", arguments: nil)
     }
-    
-    public func rewardedVideoWillDismissAndWasFullyWatched(_ wasFullyWatched: Bool) {
+
+    public func rewardedVideoWillDismissAndWasFullyWatched(_: Bool) {
         channel?.invokeMethod("onRewardedVideoClosed", arguments: nil)
     }
-    
-    public func rewardedVideoDidExpired(){
+
+    public func rewardedVideoDidExpired() {
         channel?.invokeMethod("onRewardedVideoExpired", arguments: nil)
     }
 

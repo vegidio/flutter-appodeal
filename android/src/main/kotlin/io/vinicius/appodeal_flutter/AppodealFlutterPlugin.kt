@@ -2,9 +2,17 @@ package io.vinicius.appodeal_flutter
 
 import android.app.Activity
 import androidx.annotation.NonNull
-import com.appodeal.ads.*
-import com.explorestack.consent.*
+import com.appodeal.ads.Appodeal
+import com.appodeal.ads.BannerCallbacks
+import com.appodeal.ads.InterstitialCallbacks
+import com.appodeal.ads.NonSkippableVideoCallbacks
+import com.appodeal.ads.RewardedVideoCallbacks
+import com.explorestack.consent.Consent
 import com.explorestack.consent.Consent.ShouldShow
+import com.explorestack.consent.ConsentForm
+import com.explorestack.consent.ConsentFormListener
+import com.explorestack.consent.ConsentInfoUpdateListener
+import com.explorestack.consent.ConsentManager
 import com.explorestack.consent.exception.ConsentManagerException
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -33,12 +41,14 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             "isReadyForShow" -> isReadyForShow(call, result)
             "show" -> show(activity, call, result)
 
+            // Consent Manager
             "fetchConsentInfo" -> fetchConsentInfo(call, result)
             "shouldShowConsent" -> shouldShowConsent(result)
             "requestConsentAuthorization" -> requestConsentAuthorization(result)
+
+            // Permissions
             "disableAndroidLocationPermissionCheck" -> disableAndroidLocationPermissionCheck(result)
             "disableAndroidWriteExternalStoragePermissionCheck" -> disableAndroidWriteExternalStoragePermissionCheck(result)
-            "setIOSLocationTracking" -> setIOSLocationTracking(result)
 
             else -> result.notImplemented()
         }
@@ -288,7 +298,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 })
                 .build()
 
-        consentForm.load()
+        consentForm?.load()
     }
     // endregion
 
@@ -305,7 +315,6 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
     // endregion
 
-
     // region - Permissions
     private fun disableAndroidWriteExternalStoragePermissionCheck(result: Result) {
         Appodeal.disableWriteExternalStoragePermissionCheck()
@@ -314,11 +323,6 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     private fun disableAndroidLocationPermissionCheck(result: Result) {
         Appodeal.disableLocationPermissionCheck()
-        result.success(null)
-    }
-
-    private fun setIOSLocationTracking(result: Result) {
-        // Not implemented, iOS call
         result.success(null)
     }
     // endregion

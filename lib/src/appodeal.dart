@@ -17,17 +17,6 @@ class Appodeal {
 
   static const MethodChannel _channel = const MethodChannel('appodeal_flutter');
 
-  /// Request the user authorization to track him online in order to deliver more relevant ads. This command must be
-  /// called before the initialization of the Appodeal plugin.
-  ///
-  /// This authorization request is only relevant for iOS 14+. In older versions of iOS and on Android devices this
-  /// function does nothing. It simply returns `true` as if the authorization had already been granted.
-  ///
-  /// On devices with iOS 14+ it returns `true` or `false` depending whether the user granted access or not.
-  static Future<bool> requestIOSTrackingAuthorization() async {
-    return Platform.isIOS ? await _channel.invokeMethod('requestIOSTrackingAuthorization') : true;
-  }
-
   // region - Appodeal
   /// Define the Appodeal app keys for Android and iOS. At least one of the keys must be set, otherwise an error will be
   /// thrown during the initialization.
@@ -41,7 +30,8 @@ class Appodeal {
   /// During the initialization you must define the type of ads [adTypes] that you would like to display in your app and
   /// also if ads should be presented in test mode [testMode] or not. Always set test mode as `true` during development
   /// or tests.
-  static Future<void> initialize({@required bool hasConsent, List<int> adTypes = const [], bool testMode = false}) async {
+  static Future<void> initialize(
+      {@required bool hasConsent, List<int> adTypes = const [], bool testMode = false}) async {
     assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
 
     // Register the callbacks
@@ -190,26 +180,46 @@ class Appodeal {
     await fetchConsentInfo();
     return _channel.invokeMethod('requestConsentAuthorization');
   }
-
   // endregion
 
   // region - Permissions
-
-  /// Method only for Android (cf https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide/configure-sdk#AndroidSDK.ConfigureSDK-7.Disablewriteexternalstoragepermissioncheck)
-  static Future<void> disableAndroidWriteExternalStoragePermissionCheck() async {
-    return _channel.invokeMethod('disableAndroidWriteExternalStoragePermissionCheck');
+  /// Request the user authorization to track him online in order to deliver more relevant ads. This command must be
+  /// called before the initialization of the Appodeal plugin.
+  ///
+  /// This authorization request is only relevant for iOS 14+. On older versions of iOS and on Android devices this
+  /// function does nothing. It simply returns `true` as if the authorization had already been granted.
+  ///
+  /// On devices with iOS 14+ it returns `true` or `false` depending whether the user granted access or not.
+  static Future<bool> requestIOSTrackingAuthorization() async {
+    return Platform.isIOS ? await _channel.invokeMethod('requestIOSTrackingAuthorization') : true;
   }
 
-  /// Method only for Android (cf https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide/configure-sdk#AndroidSDK.ConfigureSDK-6.Disablelocationpermissioncheck)
-  static Future<void> disableAndroidLocationPermissionCheck() async {
-    return _channel.invokeMethod('disableAndroidLocationPermissionCheck');
-  }
-
-  /// Method only for iOS (cf https://wiki.appodeal.com/en/ios/2-8-1-ios-sdk-integration/configure-sdk#iOSSDK.ConfigureSDK-5.Setlocationtracking)
+  /// Enable or disable the iOS location tracking.
+  ///
+  /// The SDK will check the location permission on the user's device. If this permission is missing, the user will get
+  /// an alert message with the request for location tracking.
+  ///
+  /// This command is only relevant for iOS. On Android devices this function does nothing.
   static Future<void> setIOSLocationTracking(bool enabled) async {
-    return _channel.invokeMethod('setIOSLocationTracking', {
-      'enabled': enabled,
-    });
+    if (Platform.isIOS) {
+      return _channel.invokeMethod('setIOSLocationTracking', {'enabled': enabled});
+    }
   }
-// endregion
+
+  /// Disable the Android write external storage permission check.
+  ///
+  /// This command is only relevant for Android. On iOS devices this function does nothing.
+  static Future<void> disableAndroidWriteExternalStoragePermissionCheck() async {
+    if (Platform.isAndroid) {
+      return _channel.invokeMethod('disableAndroidWriteExternalStoragePermissionCheck');
+    }
+  }
+
+  /// Disable the Android location permission check.
+  static Future<void> disableAndroidLocationPermissionCheck() async {
+    if (Platform.isAndroid) {
+      return _channel.invokeMethod('disableAndroidLocationPermissionCheck');
+    }
+  }
+  // endregion
 }

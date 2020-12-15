@@ -20,9 +20,8 @@ class _MyAppState extends State<MyApp> {
 
     // Set the app keys
     Appodeal.setAppKeys(
-      androidAppKey: 'f1e6435dfa48cb71bb6753f1c8ac97bba6609d481e63bb98',
-      iosAppKey: '3a2ef99639e29dfe3333e4b3b496964dae6097cc510cbb2f'
-    );
+        androidAppKey: 'f1e6435dfa48cb71bb6753f1c8ac97bba6609d481e63bb98',
+        iosAppKey: '3a2ef99639e29dfe3333e4b3b496964dae6097cc510cbb2f');
 
     // Defining the callbacks
     Appodeal.setBannerCallback((event) => print('Banner ad triggered the event $event'));
@@ -37,15 +36,9 @@ class _MyAppState extends State<MyApp> {
 
       // Initialize Appodeal after the authorization was granted or not
       await Appodeal.initialize(
-        hasConsent: true,
-        adTypes: [
-          AdType.BANNER,
-          AdType.INTERSTITIAL,
-          AdType.REWARD,
-          AdType.NON_SKIPPABLE
-        ],
-        testMode: true
-      );
+          hasConsent: true,
+          adTypes: [AdType.BANNER, AdType.INTERSTITIAL, AdType.REWARD, AdType.NON_SKIPPABLE],
+          testMode: true);
 
       setState(() => this.isAppodealInitialized = true);
     });
@@ -80,7 +73,6 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-
             RaisedButton(
               child: Text('Check GDPR/CCPA Consent Info'),
               onPressed: () async {
@@ -90,14 +82,12 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-
             RaisedButton(
               child: Text('Request GDPR/CCPA Consent'),
               onPressed: () async {
                 await Appodeal.requestConsentAuthorization();
               },
             ),
-
             RaisedButton(
               child: Text('Is Interstitial Ad ready for show?'),
               onPressed: () async {
@@ -106,21 +96,18 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-
             RaisedButton(
               child: Text('Cache Interstitial Ad'),
               onPressed: () async {
                 await Appodeal.cache(AdType.INTERSTITIAL);
               },
             ),
-
             RaisedButton(
               child: Text('Show Interstitial Ad'),
               onPressed: () async {
                 await Appodeal.show(AdType.INTERSTITIAL);
               },
             ),
-
             RaisedButton(
               child: Text('Is Reward Ad ready for show?'),
               onPressed: () async {
@@ -129,7 +116,6 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-
             RaisedButton(
               child: Text('Show Reward Ad'),
               onPressed: () async {
@@ -137,7 +123,6 @@ class _Body extends StatelessWidget {
                 print(status);
               },
             ),
-
             RaisedButton(
               child: Text('Is Non-Skippable Ad ready?'),
               onPressed: () async {
@@ -146,15 +131,14 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-
             RaisedButton(
               child: Text('Show Non-Skippable Ad'),
               onPressed: () async {
-                var status = await Appodeal.show(AdType.NON_SKIPPABLE);
-                print(status);
+                await Appodeal.disableAndroidLocationPermissionCheck();
+//                var status = await Appodeal.show(AdType.NON_SKIPPABLE);
+                print("Blah");
               },
             ),
-
             AppodealBanner()
           ],
         ),

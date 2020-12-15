@@ -36,8 +36,8 @@ jobs:
 
       - name: Check publish warnings
         run: |
-          dartfmt lib
-          dartfmt example
+          dartfmt lib --line-length 120
+          dartfmt example --line-length 120
           pub publish --dry-run
 
       - name: Upload package to pub.dev
