@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'appodeal_flutter'
-  s.version          = '0.3.2'
+  s.version          = '0.4.1'
   s.summary          = 'A Flutter plugin to display ads from Appodeal.'
   s.description      = <<-DESC
 A Flutter plugin to display ads from Appodeal; it supports the new reqs for iOS 14+ and GDPR/CCPA consent.
