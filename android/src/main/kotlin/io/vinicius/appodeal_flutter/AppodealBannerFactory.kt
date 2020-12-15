@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import com.appodeal.ads.Appodeal
-
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel

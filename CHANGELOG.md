@@ -1,3 +1,7 @@
+## 0.4.0
+
+* Added new permission controls for Android & iOS (thanks [@tommybuonomo](https://github.com/tommybuonomo))
+
 ## 0.3.2
 
 * Updated documentation with instructions to upgrade Gradle.

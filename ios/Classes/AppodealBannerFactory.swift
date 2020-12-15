@@ -9,14 +9,12 @@ import Appodeal
 import Flutter
 import Foundation
 
-class AppodealBannerFactory: NSObject, FlutterPlatformViewFactory
-{
-    func create(withFrame frame: CGRect, viewIdentifier viewId: Int64, arguments args: Any?) -> FlutterPlatformView {
-        return AppodealBannerView()
+class AppodealBannerFactory: NSObject, FlutterPlatformViewFactory {
+    func create(withFrame _: CGRect, viewIdentifier _: Int64, arguments _: Any?) -> FlutterPlatformView {
+        AppodealBannerView()
     }
-    
-    class AppodealBannerView: NSObject, FlutterPlatformView
-    {
+
+    class AppodealBannerView: NSObject, FlutterPlatformView {
         func view() -> UIView {
             let banner = Appodeal.banner()
             banner?.frame = CGRect(x: 0, y: 0, width: 320, height: 50)
