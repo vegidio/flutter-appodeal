@@ -11,15 +11,13 @@ import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 
-class AppodealBannerFactory(private val activity: Activity, private val messenger: BinaryMessenger)
-    : PlatformViewFactory(StandardMessageCodec.INSTANCE)
-{
+class AppodealBannerFactory(private val activity: Activity, private val messenger: BinaryMessenger) :
+    PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(context: Context?, viewId: Int, args: Any?): PlatformView =
-            AppodealBannerView(activity, messenger, viewId)
+        AppodealBannerView(activity, messenger, viewId)
 
-    class AppodealBannerView(activity: Activity, messenger: BinaryMessenger, id: Int)
-        : PlatformView, MethodChannel.MethodCallHandler
-    {
+    class AppodealBannerView(activity: Activity, messenger: BinaryMessenger, id: Int) :
+        PlatformView, MethodChannel.MethodCallHandler {
         private val bannerView = Appodeal.getBannerView(activity)
         private val channel = MethodChannel(messenger, "plugins.io.vinicius.appodeal/banner_$id")
 

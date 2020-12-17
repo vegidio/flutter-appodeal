@@ -102,7 +102,7 @@ class Appodeal {
         _interstitialCallback?.call(call.method);
       } else if (call.method.startsWith('onRewarded')) {
         _rewardCallback?.call(call.method);
-      } else if (call.method.startsWith('onRewarded')) {
+      } else if (call.method.startsWith('onNonSkippable')) {
         _nonSkippableCallback?.call(call.method);
       }
 
