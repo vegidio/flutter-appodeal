@@ -1,6 +1,10 @@
+## 0.4.1
+
+* Upgraded Appodeal library to version 2.8.1 (thanks [@debaserr](https://github.com/debaserr)).
+
 ## 0.4.0
 
-* Added new permission controls for Android & iOS (thanks [@tommybuonomo](https://github.com/tommybuonomo))
+* Added new permission controls for Android & iOS (thanks [@tommybuonomo](https://github.com/tommybuonomo)).
 
 ## 0.3.2
 
