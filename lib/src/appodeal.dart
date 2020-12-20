@@ -80,14 +80,27 @@ class Appodeal {
     });
   }
 
+  /// Check if an impression is available for a certain type [adType] and placement.
+  ///
+  /// Use the constants in the class `AdType` to specify what ad should be shown.
+  ///
+  /// Returns `true` if an impression is available.
+  static Future<bool> canShow(int adType, { String placementName }) async {
+    return _channel.invokeMethod('canShow', {
+      'adType': adType,
+      'placementName': placementName
+    });
+  }
+
   /// Shows an ad of certain type [adType].
   ///
   /// Use the constants in the class `AdType` to specify what ad should be shown.
   ///
   /// Returns `true` if the ad is shown.
-  static Future<bool> show(int adType) async {
+  static Future<bool> show(int adType, { String placementName }) async {
     return _channel.invokeMethod('show', {
       'adType': adType,
+      'placementName': placementName
     });
   }
 

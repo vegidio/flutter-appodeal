@@ -141,9 +141,9 @@ Center(
 To show an interstitial, reward or non-skippable ad, call the function `Appodeal.show()` passing the type of ad that you would like to show as a paremeter:
 
 ```dart
-Appodeal.show(AdType.INTERSTITIAL);  // Show an interstitial ad
-Appodeal.show(AdType.REWARD);        // Show a reward ad
-Appodeal.show(AdType.NON_SKIPPABLE); // Show a non-skippable ad
+Appodeal.show(AdType.INTERSTITIAL, placementName: "placement-name");  // Show an interstitial ad
+Appodeal.show(AdType.REWARD, placementName: "placement-name");        // Show a reward ad
+Appodeal.show(AdType.NON_SKIPPABLE, placementName: "placement-name"); // Show a non-skippable ad
 ```
 
 ## ♻️ Callbacks

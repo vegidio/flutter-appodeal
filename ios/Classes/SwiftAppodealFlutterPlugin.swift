@@ -12,7 +12,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin {
         instance.channel = FlutterMethodChannel(name: "appodeal_flutter", binaryMessenger: registrar.messenger())
 
         registrar.addMethodCallDelegate(instance, channel: instance.channel!)
-        registrar.register(AppodealBannerFactory(), withId: "plugins.io.vinicius.appodeal/banner")
+        registrar.register(AppodealBannerFactory(instance: instance), withId: "plugins.io.vinicius.appodeal/banner")
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -21,6 +21,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin {
         case "setAutoCache": setAutoCache(call, result)
         case "cache": cache(call, result)
         case "isReadyForShow": isReadyForShow(call, result)
+        case "canShow": canShow(call, result)
         case "show": show(call, result)
 
         // Consent Manager
@@ -81,16 +82,22 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin {
         result(Appodeal.isReadyForShow(with: adType))
     }
 
+    private func canShow(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        let args = call.arguments as! Dictionary<String, Any>
+        let adType = getAdType(adId: args["adType"] as! Int)
+        let placementName = args["placementName"] as? String ?? ""
+        result(Appodeal.canShow(adType, forPlacement: placementName))
+    }
+
     private func show(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let args = call.arguments as! [String: Any]
         let adType = getShowStyle(adType: getAdType(adId: args["adType"] as! Int))
-
+        let placementName = args["placementName"] as? String ?? ""
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
-        result(Appodeal.showAd(adType, rootViewController: rootViewController))
+        result(Appodeal.showAd(adType, forPlacement: placementName, rootViewController: rootViewController))
     }
 
     private func setCallbacks() {
-        Appodeal.setBannerDelegate(self)
         Appodeal.setInterstitialDelegate(self)
         Appodeal.setRewardedVideoDelegate(self)
         Appodeal.setNonSkippableVideoDelegate(self)
