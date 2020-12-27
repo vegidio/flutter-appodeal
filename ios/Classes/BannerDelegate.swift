@@ -8,7 +8,7 @@
 import Appodeal
 import Foundation
 
-extension SwiftAppodealFlutterPlugin: APDBannerViewDelegate {
+extension SwiftAppodealFlutterPlugin: AppodealBannerViewDelegate {
     public func bannerViewDidLoadAd(_ bannerView: APDBannerView, isPrecache precache: Bool) {
         channel?.invokeMethod("onBannerLoaded", arguments: nil)
     }
