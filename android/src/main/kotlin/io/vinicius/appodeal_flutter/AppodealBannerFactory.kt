@@ -14,15 +14,23 @@ import io.flutter.plugin.platform.PlatformViewFactory
 class AppodealBannerFactory(private val activity: Activity, private val messenger: BinaryMessenger) :
     PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(context: Context?, viewId: Int, args: Any?): PlatformView =
-        AppodealBannerView(activity, messenger, viewId)
+        AppodealBannerView(activity, messenger, viewId, args)
 
-    class AppodealBannerView(activity: Activity, messenger: BinaryMessenger, id: Int) :
+    class AppodealBannerView(activity: Activity, messenger: BinaryMessenger, id: Int, args: Any?) :
         PlatformView, MethodChannel.MethodCallHandler {
+        private val arguments = args as Map<*, *>
+        private val placementName = arguments["placementName"] as? String
+
         private val bannerView = Appodeal.getBannerView(activity)
         private val channel = MethodChannel(messenger, "plugins.io.vinicius.appodeal/banner_$id")
 
         init {
-            Appodeal.show(activity, Appodeal.BANNER_VIEW)
+            if (placementName !== null) {
+                Appodeal.show(activity, Appodeal.BANNER_VIEW, placementName)
+            } else {
+                Appodeal.show(activity, Appodeal.BANNER_VIEW)
+            }
+
             channel.setMethodCallHandler(this)
         }
 

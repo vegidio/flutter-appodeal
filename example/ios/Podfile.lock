@@ -100,7 +100,7 @@ PODS:
     - Protobuf (~> 3.12)
     - StackIAB (~> 1.1.2)
     - StackModules (~> 1.0.2)
-  - appodeal_flutter (0.4.1):
+  - appodeal_flutter (0.5.0):
     - APDAdColonyAdapter (= 2.8.1.1)
     - APDAmazonAdsAdapter (= 2.8.1.1)
     - APDAppLovinAdapter (= 2.8.1.1)
@@ -337,7 +337,7 @@ SPEC CHECKSUMS:
   APDYandexAdapter: 174764c7adc6ae27556f613508b5b544d438583d
   AppLovinSDK: c307abff8023aa4776f863226cbe42e7a90b3364
   Appodeal: bf9748c013eb1e91d973391130fab386ef947779
-  appodeal_flutter: 25584b67cfc516ca2f9df8bdba3b0f5bb1214f51
+  appodeal_flutter: 41c2a1e01fbc31679792b05f31779ae519833861
   AppRollSDK: bd9e96ad026dd51ad07714a35d43da95bb882d5f
   BidMachine: 5c9659e41640613d0882a6e5f352914fdaac2a31
   CriteoPublisherSdk: a7551daf9235203a040703504ae549e842b5eebf
@@ -367,4 +367,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

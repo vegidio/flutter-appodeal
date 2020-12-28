@@ -1,3 +1,7 @@
+## 0.5.0
+
+* Added support for placements (thanks [@nixxxon](https://github.com/nixxxon) & [@debaserr](https://github.com/debaserr)).
+
 ## 0.4.1
 
 * Upgraded Appodeal library to version 2.8.1 (thanks [@debaserr](https://github.com/debaserr)).

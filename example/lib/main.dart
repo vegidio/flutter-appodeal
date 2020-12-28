@@ -105,7 +105,7 @@ class _Body extends StatelessWidget {
             RaisedButton(
               child: Text('Show Interstitial Ad'),
               onPressed: () async {
-                await Appodeal.show(AdType.INTERSTITIAL);
+                await Appodeal.show(AdType.INTERSTITIAL, placementName: "placement-name");
               },
             ),
             RaisedButton(
@@ -119,7 +119,7 @@ class _Body extends StatelessWidget {
             RaisedButton(
               child: Text('Show Reward Ad'),
               onPressed: () async {
-                var status = await Appodeal.show(AdType.REWARD);
+                var status = await Appodeal.show(AdType.REWARD, placementName: 'placement-name');
                 print(status);
               },
             ),
@@ -132,13 +132,21 @@ class _Body extends StatelessWidget {
               },
             ),
             RaisedButton(
+              child: Text('Can Show Non-Skippable Ad?'),
+              onPressed: () async {
+                var canShow = await Appodeal.canShow(AdType.NON_SKIPPABLE, placementName: "placement-name");
+                Toast.show(canShow ? 'Non-Skippable can be shown' : 'Non-Skippable can NOT be shown', context,
+                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+              },
+            ),
+            RaisedButton(
               child: Text('Show Non-Skippable Ad'),
               onPressed: () async {
                 var status = await Appodeal.show(AdType.NON_SKIPPABLE);
                 print(status);
               },
             ),
-            AppodealBanner()
+            AppodealBanner(placementName: "placement-name"),
           ],
         ),
       ),
