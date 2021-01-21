@@ -4,7 +4,7 @@
 [![Pub Version](https://img.shields.io/pub/v/appodeal_flutter?color=blue)](https://pub.dev/packages/appodeal_flutter)
 [![ISC License](https://img.shields.io/npm/l/vimdb?color=important)](LICENSE)
 
-A Flutter plugin to display ads from Appodeal. It currently supports __Banner__, __Interstitial__, __Reward__ and __Non-Skippable__ ads.
+A Flutter plugin to display ads from Appodeal. It currently supports **Banner**, **Interstitial**, **Reward** and **Non-Skippable** ads.
 
 ## 📽 Demo
 
@@ -36,6 +36,39 @@ $ flutter pub get
 ### Extra step for iOS 14+ only
 
 4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/ios-14-network-support) to learn how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code is already included in this plugin and it will be executed when you call the function `Appodeal.requestIOSTrackingAuthorization()`, before the initialization of Appodeal (see below).
+
+### If you don't use AdMob
+
+This plugin comes with all possible ad networks supported by Appodeal enabled by default. I made this decision to give more flexibility to the developers using this project, but this comes with a drawback: if you don't intend to use **Google AdMob** in your app, then you are still forced to add a fake application ID in your project otherwise AdMob will make the app crash if it doesn't find an ID 😬
+
+To add this fake AdMob ID (again, only if you don't intend to use AdMob, otherwise you should use your real AdMob identifier) you must:
+
+#### Android
+
+Edit the file `android/app/src/main/AndroidManifest.xml` and add this into the `<application>` tag:
+
+```xml
+<application ...>
+    ...
+    <meta-data
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-0000000000000000~0000000000" />
+    ...
+</application>
+```
+
+#### iOS
+
+Edit the file `ios/Runner/Info.plist` and add this into the `<dict>` tag:
+
+```xml
+<dict>
+    ...
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-0000000000000000~0000000000</string>
+    ...
+</dict>
+```
 
 ## 📱 Usage
 

@@ -1,3 +1,7 @@
+## 0.5.2
+
+* Added missing instructions for those that don't use AdMob (thanks [@selvasoft](https://github.com/selvasoft)).
+
 ## 0.5.1
 
 * Setup sponsor program.
