@@ -33,6 +33,17 @@ $ flutter pub get
 
 5. Your Android project must use Gradle 4.0.1 or greater. If you are using an older version, please upgrade it by editing the file `android/build.gradle`.
 
+6. If you dont use admob, put a dummy APP_ID in android manifest inside <application> tag.
+
+```
+<application>
+...
+<meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-0000000000000000~0000000000" />
+</application>
+```
+
 ### Extra step for iOS 14+ only
 
 4. Follow the instructions available [here](https://wiki.appodeal.com/en/ios/ios-14-network-support) to learn how to implement the permission request to track users, but ignore the part to include some code in the `AppDelegate` file. This code is already included in this plugin and it will be executed when you call the function `Appodeal.requestIOSTrackingAuthorization()`, before the initialization of Appodeal (see below).
