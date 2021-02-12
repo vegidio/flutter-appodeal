@@ -1,3 +1,7 @@
+## 0.5.1
+
+* Setup sponsor program.
+
 ## 0.5.0
 
 * Added support for placements (thanks [@nixxxon](https://github.com/nixxxon) & [@debaserr](https://github.com/debaserr)).

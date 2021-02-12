@@ -189,6 +189,10 @@ The full list of events that you can track is below:
 
 `onNonSkippableVideoLoaded`, `onNonSkippableVideoFailedToLoad`, `onNonSkippableVideoShown`, `onNonSkippableVideoShowFailed`, `onNonSkippableVideoFinished`, `onNonSkippableVideoClosed`, `onNonSkippableVideoExpired`.
 
+## 🙏🏾 Donations
+
+If you like this project then please consider [becoming a sponsor](https://github.com/sponsors/vegidio). Your contribution will help me dedicate more time working on bugs and new features for this and other projects.
+
 ## 📝 License
 
 **appodeal_flutter** is released under the ISC License. See [LICENSE](LICENSE) for details.
