@@ -1,3 +1,7 @@
+## 0.5.3
+
+* Added verbose argument to  `initialize()` call (thanks [@n00bsys0p](https://github.com/n00bsys0p)).
+
 ## 0.5.2
 
 * Added missing instructions for those that don't use AdMob (thanks [@selvasoft](https://github.com/selvasoft)).

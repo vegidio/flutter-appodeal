@@ -100,7 +100,7 @@ PODS:
     - Protobuf (~> 3.12)
     - StackIAB (~> 1.1.2)
     - StackModules (~> 1.0.2)
-  - appodeal_flutter (0.5.0):
+  - appodeal_flutter (0.5.3):
     - APDAdColonyAdapter (= 2.8.1.1)
     - APDAmazonAdsAdapter (= 2.8.1.1)
     - APDAppLovinAdapter (= 2.8.1.1)
@@ -337,13 +337,13 @@ SPEC CHECKSUMS:
   APDYandexAdapter: 174764c7adc6ae27556f613508b5b544d438583d
   AppLovinSDK: c307abff8023aa4776f863226cbe42e7a90b3364
   Appodeal: bf9748c013eb1e91d973391130fab386ef947779
-  appodeal_flutter: 41c2a1e01fbc31679792b05f31779ae519833861
+  appodeal_flutter: 315dc6c1bbbf5f01f25c13570001bf448c1a3ed5
   AppRollSDK: bd9e96ad026dd51ad07714a35d43da95bb882d5f
   BidMachine: 5c9659e41640613d0882a6e5f352914fdaac2a31
   CriteoPublisherSdk: a7551daf9235203a040703504ae549e842b5eebf
   FBAudienceNetwork: 69193f0362accc40305703fb3265342416971446
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   Google-Mobile-Ads-SDK: 2f288748a42920d1c744946a460896a95b0e9110
   GoogleAppMeasurement: 8d3c0aeede16ab7764144b5a4ca8e1d4323841b7
   GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
@@ -359,7 +359,7 @@ SPEC CHECKSUMS:
   StackIAB: 14975a45de9e3b78fdb0845ab1438af218e42431
   StackModules: bdce04cf8a281cfbd982e43f90d90df23166f0fa
   StartAppSDK: d4680feb85ffb81d42b247f1a68affb56625ba7e
-  TapjoySDK: a725a16b640fa50923982813b8b0a727500138cc
+  TapjoySDK: e863ea0d0f5d3ab3f8f12d9a9af737789d9dab6d
   UnityAds: 5cf7348607675db42414a1625f88c2d560f1164c
   VungleSDK-iOS: 0405589c8626b2511dd57214a17e0d65e0d2f424
   YandexMobileAds: 538fcf00584fefa59a1d3a85f86c59bf6f5cfcdc
@@ -367,4 +367,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

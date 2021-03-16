@@ -45,6 +45,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin {
         let hasConsent = args["hasConsent"] as! Bool
         let adTypes = args["adTypes"] as! [Int]
         let testMode = args["testMode"] as! Bool
+        let verbose = args["verbose"] as! Bool
 
         // Registering callbacks
         setCallbacks()
@@ -52,6 +53,10 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin {
         let ads = AppodealAdType(rawValue: adTypes.reduce(0) { $0 | getAdType(adId: $1).rawValue })
         Appodeal.setTestingEnabled(testMode)
         Appodeal.initialize(withApiKey: appKey, types: ads, hasConsent: hasConsent)
+
+        if verbose {
+            Appodeal.setLogLevel(APDLogLevel.verbose)
+        }
 
         result(nil)
     }
