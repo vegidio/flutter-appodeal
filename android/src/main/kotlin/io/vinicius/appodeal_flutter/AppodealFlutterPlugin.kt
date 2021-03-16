@@ -3,6 +3,7 @@ package io.vinicius.appodeal_flutter
 import android.app.Activity
 import androidx.annotation.NonNull
 import com.appodeal.ads.Appodeal
+import com.appodeal.ads.utils.Log
 import com.explorestack.consent.Consent
 import com.explorestack.consent.Consent.ShouldShow
 import com.explorestack.consent.ConsentForm
@@ -76,6 +77,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         val hasConsent = args["hasConsent"] as Boolean
         val adTypes = args["adTypes"] as List<Int>
         val testMode = args["testMode"] as Boolean
+        val verbose = args["verbose"] as Boolean
 
         // Registering callbacks
         setCallbacks()
@@ -83,6 +85,9 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         val ads = adTypes.fold(0) { acc, value -> acc or getAdType(value) }
         Appodeal.setTesting(testMode)
         Appodeal.initialize(activity, appKey, ads, hasConsent)
+        if (verbose) {
+            Appodeal.setLogLevel(Log.LogLevel.verbose)
+        }
 
         result.success(null)
     }

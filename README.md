@@ -62,7 +62,8 @@ Afterwards you can initialize Appodeal with the function:
 await Appodeal.initialize(
   hasConsent: true,
   adTypes: [AdType.BANNER, AdType.INTERSTITIAL, AdType.REWARD],
-  testMode: true
+  testMode: true,
+  verbose: true,
 );
 
 // At this point you are ready to display ads
@@ -72,6 +73,8 @@ await Appodeal.initialize(
 * `adTypes` (optional) you must set a list (of type `AdType`) with all the ad types that you would like to display in your app. If this parameter is undefined or an empty list then no ads will be loaded.
 
 * `testMode` (optional) you must set `false` (default) or `true` depending if you are running the ads during development/test or production.
+
+* `verbose` (optional) set this to `true` if you want Appodeal's verbose logs to be visible amongst the Flutter logs. Default is `false`.
 
 ## 👮🏾‍♂️ Consent to track the user
 
