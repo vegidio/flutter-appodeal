@@ -25,7 +25,7 @@ dependencies:
 $ flutter pub get
 ```
 
-3. Follow the Appodeal installation instructions available for [iOS](https://wiki.appodeal.com/en/ios/2-8-1-ios-sdk-integration) and [Android](https://wiki.appodeal.com/en/android/2-8-1-android-sdk-integration-guide). However, ignore the steps to include the Appodeal SDK dependencies in Gradle (Android) and Cocoapods (iOS) since these steps will be done by this package.
+3. Follow the Appodeal installation instructions available for [iOS](https://wiki.appodeal.com/en/ios/2-9-1-ios-sdk-integration-guide) and [Android](https://wiki.appodeal.com/en/android/2-9-1-android-sdk-integration-guide). However, ignore the steps to include the Appodeal SDK dependencies in Gradle (Android) and Cocoapods (iOS) since these steps will be done by this package.
 
 ### Extra steps for Android only
 

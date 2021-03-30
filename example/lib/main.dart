@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:appodeal_flutter/appodeal_flutter.dart';
+import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 
 void main() {
@@ -64,7 +64,7 @@ class _Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            RaisedButton(
+            ElevatedButton(
               child: Text('Should I collect user consent?'),
               onPressed: () async {
                 var shouldShow = await Appodeal.shouldShowConsent();
@@ -73,7 +73,7 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Check GDPR/CCPA Consent Info'),
               onPressed: () async {
                 var consent = await Appodeal.fetchConsentInfo();
@@ -82,13 +82,13 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Request GDPR/CCPA Consent'),
               onPressed: () async {
                 await Appodeal.requestConsentAuthorization();
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Is Interstitial Ad ready for show?'),
               onPressed: () async {
                 var isReady = await Appodeal.isReadyForShow(AdType.INTERSTITIAL);
@@ -96,19 +96,19 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Cache Interstitial Ad'),
               onPressed: () async {
                 await Appodeal.cache(AdType.INTERSTITIAL);
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Show Interstitial Ad'),
               onPressed: () async {
                 await Appodeal.show(AdType.INTERSTITIAL, placementName: "placement-name");
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Is Reward Ad ready for show?'),
               onPressed: () async {
                 var isReady = await Appodeal.isReadyForShow(AdType.REWARD);
@@ -116,14 +116,14 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Show Reward Ad'),
               onPressed: () async {
                 var status = await Appodeal.show(AdType.REWARD, placementName: 'placement-name');
                 print(status);
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Is Non-Skippable Ad ready?'),
               onPressed: () async {
                 var isReady = await Appodeal.isReadyForShow(AdType.NON_SKIPPABLE);
@@ -131,7 +131,7 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Can Show Non-Skippable Ad?'),
               onPressed: () async {
                 var canShow = await Appodeal.canShow(AdType.NON_SKIPPABLE, placementName: "placement-name");
@@ -139,7 +139,7 @@ class _Body extends StatelessWidget {
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Show Non-Skippable Ad'),
               onPressed: () async {
                 var status = await Appodeal.show(AdType.NON_SKIPPABLE);

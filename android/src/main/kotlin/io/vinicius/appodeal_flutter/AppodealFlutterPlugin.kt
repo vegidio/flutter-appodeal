@@ -28,6 +28,8 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         pluginBinding = flutterPluginBinding
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "appodeal_flutter")
         channel.setMethodCallHandler(this)
+
+        Appodeal.setSharedAdsInstanceAcrossActivities(true)
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {

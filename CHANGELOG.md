@@ -1,3 +1,7 @@
+## 0.6.0
+
+* Upgraded Appodeal library to version 2.9.1.
+
 ## 0.5.3
 
 * Added verbose argument to  `initialize()` call (thanks [@n00bsys0p](https://github.com/n00bsys0p)).

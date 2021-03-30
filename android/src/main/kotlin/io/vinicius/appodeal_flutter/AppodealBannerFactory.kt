@@ -20,7 +20,6 @@ class AppodealBannerFactory(private val activity: Activity, private val messenge
         PlatformView, MethodChannel.MethodCallHandler {
         private val arguments = args as Map<*, *>
         private val placementName = arguments["placementName"] as? String
-
         private val bannerView = Appodeal.getBannerView(activity)
         private val channel = MethodChannel(messenger, "plugins.io.vinicius.appodeal/banner_$id")
 
