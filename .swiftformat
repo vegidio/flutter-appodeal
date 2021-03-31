@@ -13,7 +13,6 @@
 --enable emptyBraces
 --enable initCoderUnavailable
 --enable isEmpty
---enable isEmpty
 --enable leadingDelimiters
 --enable numberFormatting
 --enable preferKeyPath
@@ -30,7 +29,6 @@
 --enable redundantParens
 --enable redundantPattern
 --enable redundantRawValues
---enable redundantRawValues
 --enable redundantReturn
 --enable redundantVoidReturnType
 --enable spaceAroundBraces
@@ -42,7 +40,6 @@
 --enable spaceInsideBrackets
 --enable spaceInsideComments
 --enable spaceInsideGenerics
---enable spaceInsideParens
 --enable spaceInsideParens
 --enable todos
 --enable trailingCommas
