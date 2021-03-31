@@ -1,5 +1,5 @@
 group 'io.vinicius.appodeal_flutter'
-version '1.0-SNAPSHOT'
+version '0.6.0'
 
 buildscript {
     ext.kotlin_version = '1.4.10'
@@ -46,6 +46,6 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.appodeal.ads:sdk:2.9.1.+'
-    implementation 'com.explorestack:consent:1.0.2'
+    implementation 'com.explorestack:consent:1.0.4'
     implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
 }
