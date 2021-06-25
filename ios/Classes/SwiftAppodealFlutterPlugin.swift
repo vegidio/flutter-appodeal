@@ -127,8 +127,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin {
                     "zone": STKConsentManager.shared().regulation.rawValue,
                 ])
             } else {
-                result(FlutterError(code: "CONSENT_INFO_ERROR", message: "Failed to fetch the consent info",
-                                    details: error))
+                result(FlutterError(code: "CONSENT_INFO_ERROR", message: error!.localizedDescription, details: nil))
             }
         }
     }
@@ -141,8 +140,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin {
             if error == nil {
                 result(STKConsentManager.shared().shouldShowConsentDialog == .true)
             } else {
-                result(FlutterError(code: "CONSENT_CHECK_ERROR", message: "Failed to check if consent is needed",
-                                    details: error))
+                result(FlutterError(code: "CONSENT_CHECK_ERROR", message: error!.localizedDescription, details: nil))
             }
         }
     }
@@ -154,8 +152,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin {
                 STKConsentManager.shared().showConsentDialog(fromRootViewController: controller!, delegate: nil)
                 result(nil)
             } else {
-                result(FlutterError(code: "CONSENT_WINDOW_ERROR", message: "Error showing the consent window",
-                                    details: error))
+                result(FlutterError(code: "CONSENT_WINDOW_ERROR", message: error!.localizedDescription, details: nil))
             }
         }
     }
