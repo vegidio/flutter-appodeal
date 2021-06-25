@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 class AppodealBanner extends StatelessWidget {
   final Map<String, dynamic> _args = {};
 
-  AppodealBanner({String placementName}) {
+  AppodealBanner({String? placementName}) {
     this._args["placementName"] = placementName;
   }
 

@@ -2,25 +2,24 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'consent.dart';
 
 class Appodeal {
-  static String _androidAppKey;
-  static String _iosAppKey;
+  static String? _androidAppKey;
+  static String? _iosAppKey;
 
-  static Function(String) _bannerCallback;
-  static Function(String) _interstitialCallback;
-  static Function(String) _rewardCallback;
-  static Function(String) _nonSkippableCallback;
+  static Function(String)? _bannerCallback;
+  static Function(String)? _interstitialCallback;
+  static Function(String)? _rewardCallback;
+  static Function(String)? _nonSkippableCallback;
 
   static const MethodChannel _channel = const MethodChannel('appodeal_flutter');
 
   // region - Appodeal
   /// Define the Appodeal app keys for Android and iOS. At least one of the keys must be set, otherwise an error will be
   /// thrown during the initialization.
-  static void setAppKeys({String androidAppKey, String iosAppKey}) {
+  static void setAppKeys({String? androidAppKey, String? iosAppKey}) {
     _androidAppKey = androidAppKey;
     _iosAppKey = iosAppKey;
   }
@@ -31,7 +30,7 @@ class Appodeal {
   /// also if ads should be presented in test mode [testMode] or not. Always set test mode as `true` during development
   /// or tests.
   static Future<void> initialize(
-      {@required bool hasConsent, List<int> adTypes = const [], bool testMode = false, bool verbose = false}) async {
+      {required bool hasConsent, List<int> adTypes = const [], bool testMode = false, bool verbose = false}) async {
     assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
 
     // Register the callbacks
@@ -76,9 +75,10 @@ class Appodeal {
   ///
   /// Returns `true` if the ad is loaded.
   static Future<bool> isReadyForShow(int adType) async {
-    return _channel.invokeMethod('isReadyForShow', {
-      'adType': adType,
-    });
+    return await _channel.invokeMethod('isReadyForShow', {
+          'adType': adType,
+        }) ??
+        false;
   }
 
   /// Check if an impression is available for a certain type [adType] and placement.
@@ -86,8 +86,12 @@ class Appodeal {
   /// Use the constants in the class `AdType` to specify what ad should be shown.
   ///
   /// Returns `true` if an impression is available.
-  static Future<bool> canShow(int adType, {String placementName}) async {
-    return _channel.invokeMethod('canShow', {'adType': adType, 'placementName': placementName});
+  static Future<bool> canShow(int adType, {String? placementName}) async {
+    return await _channel.invokeMethod('canShow', {
+          'adType': adType,
+          'placementName': placementName,
+        }) ??
+        false;
   }
 
   /// Shows an ad of certain type [adType].
@@ -95,8 +99,12 @@ class Appodeal {
   /// Use the constants in the class `AdType` to specify what ad should be shown.
   ///
   /// Returns `true` if the ad is shown.
-  static Future<bool> show(int adType, {String placementName}) async {
-    return _channel.invokeMethod('show', {'adType': adType, 'placementName': placementName});
+  static Future<bool> show(int adType, {String? placementName}) async {
+    return await _channel.invokeMethod('show', {
+          'adType': adType,
+          'placementName': placementName,
+        }) ??
+        false;
   }
 
   // endregion
@@ -115,7 +123,7 @@ class Appodeal {
       }
 
       return null;
-    });
+    } as Future<dynamic> Function(MethodCall)?);
   }
 
   /// Define a callback to track banner ad events.
@@ -177,9 +185,10 @@ class Appodeal {
 
     await fetchConsentInfo();
     return await _channel.invokeMethod('shouldShowConsent', {
-      'androidAppKey': _androidAppKey,
-      'iosAppKey': _iosAppKey,
-    });
+          'androidAppKey': _androidAppKey,
+          'iosAppKey': _iosAppKey,
+        }) ??
+        false;
   }
 
   /// Displays a dialog window where the user can grant or deny access to be tracked online, according to GDPR or CCPA
@@ -199,7 +208,8 @@ class Appodeal {
   ///
   /// On devices with iOS 14+ it returns `true` or `false` depending whether the user granted access or not.
   static Future<bool> requestIOSTrackingAuthorization() async {
-    return Platform.isIOS ? await _channel.invokeMethod('requestIOSTrackingAuthorization') : true;
+    var authorized = Platform.isIOS ? await _channel.invokeMethod('requestIOSTrackingAuthorization') : true;
+    return authorized ?? false;
   }
 
   /// Enable or disable the iOS location tracking.

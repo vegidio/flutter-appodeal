@@ -3,9 +3,9 @@ import 'package:appodeal_flutter/appodeal_flutter.dart';
 import 'types.dart';
 
 class Consent {
-  List<String> acceptedVendors;
-  int zone;
-  int status;
+  List<String> acceptedVendors = [];
+  int zone = ConsentZone.UNKNOWN;
+  int status = ConsentStatus.UNKNOWN;
 
   Consent(Map consentMap) {
     acceptedVendors = List<String>.from(consentMap["acceptedVendors"]);
