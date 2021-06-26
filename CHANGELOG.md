@@ -1,3 +1,8 @@
+## 1.0.0
+
+* Support to sound null-safety.
+* Upgraded Appodeal library to version 2.10.1.
+
 ## 0.6.0
 
 * Upgraded Appodeal library to version 2.9.1.
