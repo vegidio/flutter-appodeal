@@ -111,7 +111,7 @@ class Appodeal {
 
   // region - Callbacks
   static void _setCallbacks() {
-    _channel.setMethodCallHandler((call) {
+    _channel.setMethodCallHandler((call) async {
       if (call.method.startsWith('onBanner')) {
         _bannerCallback?.call(call.method);
       } else if (call.method.startsWith('onInterstitial')) {
@@ -121,9 +121,7 @@ class Appodeal {
       } else if (call.method.startsWith('onNonSkippable')) {
         _nonSkippableCallback?.call(call.method);
       }
-
-      return null;
-    } as Future<dynamic> Function(MethodCall)?);
+    });
   }
 
   /// Define a callback to track banner ad events.
