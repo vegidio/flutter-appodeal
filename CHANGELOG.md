@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Fixed crash when setting a callback.
+
 ## 1.0.0
 
 * Support to sound null-safety.
