@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.version          = '1.0.1'
   s.summary          = 'A Flutter plugin to display ads from Appodeal.'
   s.description      = <<-DESC
-A Flutter plugin to display ads from Appodeal; it supports the new reqs for iOS 14+ and GDPR/CCPA consent.
+A Flutter plugin to display ads from Appodeal; it supports consent dialog to track users.
                        DESC
   s.homepage         = 'https://pub.dev/packages/appodeal_flutter'
   s.license          = { :file => '../LICENSE' }
