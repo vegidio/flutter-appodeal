@@ -20,8 +20,8 @@ class _MyAppState extends State<MyApp> {
 
     // Set the app keys
     Appodeal.setAppKeys(
-        androidAppKey: '78b7feaaad6edd9e42640692a714f3f735f8806c2f5ce9c3',
-        iosAppKey: '42983080d1c4911c02c8ae745c21322d7e9dd2f475339404');
+        androidAppKey: 'f1e6435dfa48cb71bb6753f1c8ac97bba6609d481e63bb98',
+        iosAppKey: '3a2ef99639e29dfe3333e4b3b496964dae6097cc510cbb2f');
 
     // Defining the callbacks
     Appodeal.setBannerCallback((event) => print('Banner ad triggered the event $event'));
@@ -77,8 +77,7 @@ class _Body extends StatelessWidget {
               onPressed: () async {
                 var shouldShow = await Appodeal.shouldShowConsent();
 
-                Toast.show(
-                    'The app should${shouldShow ? ' ' : ' NOT '}collect user consent', context,
+                Toast.show('The app should${shouldShow ? ' ' : ' NOT '}collect user consent', context,
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
@@ -101,8 +100,7 @@ class _Body extends StatelessWidget {
               child: Text('Is Interstitial Ad ready for show?'),
               onPressed: () async {
                 var isReady = await Appodeal.isReadyForShow(AdType.INTERSTITIAL);
-                Toast.show(
-                    isReady ? 'Interstitial ad is ready' : 'Interstitial ad is NOT ready', context,
+                Toast.show(isReady ? 'Interstitial ad is ready' : 'Interstitial ad is NOT ready', context,
                     duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),

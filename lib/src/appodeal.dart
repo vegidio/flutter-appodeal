@@ -31,12 +31,8 @@ class Appodeal {
   /// also if ads should be presented in test mode [testMode] or not. Always set test mode as `true` during development
   /// or tests.
   static Future<void> initialize(
-      {required bool hasConsent,
-      List<int> adTypes = const [],
-      bool testMode = false,
-      bool verbose = false}) async {
-    assert(_androidAppKey != null || _iosAppKey != null,
-        'You must set at least one of the keys for Android or iOS');
+      {required bool hasConsent, List<int> adTypes = const [], bool testMode = false, bool verbose = false}) async {
+    assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
 
     // Register the callbacks
     _setCallbacks();
@@ -175,8 +171,7 @@ class Appodeal {
   /// Returns an object of type `Consent` where you can check the user's consent status and in what zone/regulation, if
   /// any, that consent applies.
   static Future<Consent> fetchConsentInfo() async {
-    assert(_androidAppKey != null || _iosAppKey != null,
-        'You must set at least one of the keys for Android or iOS');
+    assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
 
     var consentMap = await _channel.invokeMethod('fetchConsentInfo', {
       'androidAppKey': _androidAppKey,
@@ -194,8 +189,7 @@ class Appodeal {
   /// Returns `true` if the app must request consent. This function will return `false` when the user is not protected
   /// by any privacy laws, but also when the user previously granted or declined permission to be tracked.
   static Future<bool> shouldShowConsent() async {
-    assert(_androidAppKey != null || _iosAppKey != null,
-        'You must set at least one of the keys for Android or iOS');
+    assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
 
     await fetchConsentInfo();
     return await _channel.invokeMethod('shouldShowConsent', {
@@ -222,8 +216,7 @@ class Appodeal {
   ///
   /// On devices with iOS 14+ it returns `true` or `false` depending whether the user granted access or not.
   static Future<bool> requestIOSTrackingAuthorization() async {
-    var authorized =
-        Platform.isIOS ? await _channel.invokeMethod('requestIOSTrackingAuthorization') : true;
+    var authorized = Platform.isIOS ? await _channel.invokeMethod('requestIOSTrackingAuthorization') : true;
     return authorized ?? false;
   }
 
