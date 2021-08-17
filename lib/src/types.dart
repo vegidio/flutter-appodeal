@@ -5,6 +5,7 @@ class AdType {
   static const INTERSTITIAL = 3;
   static const REWARD = 4;
   static const NON_SKIPPABLE = 5;
+  static const MREC = 6;
 }
 
 class ConsentZone {

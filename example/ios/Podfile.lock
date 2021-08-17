@@ -113,13 +113,13 @@ PODS:
   - APDYandexAdapter (2.10.1.1):
     - Appodeal (= 2.10.1)
     - YandexMobileAds (= 4.1.2)
-  - AppLovinSDK (10.3.2)
+  - AppLovinSDK (10.3.4)
   - Appodeal (2.10.1):
     - Protobuf (~> 3.12)
     - StackCrashReporter (= 1.0.0-Beta)
     - StackIAB (~> 1.4.1)
     - StackModules (~> 1.1.0)
-  - appodeal_flutter (1.0.0):
+  - appodeal_flutter (1.0.1):
     - APDAdColonyAdapter (= 2.10.1.1)
     - APDAmazonAdsAdapter (= 2.10.1.1)
     - APDAppLovinAdapter (= 2.10.1.2)
@@ -158,36 +158,36 @@ PODS:
   - Google-Mobile-Ads-SDK (8.5.0):
     - GoogleAppMeasurement (< 9.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
-  - GoogleAppMeasurement (8.2.0):
-    - GoogleAppMeasurement/AdIdSupport (= 8.2.0)
+  - GoogleAppMeasurement (8.5.0):
+    - GoogleAppMeasurement/AdIdSupport (= 8.5.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
     - GoogleUtilities/MethodSwizzler (~> 7.4)
     - GoogleUtilities/Network (~> 7.4)
     - "GoogleUtilities/NSData+zlib (~> 7.4)"
     - nanopb (~> 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (8.2.0):
+  - GoogleAppMeasurement/AdIdSupport (8.5.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
     - GoogleUtilities/MethodSwizzler (~> 7.4)
     - GoogleUtilities/Network (~> 7.4)
     - "GoogleUtilities/NSData+zlib (~> 7.4)"
     - nanopb (~> 2.30908.0)
   - GoogleUserMessagingPlatform (2.0.0)
-  - GoogleUtilities/AppDelegateSwizzler (7.4.3):
+  - GoogleUtilities/AppDelegateSwizzler (7.5.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.4.3):
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (7.4.3):
+  - GoogleUtilities/Environment (7.5.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.5.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (7.4.3):
+  - GoogleUtilities/MethodSwizzler (7.5.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (7.4.3):
+  - GoogleUtilities/Network (7.5.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.4.3)"
-  - GoogleUtilities/Reachability (7.4.3):
+  - "GoogleUtilities/NSData+zlib (7.5.0)"
+  - GoogleUtilities/Reachability (7.5.0):
     - GoogleUtilities/Logger
   - InMobiSDK/Core (9.0.7)
   - IronSourceSDK (7.1.6.0)
@@ -212,7 +212,7 @@ PODS:
   - OguryAds (2.3.5):
     - OguryAds/OMID (= 2.3.5)
   - OguryAds/OMID (2.3.5)
-  - PromisesObjC (1.2.12)
+  - PromisesObjC (2.0.0)
   - Protobuf (3.17.0)
   - smaato-ios-sdk (21.6.13):
     - smaato-ios-sdk/Full (= 21.6.13)
@@ -294,12 +294,12 @@ PODS:
     - StackModules (~> 1.1.0)
   - StackIAB/StackXML (1.4.3):
     - StackModules (~> 1.1.0)
-  - StackModules (1.1.3):
-    - StackModules/StackProductPresentation (= 1.1.3)
-  - StackModules/StackFoundation (1.1.3)
-  - StackModules/StackProductPresentation (1.1.3):
+  - StackModules (1.1.6):
+    - StackModules/StackProductPresentation (= 1.1.6)
+  - StackModules/StackFoundation (1.1.6)
+  - StackModules/StackProductPresentation (1.1.6):
     - StackModules/StackUIKit
-  - StackModules/StackUIKit (1.1.3):
+  - StackModules/StackUIKit (1.1.6):
     - StackModules/StackFoundation
   - StartAppSDK (4.6.4)
   - TapjoySDK (12.7.0)
@@ -408,20 +408,20 @@ SPEC CHECKSUMS:
   APDUnityAdapter: bc41596c5e59c168ca2900c088cc6448e73e2764
   APDVungleAdapter: eb59e56d758da1fd325b39753c669998db450e9d
   APDYandexAdapter: bdfe05e2bb796d3bca08adf890fcf8edc781dff8
-  AppLovinSDK: 3bbfef1e3ac84d85f556fda26e50f5a70230b970
+  AppLovinSDK: 5a28da8e9b298a11e9e878abcc98e21e7edbdad3
   Appodeal: 1bb4a1d29eff4c30deab00ec04103ee0bf4279c1
-  appodeal_flutter: a195a97aa259f60a78795cd2c0298a098ddabb03
+  appodeal_flutter: 46a5587127d3aed7586bdeb48c86522c6fd22eca
   AppRollSDK: bd9e96ad026dd51ad07714a35d43da95bb882d5f
   BidMachine: e1cfa7f47a51ec6afbc62949d12274f61c04c1bf
   ChartboostSDK: df785becfd574915aeb8704818fa57679c099711
   CriteoPublisherSdk: a7551daf9235203a040703504ae549e842b5eebf
   FBAudienceNetwork: 1974ec59ef88102f284c29941d73d0cbec3f2874
   FBSDKCoreKit: 0d1ae58388a458b8222f72025804cdc84eb5d0c3
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   Google-Mobile-Ads-SDK: 6f5c41bf73db1656e5b203ba9c31e3d0899a128d
-  GoogleAppMeasurement: b52eafc9dff542d580700e708216568bd2fbf168
+  GoogleAppMeasurement: 8d10c1c470fcb0e5143ed74fddd164f0a0384800
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
-  GoogleUtilities: 45dbb24a7f351d69d0a601482b39ad6c32e30dab
+  GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
   InMobiSDK: c3ec3fed998d8431ba31ad16565d102159e3f9e3
   IronSourceSDK: 3cd80081469b1228cfaacb516eedb02f022745ea
   MintegralAdSDK: 2e37e32cdfbf5f7d8399cad67f0271e92da098d5
@@ -429,13 +429,13 @@ SPEC CHECKSUMS:
   myTargetSDK: edbafedbd3c86f88366d738cae9adee9e6c2359b
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   OguryAds: 8dccce073aea7e11ddb83f1122e8ee65bf33f3c3
-  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   Protobuf: 7327d4444215b5f18e560a97f879ff5503c4581c
   smaato-ios-sdk: 700f044b161581a3396072d01ce48c81c09a9fa3
   StackConsentManager: 2e7c7512d4c1b5dddf248e7e9f78931d8d0142e8
   StackCrashReporter: 855bc6d59c5ab0a8103b1428e1d5d25abe61ed30
   StackIAB: 0229259e7616ea48da76466a325cf7c53ea860cd
-  StackModules: 9cf0d50a595e49191211cfe22fe4fd0f443097cc
+  StackModules: f0ee7e66c4f4fc174016b4087f57dbe2382491aa
   StartAppSDK: cb5a43363fc10ee4977b42f77d81b995d73262f0
   TapjoySDK: e863ea0d0f5d3ab3f8f12d9a9af737789d9dab6d
   UnityAds: 5b17b608ddb50ec7705b17e7884aa516be118938
