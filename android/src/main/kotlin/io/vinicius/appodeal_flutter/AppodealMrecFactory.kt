@@ -20,7 +20,7 @@ class AppodealMrecFactory(private val activity: Activity, private val messenger:
         PlatformView, MethodChannel.MethodCallHandler {
         private val arguments = args as Map<*, *>
         private val placementName = arguments["placementName"] as? String
-        private val bannerView = Appodeal.getMrecView(activity)
+        private val mrecView = Appodeal.getMrecView(activity)
         private val channel = MethodChannel(messenger, "plugins.io.vinicius.appodeal/mrec_$id")
 
         init {
@@ -39,7 +39,7 @@ class AppodealMrecFactory(private val activity: Activity, private val messenger:
             }
         }
 
-        override fun getView(): View = bannerView
+        override fun getView(): View = mrecView
         override fun dispose() {}
     }
 }

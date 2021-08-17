@@ -1,3 +1,6 @@
+## 1.1.0
+
+* Add support for MREC ads
 ## 1.0.1
 
 * Fixed crash when setting a callback.
