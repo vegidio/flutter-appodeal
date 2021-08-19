@@ -4,7 +4,7 @@
 [![Pub Version](https://img.shields.io/pub/v/appodeal_flutter?color=blue)](https://pub.dev/packages/appodeal_flutter)
 [![MIT License](https://img.shields.io/github/license/vegidio-flutter/appodeal?color=important)](LICENSE)
 
-A Flutter plugin to display ads from Appodeal. It currently supports **Banner**, **Interstitial**, **Reward** and **Non-Skippable** ads.
+A Flutter plugin to display ads from Appodeal. It currently supports **Banner**, **MREC**, **Interstitial**, **Reward** and **Non-Skippable** ads.
 
 ## 📽 Demo
 
@@ -172,6 +172,18 @@ Center(
 ...
 ```
 
+### MREC
+
+To display a banner ad in your app, just include the `AppodealBanner()` widget somewhere in your widget tree. For example:
+
+```dart
+...
+Center(
+  child: AppodealMREC()
+)
+...
+```
+
 ### Interstitial, Reward & Non-Skippable ads
 
 To show an interstitial, reward or non-skippable ad, call the function `Appodeal.show()` passing the type of ad that you would like to show as a paremeter (mandatory) and the [placement name](https://faq.appodeal.com/en/articles/1154394-placements) (optional):
@@ -212,6 +224,11 @@ The full list of events that you can track is below:
 ### Banner
 
 `onBannerLoaded`, `onBannerFailedToLoad`, `onBannerShown`, `onBannerClicked`, `onBannerExpired`.
+
+### Banner
+
+`onMrecLoaded`, `onMrecFailedToLoad`, `onMrecShown`, `onMrecClicked`, `onMrecExpired`.
+
 
 ### Interstitial
 
