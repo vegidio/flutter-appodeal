@@ -159,12 +159,9 @@ class _Body extends StatelessWidget {
                 print(status);
               },
             ),
-            // AppodealBanner(placementName: "placement-name"),
-            AppodealMrec(placementName: "default"),
-            FutureBuilder(
-              future: Appodeal.canShow(AdType.MREC),
-              builder: (context, snapshot) => Text("Can show MREC ${snapshot.data}"),
-            )
+            AppodealBanner(placementName: "placement-name"),
+            Divider(),
+            AppodealMrec(placementName: "placement-name"),
           ],
         ),
       ),
