@@ -2,7 +2,7 @@ group 'io.vinicius.appodeal_flutter'
 version '1.0.1'
 
 buildscript {
-    ext.kotlin_version = '1.4.10'
+    ext.kotlin_version = '1.5.21'
     repositories {
         google()
         jcenter()
@@ -47,10 +47,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.gms:play-services-ads-identifier:17.0.1'
 
-    implementation 'com.appodeal.ads:sdk:2.10.1.+'
-    implementation 'com.appodeal.ads.sdk.networks:chartboost:2.10.1.6'
-    implementation 'com.appodeal.ads.sdk.networks:inmobi:2.10.1.7'
-    implementation 'com.appodeal.ads.sdk.networks:mopub:2.10.1.4'
-    implementation 'com.appodeal.ads.sdk.networks:tapjoy:2.10.1.7'
+    implementation 'com.appodeal.ads:sdk:2.10.2.+'
     implementation 'com.explorestack:consent:1.0.4'
 }

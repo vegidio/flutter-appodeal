@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'appodeal_flutter'
-  s.version          = '1.0.1'
+  s.version          = '1.1.0'
   s.summary          = 'A Flutter plugin to display ads from Appodeal.'
   s.description      = <<-DESC
 A Flutter plugin to display ads from Appodeal; it supports consent dialog to track users.
@@ -19,25 +19,25 @@ A Flutter plugin to display ads from Appodeal; it supports consent dialog to tra
   s.static_framework = true
 
   # Appodeal Dependencies
-  s.dependency 'APDAdColonyAdapter', '2.10.1.1'
-  s.dependency 'APDAmazonAdsAdapter', '2.10.1.1'
-  s.dependency 'APDAppLovinAdapter', '2.10.1.2'
-  s.dependency 'APDBidMachineAdapter', '2.10.1.2'
-  s.dependency 'APDChartboostAdapter', '2.10.1.1'
-  s.dependency 'APDFacebookAudienceAdapter', '2.10.1.1'
-  s.dependency 'APDGoogleAdMobAdapter', '2.10.1.1'
-  s.dependency 'APDInMobiAdapter', '2.10.1.1'
-  s.dependency 'APDIronSourceAdapter', '2.10.1.2'
-  s.dependency 'APDMintegralAdapter', '2.10.1.1'
-  s.dependency 'APDMyTargetAdapter', '2.10.1.2'
-  s.dependency 'APDOguryAdapter', '2.10.1.1'
-  s.dependency 'APDSmaatoAdapter', '2.10.1.1'
-  s.dependency 'APDStartAppAdapter', '2.10.1.2'
-  s.dependency 'APDTapjoyAdapter', '2.10.1.1'
-  s.dependency 'APDTwitterMoPubAdapter', '2.10.1.1'
-  s.dependency 'APDUnityAdapter', '2.10.1.1'
-  s.dependency 'APDVungleAdapter', '2.10.1.1'
-  s.dependency 'APDYandexAdapter', '2.10.1.1'
+  s.dependency 'APDAdColonyAdapter', '2.10.2.1'
+  s.dependency 'APDAmazonAdsAdapter', '2.10.2.1'
+  s.dependency 'APDAppLovinAdapter', '2.10.2.1'
+  s.dependency 'APDBidMachineAdapter', '2.10.2.2'
+  s.dependency 'APDChartboostAdapter', '2.10.2.1'
+  s.dependency 'APDFacebookAudienceAdapter', '2.10.2.1'
+  s.dependency 'APDGoogleAdMobAdapter', '2.10.2.2'
+  s.dependency 'APDInMobiAdapter', '2.10.2.1'
+  s.dependency 'APDIronSourceAdapter', '2.10.2.2'
+  s.dependency 'APDMintegralAdapter', '2.10.2.1'
+  s.dependency 'APDMyTargetAdapter', '2.10.2.1'
+  s.dependency 'APDOguryAdapter', '2.10.2.1'
+  s.dependency 'APDSmaatoAdapter', '2.10.2.1'
+  s.dependency 'APDStartAppAdapter', '2.10.2.2'
+  s.dependency 'APDTapjoyAdapter', '2.10.2.1'
+  s.dependency 'APDTwitterMoPubAdapter', '2.10.2.1'
+  s.dependency 'APDUnityAdapter', '2.10.2.1'
+  s.dependency 'APDVungleAdapter', '2.10.2.2'
+  s.dependency 'APDYandexAdapter', '2.10.2.2'
 
   # Consent Manager Dependency
   s.dependency 'StackConsentManager', '1.0.1'
