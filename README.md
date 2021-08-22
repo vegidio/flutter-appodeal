@@ -4,7 +4,7 @@
 [![Pub Version](https://img.shields.io/pub/v/appodeal_flutter?color=blue)](https://pub.dev/packages/appodeal_flutter)
 [![MIT License](https://img.shields.io/github/license/vegidio-flutter/appodeal?color=important)](LICENSE)
 
-A Flutter plugin to display ads from Appodeal. It currently supports **Banner**, **Interstitial**, **Reward** and **Non-Skippable** ads.
+A Flutter plugin to display ads from Appodeal. It currently supports **Banner**, **MREC**, **Interstitial**, **Reward** and **Non-Skippable** ads.
 
 ## 📽 Demo
 
@@ -160,15 +160,20 @@ or:
 
 After you collect all the permissions and the plugin properly initialized, you are ready to display the ads:
 
-### Banner
+### Banner & MREC
 
-To display a banner ad in your app, just include the `AppodealBanner()` widget somewhere in your widget tree. For example:
+To display a banner or MREC ad in your app, just include the widgets `AppodealBanner()` or `AppodealMrec()` somewhere in your widget tree. For example:
 
 ```dart
 ...
+// Add a banner ad
 Center(
   child: AppodealBanner()
-)
+),
+// or a MREC red
+Center(
+  child: AppodealMrec()
+),
 ...
 ```
 
@@ -179,7 +184,7 @@ To show an interstitial, reward or non-skippable ad, call the function `Appodeal
 ```dart
 Appodeal.show(AdType.INTERSTITIAL, placementName: "placement-name");  // Show an interstitial ad
 Appodeal.show(AdType.REWARD, placementName: "placement-name");        // Show a reward ad
-Appodeal.show(AdType.NON_SKIPPABLE, placementName: "placement-name"); // Show a non-skippable ad
+Appodeal.show(AdType.NON_SKIPPABLE);                                  // Show a non-skippable ad without placement name
 ```
 
 ## ♻️ Callbacks
@@ -187,6 +192,7 @@ Appodeal.show(AdType.NON_SKIPPABLE, placementName: "placement-name"); // Show a 
 You can define callbacks to your ads and track when an event occurs; it can be done by calling the callback functions below:
 
 - `Appodeal.setBannerCallback((event) {})`
+- `Appodeal.setMrecCallback((event) {})`
 - `Appodeal.setInterstitialCallback((event) {})`
 - `Appodeal.setRewardCallback((event) {})`
 - `Appodeal.setNonSkippableCallback((event) {})`
@@ -212,6 +218,10 @@ The full list of events that you can track is below:
 ### Banner
 
 `onBannerLoaded`, `onBannerFailedToLoad`, `onBannerShown`, `onBannerClicked`, `onBannerExpired`.
+
+### MREC
+
+`onMrecLoaded`, `onMrecFailedToLoad`, `onMrecShown`, `onMrecClicked`, `onMrecExpired`.
 
 ### Interstitial
 

@@ -66,6 +66,11 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             "plugins.io.vinicius.appodeal/banner",
             AppodealBannerFactory(activity, pluginBinding.binaryMessenger)
         )
+
+        pluginBinding.platformViewRegistry.registerViewFactory(
+            "plugins.io.vinicius.appodeal/mrec",
+            AppodealMrecFactory(activity, pluginBinding.binaryMessenger)
+        )
     }
 
     override fun onDetachedFromActivityForConfigChanges() {}
@@ -144,6 +149,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     // region - Callbacks
     private fun setCallbacks() {
         Appodeal.setBannerCallbacks(bannerCallback(channel))
+        Appodeal.setMrecCallbacks(mrecCallback(channel))
         Appodeal.setInterstitialCallbacks(interstitialCallback(channel))
         Appodeal.setRewardedVideoCallbacks(rewardedCallback(channel))
         Appodeal.setNonSkippableVideoCallbacks(nonSkippableCallback(channel))
@@ -218,6 +224,7 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             3 -> Appodeal.INTERSTITIAL
             4 -> Appodeal.REWARDED_VIDEO
             5 -> Appodeal.NON_SKIPPABLE_VIDEO
+            6 -> Appodeal.MREC
             else -> Appodeal.NONE
         }
     }

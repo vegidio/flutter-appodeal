@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
 
     // Defining the callbacks
     Appodeal.setBannerCallback((event) => print('Banner ad triggered the event $event'));
+    Appodeal.setMrecCallback((event) => print('MREC ad triggered the event $event'));
     Appodeal.setInterstitialCallback((event) => print('Interstitial ad triggered the event $event'));
     Appodeal.setRewardCallback((event) => print('Reward ad triggered the event $event'));
     Appodeal.setNonSkippableCallback((event) => print('Non-skippable ad triggered the event $event'));
@@ -37,7 +38,7 @@ class _MyAppState extends State<MyApp> {
       // Initialize Appodeal after the authorization was granted or not
       await Appodeal.initialize(
           hasConsent: true,
-          adTypes: [AdType.BANNER, AdType.INTERSTITIAL, AdType.REWARD, AdType.NON_SKIPPABLE],
+          adTypes: [AdType.BANNER, AdType.MREC, AdType.INTERSTITIAL, AdType.REWARD, AdType.NON_SKIPPABLE],
           testMode: true);
 
       setState(() => this.isAppodealInitialized = true);
@@ -60,94 +61,114 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              child: Text('Should I collect user consent?'),
-              onPressed: () async {
-                var shouldShow = await Appodeal.shouldShowConsent();
+      child: SingleChildScrollView(
+        child: IntrinsicWidth(
+          child: Wrap(
+            runSpacing: 8,
+            spacing: double.infinity,
+            alignment: WrapAlignment.center,
+            children: [
+              ElevatedButton(
+                child: Text('Should I collect user consent?'),
+                onPressed: () async {
+                  var shouldShow = await Appodeal.shouldShowConsent();
+                  Toast.show('The app should${shouldShow ? ' ' : ' NOT '}collect user consent', context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                },
+              ),
+              ElevatedButton(
+                child: Text('Check GDPR/CCPA Consent Info'),
+                onPressed: () async {
+                  var consent = await Appodeal.fetchConsentInfo();
 
-                Toast.show('The app should${shouldShow ? ' ' : ' NOT '}collect user consent', context,
-                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-              },
-            ),
-            ElevatedButton(
-              child: Text('Check GDPR/CCPA Consent Info'),
-              onPressed: () async {
-                var consent = await Appodeal.fetchConsentInfo();
-
-                Toast.show('Status: ${consent.status}; Zone: ${consent.zone}', context,
-                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-              },
-            ),
-            ElevatedButton(
-              child: Text('Request GDPR/CCPA Consent'),
-              onPressed: () async {
-                await Appodeal.requestConsentAuthorization();
-              },
-            ),
-            ElevatedButton(
-              child: Text('Is Interstitial Ad ready for show?'),
-              onPressed: () async {
-                var isReady = await Appodeal.isReadyForShow(AdType.INTERSTITIAL);
-                Toast.show(isReady ? 'Interstitial ad is ready' : 'Interstitial ad is NOT ready', context,
-                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-              },
-            ),
-            ElevatedButton(
-              child: Text('Cache Interstitial Ad'),
-              onPressed: () async {
-                await Appodeal.cache(AdType.INTERSTITIAL);
-              },
-            ),
-            ElevatedButton(
-              child: Text('Show Interstitial Ad'),
-              onPressed: () async {
-                await Appodeal.show(AdType.INTERSTITIAL, placementName: "placement-name");
-              },
-            ),
-            ElevatedButton(
-              child: Text('Is Reward Ad ready for show?'),
-              onPressed: () async {
-                var isReady = await Appodeal.isReadyForShow(AdType.REWARD);
-                Toast.show(isReady ? 'Reward ad is ready' : 'Reward ad is NOT ready', context,
-                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-              },
-            ),
-            ElevatedButton(
-              child: Text('Show Reward Ad'),
-              onPressed: () async {
-                var status = await Appodeal.show(AdType.REWARD, placementName: 'placement-name');
-                print(status);
-              },
-            ),
-            ElevatedButton(
-              child: Text('Is Non-Skippable Ad ready?'),
-              onPressed: () async {
-                var isReady = await Appodeal.isReadyForShow(AdType.NON_SKIPPABLE);
-                Toast.show(isReady ? 'Non-Skippable ad is ready' : 'No-Skippable ad is NOT ready', context,
-                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-              },
-            ),
-            ElevatedButton(
-              child: Text('Can Show Non-Skippable Ad?'),
-              onPressed: () async {
-                var canShow = await Appodeal.canShow(AdType.NON_SKIPPABLE, placementName: "placement-name");
-                Toast.show(canShow ? 'Non-Skippable can be shown' : 'Non-Skippable can NOT be shown', context,
-                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-              },
-            ),
-            ElevatedButton(
-              child: Text('Show Non-Skippable Ad'),
-              onPressed: () async {
-                var status = await Appodeal.show(AdType.NON_SKIPPABLE);
-                print(status);
-              },
-            ),
-            AppodealBanner(placementName: "placement-name"),
-          ],
+                  Toast.show('Status: ${consent.status}; Zone: ${consent.zone}', context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                },
+              ),
+              ElevatedButton(
+                child: Text('Request GDPR/CCPA Consent'),
+                onPressed: () async {
+                  await Appodeal.requestConsentAuthorization();
+                },
+              ),
+              ElevatedButton(
+                child: Text('Is Interstitial Ad ready for show?'),
+                onPressed: () async {
+                  var isReady = await Appodeal.isReadyForShow(AdType.INTERSTITIAL);
+                  Toast.show(isReady ? 'Interstitial ad is ready' : 'Interstitial ad is NOT ready', context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                },
+              ),
+              ElevatedButton(
+                child: Text('Cache Interstitial Ad'),
+                onPressed: () async {
+                  await Appodeal.cache(AdType.INTERSTITIAL);
+                },
+              ),
+              ElevatedButton(
+                child: Text('Show Interstitial Ad'),
+                onPressed: () async {
+                  await Appodeal.show(AdType.INTERSTITIAL, placementName: "placement-name");
+                },
+              ),
+              ElevatedButton(
+                child: Text('Is Reward Ad ready for show?'),
+                onPressed: () async {
+                  var isReady = await Appodeal.isReadyForShow(AdType.REWARD);
+                  Toast.show(isReady ? 'Reward ad is ready' : 'Reward ad is NOT ready', context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                },
+              ),
+              ElevatedButton(
+                child: Text('Show Reward Ad'),
+                onPressed: () async {
+                  var status = await Appodeal.show(AdType.REWARD, placementName: 'placement-name');
+                  print(status);
+                },
+              ),
+              ElevatedButton(
+                child: Text('Is Non-Skippable Ad ready?'),
+                onPressed: () async {
+                  var isReady = await Appodeal.isReadyForShow(AdType.NON_SKIPPABLE);
+                  Toast.show(isReady ? 'Non-Skippable ad is ready' : 'No-Skippable ad is NOT ready', context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                },
+              ),
+              ElevatedButton(
+                child: Text('Can Show Non-Skippable Ad?'),
+                onPressed: () async {
+                  var canShow = await Appodeal.canShow(AdType.NON_SKIPPABLE, placementName: "placement-name");
+                  Toast.show(canShow ? 'Non-Skippable can be shown' : 'Non-Skippable can NOT be shown', context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                },
+              ),
+              ElevatedButton(
+                child: Text('Show Non-Skippable Ad'),
+                onPressed: () async {
+                  var status = await Appodeal.show(AdType.NON_SKIPPABLE);
+                  print(status);
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Column(
+                  children: [
+                    Text("Banner Ad"),
+                    AppodealBanner(placementName: "placement-name"),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Column(
+                  children: [
+                    Text("MREC Ad"),
+                    AppodealMrec(placementName: "placement-name"),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

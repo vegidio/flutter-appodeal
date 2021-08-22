@@ -10,6 +10,7 @@ class Appodeal {
   static String? _iosAppKey;
 
   static Function(String)? _bannerCallback;
+  static Function(String)? _mrecCallback;
   static Function(String)? _interstitialCallback;
   static Function(String)? _rewardCallback;
   static Function(String)? _nonSkippableCallback;
@@ -114,6 +115,8 @@ class Appodeal {
     _channel.setMethodCallHandler((call) async {
       if (call.method.startsWith('onBanner')) {
         _bannerCallback?.call(call.method);
+      } else if (call.method.startsWith('onMrec')) {
+        _mrecCallback?.call(call.method);
       } else if (call.method.startsWith('onInterstitial')) {
         _interstitialCallback?.call(call.method);
       } else if (call.method.startsWith('onRewarded')) {
@@ -129,6 +132,13 @@ class Appodeal {
   /// It receives a function [callback] with parameter `event` of type `String.
   static void setBannerCallback(Function(String event) callback) {
     _bannerCallback = callback;
+  }
+
+  /// Define a callback to track MREC ad events.
+  ///
+  /// It receives a function [callback] with parameter `event` of type `String.
+  static void setMrecCallback(Function(String event) callback) {
+    _mrecCallback = callback;
   }
 
   /// Define a callback to track interstitial ad events.

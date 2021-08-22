@@ -13,6 +13,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin {
 
         registrar.addMethodCallDelegate(instance, channel: instance.channel!)
         registrar.register(AppodealBannerFactory(instance: instance), withId: "plugins.io.vinicius.appodeal/banner")
+        registrar.register(AppodealMrecFactory(instance: instance), withId: "plugins.io.vinicius.appodeal/mrec")
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -195,6 +196,7 @@ public class SwiftAppodealFlutterPlugin: NSObject, FlutterPlugin {
         case 3: return .interstitial
         case 4: return .rewardedVideo
         case 5: return .nonSkippableVideo
+        case 6: return .MREC
         default: return AppodealAdType(rawValue: 0)
         }
     }

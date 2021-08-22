@@ -11,23 +11,23 @@ import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 
-class AppodealBannerFactory(private val activity: Activity, private val messenger: BinaryMessenger) :
+class AppodealMrecFactory(private val activity: Activity, private val messenger: BinaryMessenger) :
     PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(context: Context?, viewId: Int, args: Any?): PlatformView =
-        AppodealBannerView(activity, messenger, viewId, args)
+        AppodealMrecView(activity, messenger, viewId, args)
 
-    class AppodealBannerView(activity: Activity, messenger: BinaryMessenger, id: Int, args: Any?) :
+    class AppodealMrecView(activity: Activity, messenger: BinaryMessenger, id: Int, args: Any?) :
         PlatformView, MethodChannel.MethodCallHandler {
         private val arguments = args as Map<*, *>
         private val placementName = arguments["placementName"] as? String
-        private val bannerView = Appodeal.getBannerView(activity)
-        private val channel = MethodChannel(messenger, "plugins.io.vinicius.appodeal/banner_$id")
+        private val mrecView = Appodeal.getMrecView(activity)
+        private val channel = MethodChannel(messenger, "plugins.io.vinicius.appodeal/mrec_$id")
 
         init {
             if (placementName != null) {
-                Appodeal.show(activity, Appodeal.BANNER_VIEW, placementName)
+                Appodeal.show(activity, Appodeal.MREC, placementName)
             } else {
-                Appodeal.show(activity, Appodeal.BANNER_VIEW)
+                Appodeal.show(activity, Appodeal.MREC)
             }
 
             channel.setMethodCallHandler(this)
@@ -39,7 +39,7 @@ class AppodealBannerFactory(private val activity: Activity, private val messenge
             }
         }
 
-        override fun getView(): View = bannerView
+        override fun getView(): View = mrecView
         override fun dispose() {}
     }
 }
