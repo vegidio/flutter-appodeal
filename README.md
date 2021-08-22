@@ -94,7 +94,7 @@ Afterwards you can initialize Appodeal with the function:
 // Initialize Appodeal
 await Appodeal.initialize(
   hasConsent: true,
-  adTypes: [AdType.BANNER, AdType.INTERSTITIAL, AdType.REWARD],
+  adTypes: [AdType.BANNER, AdType.MREC, AdType.INTERSTITIAL, AdType.REWARD, AdType.NON_SKIPPABLE],
   testMode: true,
   verbose: true,
 );
@@ -170,14 +170,14 @@ To display a banner or MREC ad in your app, just include the widgets `AppodealBa
 Center(
   child: AppodealBanner()
 ),
-// or a MREC red
+// or a MREC ad
 Center(
   child: AppodealMrec()
 ),
 ...
 ```
 
-### Interstitial, Reward & Non-Skippable ads
+### Interstitial, Reward & Non-Skippable
 
 To show an interstitial, reward or non-skippable ad, call the function `Appodeal.show()` passing the type of ad that you would like to show as a paremeter (mandatory) and the [placement name](https://faq.appodeal.com/en/articles/1154394-placements) (optional):
 
