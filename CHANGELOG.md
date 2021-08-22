@@ -1,6 +1,9 @@
 ## 1.1.0
 
-* Add support for MREC ads
+* Added support to __MREC__ ads (thanks [@eliabieri](https://github.com/eliabieri)).
+* Upgraded Appodeal library to version 2.10.2.
+* Changed project's license to MIT.
+
 ## 1.0.1
 
 * Fixed crash when setting a callback.
@@ -16,7 +19,7 @@
 
 ## 0.5.3
 
-* Added verbose argument to  `initialize()` call (thanks [@n00bsys0p](https://github.com/n00bsys0p)).
+* Added verbose argument to `initialize()` call (thanks [@n00bsys0p](https://github.com/n00bsys0p)).
 
 ## 0.5.2
 
