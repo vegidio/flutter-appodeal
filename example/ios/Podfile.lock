@@ -157,6 +157,9 @@ PODS:
     - FBSDKCoreKit_Basics/Basics (= 11.1.0)
   - FBSDKCoreKit_Basics/Basics (11.1.0)
   - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
   - Google-Mobile-Ads-SDK (8.9.0):
     - GoogleAppMeasurement (< 9.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
@@ -315,6 +318,7 @@ PODS:
     - StackModules/StackFoundation
   - StartAppSDK (4.6.7)
   - TapjoySDK (12.7.0)
+  - Toast (4.0.0)
   - UnityAds (3.7.5)
   - VungleSDK-iOS (6.10.1)
   - YandexMobileAds (4.3.1):
@@ -333,6 +337,7 @@ PODS:
 DEPENDENCIES:
   - appodeal_flutter (from `.symlinks/plugins/appodeal_flutter/ios`)
   - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
 
 SPEC REPOS:
   trunk:
@@ -386,6 +391,7 @@ SPEC REPOS:
     - StackModules
     - StartAppSDK
     - TapjoySDK
+    - Toast
     - UnityAds
     - VungleSDK-iOS
     - YandexMobileAds
@@ -396,6 +402,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/appodeal_flutter/ios"
   Flutter:
     :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
 
 SPEC CHECKSUMS:
   AdColony: 957c975fa756fcdb10a91e8a7d6de4cf5bfc4f78
@@ -429,7 +437,8 @@ SPEC CHECKSUMS:
   CriteoPublisherSdk: a7551daf9235203a040703504ae549e842b5eebf
   FBAudienceNetwork: 9a5f277d6ed36a46354a045c46a4858b47407a72
   FBSDKCoreKit_Basics: 8f978bce195845f609b0ec6b425949d0d24f525b
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
   Google-Mobile-Ads-SDK: 8494046b4d339275a381f6bcfafbff7adb2f515f
   GoogleAppMeasurement: 2c0c6e2a7ab3fe730ade6379f732bdefb46f50b0
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
@@ -450,6 +459,7 @@ SPEC CHECKSUMS:
   StackModules: f0ee7e66c4f4fc174016b4087f57dbe2382491aa
   StartAppSDK: 709e9c49a30fb5ec48d3311bd390b0a16d953b19
   TapjoySDK: e863ea0d0f5d3ab3f8f12d9a9af737789d9dab6d
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   UnityAds: 9adbfd8ccc008e4e3e7b1bcf5666a126df4f1a8e
   VungleSDK-iOS: 0344be7980f4cca040761f819dfd8101edba44cf
   YandexMobileAds: 8f9bdf380364875c468ded8f33bf6e9cc711b3a2
@@ -457,4 +467,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.0
