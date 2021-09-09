@@ -8,7 +8,7 @@ class Consent {
   int status = ConsentStatus.UNKNOWN;
 
   Consent(Map consentMap) {
-    acceptedVendors = List<String>.from(consentMap["acceptedVendors"]);
+    acceptedVendors = (consentMap["acceptedVendors"] as List).whereType<String>().toList();
 
     switch (consentMap["status"]) {
       case 0:
