@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'appodeal_flutter'
-  s.version          = '1.1.0'
+  s.version          = '1.1.1'
   s.summary          = 'A Flutter plugin to display ads from Appodeal.'
   s.description      = <<-DESC
 A Flutter plugin to display ads from Appodeal; it supports consent dialog to track users.

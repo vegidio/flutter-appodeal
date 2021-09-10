@@ -1,3 +1,7 @@
+## 1.1.1
+
+* Fixed bug fetching the accepted vendors in the Consent Manager.
+
 ## 1.1.0
 
 * Added support to __MREC__ ads (thanks [@eliabieri](https://github.com/eliabieri)).
