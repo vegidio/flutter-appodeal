@@ -1,8 +1,8 @@
 # appodeal_flutter
 
-[![GitHub Actions](https://img.shields.io/github/workflow/status/vegidio-flutter/appodeal/build)](https://github.com/vegidio-flutter/appodeal/actions)
+[![GitHub Actions](https://img.shields.io/github/workflow/status/vegidio/flutter-appodeal/build)](https://github.com/vegidio/flutter-appodeal/actions)
 [![Pub Version](https://img.shields.io/pub/v/appodeal_flutter?color=blue)](https://pub.dev/packages/appodeal_flutter)
-[![MIT License](https://img.shields.io/github/license/vegidio-flutter/appodeal?color=important)](LICENSE)
+[![MIT License](https://img.shields.io/github/license/vegidio/flutter-appodeal?color=important)](LICENSE)
 
 A Flutter plugin to display ads from Appodeal. It currently supports **Banner**, **MREC**, **Interstitial**, **Reward** and **Non-Skippable** ads.
 
