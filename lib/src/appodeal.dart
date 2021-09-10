@@ -15,7 +15,7 @@ class Appodeal {
   static Function(String)? _rewardCallback;
   static Function(String)? _nonSkippableCallback;
 
-  static const MethodChannel _channel = const MethodChannel('appodeal_flutter');
+  static const MethodChannel _channel = MethodChannel('appodeal_flutter');
 
   // region - Appodeal
   /// Define the Appodeal app keys for Android and iOS. At least one of the keys must be set, otherwise an error will be

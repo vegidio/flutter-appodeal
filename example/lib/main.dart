@@ -1,12 +1,16 @@
 import 'package:appodeal_flutter/appodeal_flutter.dart';
+import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
-  runApp(MyApp());
+  Fimber.plantTree(DebugTree());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -24,24 +28,24 @@ class _MyAppState extends State<MyApp> {
         iosAppKey: '3a2ef99639e29dfe3333e4b3b496964dae6097cc510cbb2f');
 
     // Defining the callbacks
-    Appodeal.setBannerCallback((event) => print('Banner ad triggered the event $event'));
-    Appodeal.setMrecCallback((event) => print('MREC ad triggered the event $event'));
-    Appodeal.setInterstitialCallback((event) => print('Interstitial ad triggered the event $event'));
-    Appodeal.setRewardCallback((event) => print('Reward ad triggered the event $event'));
-    Appodeal.setNonSkippableCallback((event) => print('Non-skippable ad triggered the event $event'));
+    Appodeal.setBannerCallback((event) => Fimber.i('Banner ad triggered the event $event'));
+    Appodeal.setMrecCallback((event) => Fimber.i('MREC ad triggered the event $event'));
+    Appodeal.setInterstitialCallback((event) => Fimber.i('Interstitial ad triggered the event $event'));
+    Appodeal.setRewardCallback((event) => Fimber.i('Reward ad triggered the event $event'));
+    Appodeal.setNonSkippableCallback((event) => Fimber.i('Non-skippable ad triggered the event $event'));
 
     // Request authorization to track the user
     Appodeal.requestIOSTrackingAuthorization().then((_) async {
       // Set interstitial ads to be cached manually
-      await Appodeal.setAutoCache(AdType.INTERSTITIAL, false);
+      await Appodeal.setAutoCache(AdType.interstitial, false);
 
       // Initialize Appodeal after the authorization was granted or not
       await Appodeal.initialize(
           hasConsent: true,
-          adTypes: [AdType.BANNER, AdType.MREC, AdType.INTERSTITIAL, AdType.REWARD, AdType.NON_SKIPPABLE],
+          adTypes: [AdType.banner, AdType.mrec, AdType.interstitial, AdType.reward, AdType.nonSkippable],
           testMode: true);
 
-      setState(() => this.isAppodealInitialized = true);
+      setState(() => isAppodealInitialized = true);
     });
   }
 
@@ -68,7 +72,7 @@ class _Body extends StatelessWidget {
       alignment: WrapAlignment.center,
       children: [
         ElevatedButton(
-          child: Text('Should I collect user consent?'),
+          child: const Text('Should I collect user consent?'),
           onPressed: () async {
             var shouldShow = await Appodeal.shouldShowConsent();
             Fluttertoast.showToast(
@@ -78,7 +82,7 @@ class _Body extends StatelessWidget {
           },
         ),
         ElevatedButton(
-          child: Text('Check GDPR/CCPA Consent Info'),
+          child: const Text('Check GDPR/CCPA Consent Info'),
           onPressed: () async {
             var consent = await Appodeal.fetchConsentInfo();
             Fluttertoast.showToast(
@@ -88,15 +92,15 @@ class _Body extends StatelessWidget {
           },
         ),
         ElevatedButton(
-          child: Text('Request GDPR/CCPA Consent'),
+          child: const Text('Request GDPR/CCPA Consent'),
           onPressed: () async {
             await Appodeal.requestConsentAuthorization();
           },
         ),
         ElevatedButton(
-          child: Text('Is Interstitial Ad ready for show?'),
+          child: const Text('Is Interstitial Ad ready for show?'),
           onPressed: () async {
-            var isReady = await Appodeal.isReadyForShow(AdType.INTERSTITIAL);
+            var isReady = await Appodeal.isReadyForShow(AdType.interstitial);
             Fluttertoast.showToast(
                 msg: isReady ? 'Interstitial ad is ready' : 'Interstitial ad is NOT ready',
                 toastLength: Toast.LENGTH_LONG,
@@ -104,21 +108,21 @@ class _Body extends StatelessWidget {
           },
         ),
         ElevatedButton(
-          child: Text('Cache Interstitial Ad'),
+          child: const Text('Cache Interstitial Ad'),
           onPressed: () async {
-            await Appodeal.cache(AdType.INTERSTITIAL);
+            await Appodeal.cache(AdType.interstitial);
           },
         ),
         ElevatedButton(
-          child: Text('Show Interstitial Ad'),
+          child: const Text('Show Interstitial Ad'),
           onPressed: () async {
-            await Appodeal.show(AdType.INTERSTITIAL, placementName: "placement-name");
+            await Appodeal.show(AdType.interstitial, placementName: "placement-name");
           },
         ),
         ElevatedButton(
-          child: Text('Is Reward Ad ready for show?'),
+          child: const Text('Is Reward Ad ready for show?'),
           onPressed: () async {
-            var isReady = await Appodeal.isReadyForShow(AdType.REWARD);
+            var isReady = await Appodeal.isReadyForShow(AdType.reward);
             Fluttertoast.showToast(
                 msg: isReady ? 'Reward ad is ready' : 'Reward ad is NOT ready',
                 toastLength: Toast.LENGTH_LONG,
@@ -126,16 +130,16 @@ class _Body extends StatelessWidget {
           },
         ),
         ElevatedButton(
-          child: Text('Show Reward Ad'),
+          child: const Text('Show Reward Ad'),
           onPressed: () async {
-            var status = await Appodeal.show(AdType.REWARD, placementName: 'placement-name');
-            print(status);
+            var status = await Appodeal.show(AdType.reward, placementName: 'placement-name');
+            Fimber.i("$status");
           },
         ),
         ElevatedButton(
-          child: Text('Is Non-Skippable Ad ready?'),
+          child: const Text('Is Non-Skippable Ad ready?'),
           onPressed: () async {
-            var isReady = await Appodeal.isReadyForShow(AdType.NON_SKIPPABLE);
+            var isReady = await Appodeal.isReadyForShow(AdType.nonSkippable);
             Fluttertoast.showToast(
                 msg: isReady ? 'Non-Skippable ad is ready' : 'No-Skippable ad is NOT ready',
                 toastLength: Toast.LENGTH_LONG,
@@ -143,9 +147,9 @@ class _Body extends StatelessWidget {
           },
         ),
         ElevatedButton(
-          child: Text('Can Show Non-Skippable Ad?'),
+          child: const Text('Can Show Non-Skippable Ad?'),
           onPressed: () async {
-            var canShow = await Appodeal.canShow(AdType.NON_SKIPPABLE, placementName: "placement-name");
+            var canShow = await Appodeal.canShow(AdType.nonSkippable, placementName: "placement-name");
             Fluttertoast.showToast(
                 msg: canShow ? 'Non-Skippable can be shown' : 'Non-Skippable can NOT be shown',
                 toastLength: Toast.LENGTH_LONG,
@@ -153,17 +157,17 @@ class _Body extends StatelessWidget {
           },
         ),
         ElevatedButton(
-          child: Text('Show Non-Skippable Ad'),
+          child: const Text('Show Non-Skippable Ad'),
           onPressed: () async {
-            var status = await Appodeal.show(AdType.NON_SKIPPABLE);
-            print(status);
+            var status = await Appodeal.show(AdType.nonSkippable);
+            Fimber.i("$status");
           },
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 4),
           child: Column(
             children: [
-              Text("Banner Ad"),
+              const Text("Banner Ad"),
               AppodealBanner(placementName: "placement-name"),
             ],
           ),
@@ -172,7 +176,7 @@ class _Body extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 4),
           child: Column(
             children: [
-              Text("MREC Ad"),
+              const Text("MREC Ad"),
               AppodealMrec(placementName: "placement-name"),
             ],
           ),

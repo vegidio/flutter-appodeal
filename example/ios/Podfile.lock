@@ -119,7 +119,7 @@ PODS:
     - StackAnalytics (~> 1.2.0)
     - StackIAB (~> 1.4.3)
     - StackModules (~> 1.1.6)
-  - appodeal_flutter (1.1.0):
+  - appodeal_flutter (1.1.1):
     - APDAdColonyAdapter (= 2.10.2.1)
     - APDAmazonAdsAdapter (= 2.10.2.1)
     - APDAppLovinAdapter (= 2.10.2.1)
@@ -157,6 +157,8 @@ PODS:
     - FBSDKCoreKit_Basics/Basics (= 11.1.0)
   - FBSDKCoreKit_Basics/Basics (11.1.0)
   - Flutter (1.0.0)
+  - flutter_fimber (0.0.1):
+    - Flutter
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
@@ -337,6 +339,7 @@ PODS:
 DEPENDENCIES:
   - appodeal_flutter (from `.symlinks/plugins/appodeal_flutter/ios`)
   - Flutter (from `Flutter`)
+  - flutter_fimber (from `.symlinks/plugins/flutter_fimber/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
 
 SPEC REPOS:
@@ -402,6 +405,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/appodeal_flutter/ios"
   Flutter:
     :path: Flutter
+  flutter_fimber:
+    :path: ".symlinks/plugins/flutter_fimber/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
 
@@ -430,7 +435,7 @@ SPEC CHECKSUMS:
   APDYandexAdapter: afe8d4d380a18e812d8f7c487aeab90bd723ceed
   AppLovinSDK: 5a28da8e9b298a11e9e878abcc98e21e7edbdad3
   Appodeal: 2fbca4ef766bc50e88b26190f5f3a205a1b667c1
-  appodeal_flutter: e5c1bf92a393e4bb63d78da7f3d304364c93c94f
+  appodeal_flutter: 6bc7077eabe53e2cdcef4ebb03fd0dc671cb4a3d
   AppRollSDK: bd9e96ad026dd51ad07714a35d43da95bb882d5f
   BidMachine: e838b9689a17ae50bbd81470563d92b81ccef744
   ChartboostSDK: df785becfd574915aeb8704818fa57679c099711
@@ -438,6 +443,7 @@ SPEC CHECKSUMS:
   FBAudienceNetwork: 9a5f277d6ed36a46354a045c46a4858b47407a72
   FBSDKCoreKit_Basics: 8f978bce195845f609b0ec6b425949d0d24f525b
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_fimber: 4a6b342666fecb329fca23143f4b72c46cdd8022
   fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
   Google-Mobile-Ads-SDK: 8494046b4d339275a381f6bcfafbff7adb2f515f
   GoogleAppMeasurement: 2c0c6e2a7ab3fe730ade6379f732bdefb46f50b0

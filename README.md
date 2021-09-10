@@ -94,7 +94,7 @@ Afterwards you can initialize Appodeal with the function:
 // Initialize Appodeal
 await Appodeal.initialize(
   hasConsent: true,
-  adTypes: [AdType.BANNER, AdType.MREC, AdType.INTERSTITIAL, AdType.REWARD, AdType.NON_SKIPPABLE],
+  adTypes: [AdType.banner, AdType.mrec, AdType.interstitial, AdType.reward, AdType.nonSkippable],
   testMode: true,
   verbose: true,
 );
@@ -152,7 +152,7 @@ or:
     2.2. After the user grants or decline consent, you can call the function `Appodeal.fetchConsentInfo()` to fetch the consent info:
     ```dart
     var consent = await Appodeal.fetchConsentInfo();
-    var hasConsent = consent.status == ConsentStatus.PERSONALIZED || consent.status == ConsentStatus.PARTLY_PERSONALIZED;
+    var hasConsent = consent.status == ConsentStatus.personalized || consent.status == ConsentStatus.partlyPersonalized;
     await Appodeal.initialize(hasConsent: hasConsent, ...)
     ```
 
@@ -182,9 +182,9 @@ Center(
 To show an interstitial, reward or non-skippable ad, call the function `Appodeal.show()` passing the type of ad that you would like to show as a paremeter (mandatory) and the [placement name](https://faq.appodeal.com/en/articles/1154394-placements) (optional):
 
 ```dart
-Appodeal.show(AdType.INTERSTITIAL, placementName: "placement-name");  // Show an interstitial ad
-Appodeal.show(AdType.REWARD, placementName: "placement-name");        // Show a reward ad
-Appodeal.show(AdType.NON_SKIPPABLE);                                  // Show a non-skippable ad without placement name
+Appodeal.show(AdType.interstitial, placementName: "placement-name");  // Show an interstitial ad
+Appodeal.show(AdType.reward, placementName: "placement-name");        // Show a reward ad
+Appodeal.show(AdType.nonSkippable);                                   // Show a non-skippable ad without placement name
 ```
 
 ## ♻️ Callbacks
