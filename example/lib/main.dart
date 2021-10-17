@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
       await Appodeal.initialize(
           hasConsent: true,
           adTypes: [AdType.banner, AdType.mrec, AdType.interstitial, AdType.reward, AdType.nonSkippable],
-          testMode: true);
+          testMode: true, userId: '123');
 
       setState(() => isAppodealInitialized = true);
     });

@@ -85,15 +85,17 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         val adTypes = args["adTypes"] as List<Int>
         val testMode = args["testMode"] as Boolean
         val verbose = args["verbose"] as Boolean
+        val userId = args["userId"] as String
 
         // Registering callbacks
         setCallbacks()
 
         val ads = adTypes.fold(0) { acc, value -> acc or getAdType(value) }
+        println("set user id = " + userId)
+        if (userId != "") Appodeal.getUserSettings(activity).setUserId(userId)
         Appodeal.setTesting(testMode)
         Appodeal.initialize(activity, appKey, ads, hasConsent)
         if (verbose) Appodeal.setLogLevel(Log.LogLevel.verbose)
-
         result.success(null)
     }
 
