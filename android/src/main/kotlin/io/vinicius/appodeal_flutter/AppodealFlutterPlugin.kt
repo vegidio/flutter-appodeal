@@ -91,7 +91,6 @@ class AppodealFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         setCallbacks()
 
         val ads = adTypes.fold(0) { acc, value -> acc or getAdType(value) }
-        println("set user id = " + userId)
         if (userId != "") Appodeal.getUserSettings(activity).setUserId(userId)
         Appodeal.setTesting(testMode)
         Appodeal.initialize(activity, appKey, ads, hasConsent)
