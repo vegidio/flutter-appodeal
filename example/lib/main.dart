@@ -42,13 +42,7 @@ class _MyAppState extends State<MyApp> {
       // Initialize Appodeal after the authorization was granted or not
       await Appodeal.initialize(
         hasConsent: true,
-        adTypes: [
-          AdType.banner,
-          AdType.mrec,
-          AdType.interstitial,
-          AdType.reward,
-          AdType.nonSkippable
-        ],
+        adTypes: [AdType.banner, AdType.mrec, AdType.interstitial, AdType.reward, AdType.nonSkippable],
         testMode: true,
         userId: 'User#123', // For S2S rewarded video callbacks
       );
