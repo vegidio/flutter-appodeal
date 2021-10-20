@@ -43,7 +43,9 @@ class _MyAppState extends State<MyApp> {
       await Appodeal.initialize(
           hasConsent: true,
           adTypes: [AdType.banner, AdType.mrec, AdType.interstitial, AdType.reward, AdType.nonSkippable],
-          testMode: true, userId: '123');
+          testMode: true, 
+		  userId: 'User#123' // For server-to-server (S2S) rewarded video callbacks
+	  );
 
       setState(() => isAppodealInitialized = true);
     });
