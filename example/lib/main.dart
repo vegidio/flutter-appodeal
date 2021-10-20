@@ -41,11 +41,17 @@ class _MyAppState extends State<MyApp> {
 
       // Initialize Appodeal after the authorization was granted or not
       await Appodeal.initialize(
-          hasConsent: true,
-          adTypes: [AdType.banner, AdType.mrec, AdType.interstitial, AdType.reward, AdType.nonSkippable],
-          testMode: true, 
-		  userId: 'User#123' // For server-to-server (S2S) rewarded video callbacks
-	  );
+        hasConsent: true,
+        adTypes: [
+          AdType.banner,
+          AdType.mrec,
+          AdType.interstitial,
+          AdType.reward,
+          AdType.nonSkippable
+        ],
+        testMode: true,
+        userId: 'User#123', // For S2S rewarded video callbacks
+      );
 
       setState(() => isAppodealInitialized = true);
     });
@@ -59,7 +65,9 @@ class _MyAppState extends State<MyApp> {
             title: const Text('Appodeal Example App'),
           ),
           body: isAppodealInitialized
-              ? SafeArea(child: SingleChildScrollView(child: IntrinsicWidth(child: _Body())))
+              ? SafeArea(
+                  child: SingleChildScrollView(
+                      child: IntrinsicWidth(child: _Body())))
               : Container()),
     );
   }
@@ -78,7 +86,8 @@ class _Body extends StatelessWidget {
           onPressed: () async {
             var shouldShow = await Appodeal.shouldShowConsent();
             Fluttertoast.showToast(
-                msg: 'The app should${shouldShow ? ' ' : ' NOT '}collect user consent',
+                msg:
+                    'The app should${shouldShow ? ' ' : ' NOT '}collect user consent',
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.BOTTOM);
           },
@@ -104,7 +113,9 @@ class _Body extends StatelessWidget {
           onPressed: () async {
             var isReady = await Appodeal.isReadyForShow(AdType.interstitial);
             Fluttertoast.showToast(
-                msg: isReady ? 'Interstitial ad is ready' : 'Interstitial ad is NOT ready',
+                msg: isReady
+                    ? 'Interstitial ad is ready'
+                    : 'Interstitial ad is NOT ready',
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.BOTTOM);
           },
@@ -118,7 +129,8 @@ class _Body extends StatelessWidget {
         ElevatedButton(
           child: const Text('Show Interstitial Ad'),
           onPressed: () async {
-            await Appodeal.show(AdType.interstitial, placementName: "placement-name");
+            await Appodeal.show(AdType.interstitial,
+                placementName: "placement-name");
           },
         ),
         ElevatedButton(
@@ -134,7 +146,8 @@ class _Body extends StatelessWidget {
         ElevatedButton(
           child: const Text('Show Reward Ad'),
           onPressed: () async {
-            var status = await Appodeal.show(AdType.reward, placementName: 'placement-name');
+            var status = await Appodeal.show(AdType.reward,
+                placementName: 'placement-name');
             Fimber.i("$status");
           },
         ),
@@ -143,7 +156,9 @@ class _Body extends StatelessWidget {
           onPressed: () async {
             var isReady = await Appodeal.isReadyForShow(AdType.nonSkippable);
             Fluttertoast.showToast(
-                msg: isReady ? 'Non-Skippable ad is ready' : 'No-Skippable ad is NOT ready',
+                msg: isReady
+                    ? 'Non-Skippable ad is ready'
+                    : 'No-Skippable ad is NOT ready',
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.BOTTOM);
           },
@@ -151,9 +166,12 @@ class _Body extends StatelessWidget {
         ElevatedButton(
           child: const Text('Can Show Non-Skippable Ad?'),
           onPressed: () async {
-            var canShow = await Appodeal.canShow(AdType.nonSkippable, placementName: "placement-name");
+            var canShow = await Appodeal.canShow(AdType.nonSkippable,
+                placementName: "placement-name");
             Fluttertoast.showToast(
-                msg: canShow ? 'Non-Skippable can be shown' : 'Non-Skippable can NOT be shown',
+                msg: canShow
+                    ? 'Non-Skippable can be shown'
+                    : 'Non-Skippable can NOT be shown',
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.BOTTOM);
           },
