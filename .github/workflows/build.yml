@@ -35,8 +35,8 @@ jobs:
 
       - name: Check publish warnings
         run: |
-          dartfmt lib
-          dartfmt example
+          dart format lib
+          dart format example
           pub publish --dry-run
 
       - name: Upload package to pub.dev

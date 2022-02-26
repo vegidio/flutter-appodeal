@@ -6,6 +6,12 @@
 
 A Flutter plugin to display ads from Appodeal. It currently supports **Banner**, **MREC**, **Interstitial**, **Reward** and **Non-Skippable** ads.
 
+# ⚠ Package Archived ⚠ - Please use the [official](https://pub.dev/packages/stack_appodeal_flutter) Appodeal package from now on
+
+This project was created by me when there was no official support for Appodeal on Flutter. But now that the Appodeal team created their own official package I don't see a reason to keep maintaining this one.
+
+I thank everybody that downloaded, contributed with PRs an supported this package.
+
 ## 📽 Demo
 
 [![Demo](https://i.imgur.com/rrLm2ro.gif)](https://i.imgur.com/Rh2YwuW.mp4)

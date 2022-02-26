@@ -1,3 +1,7 @@
+## 1.1.2
+
+* Package archived; please use the [official](https://pub.dev/packages/stack_appodeal_flutter) Appodeal package from now on.
+
 ## 1.1.1
 
 * Fixed bug fetching the accepted vendors in the Consent Manager.
