@@ -31,7 +31,7 @@ class Appodeal {
   /// also if ads should be presented in test mode [testMode] or not. Always set test mode as `true` during development
   /// or tests.
   static Future<void> initialize(
-      {required bool hasConsent, List<int> adTypes = const [], bool testMode = false, bool verbose = false}) async {
+      {required bool hasConsent, List<int> adTypes = const [], bool testMode = false, bool verbose = false, String userId = ''}) async {
     assert(_androidAppKey != null || _iosAppKey != null, 'You must set at least one of the keys for Android or iOS');
 
     // Register the callbacks
@@ -44,6 +44,7 @@ class Appodeal {
       'adTypes': adTypes,
       'testMode': testMode,
       'verbose': verbose,
+      'userId' : userId,
     });
   }
 
